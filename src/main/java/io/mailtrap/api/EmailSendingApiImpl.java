@@ -2,21 +2,21 @@ package io.mailtrap.api;
 
 import io.mailtrap.Constants;
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.abstractions.ProductionSendApi;
-import io.mailtrap.api.abstractions.SendApiResource;
+import io.mailtrap.api.abstractions.EmailSendingApi;
+import io.mailtrap.api.abstractions.classes.SendApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 
 /**
- * Implementation of the {@link ProductionSendApi} interface for sending emails in the production environment.
+ * Implementation of the {@link EmailSendingApi} interface for sending emails in the production environment.
  */
-public class ProductionSendApiImpl extends SendApiResource implements ProductionSendApi {
+public class EmailSendingApiImpl extends SendApiResource implements EmailSendingApi {
 
-    public ProductionSendApiImpl(MailtrapConfig config, CustomValidator customValidator) {
+    public EmailSendingApiImpl(MailtrapConfig config, CustomValidator customValidator) {
         super(config, customValidator);
-        this.apiBaseUrl = Constants.PRODUCTION_SEND_URL;
+        this.apiHost = Constants.EMAIL_SENDING_SEND_HOST;
     }
 
     @Override
@@ -26,7 +26,7 @@ public class ProductionSendApiImpl extends SendApiResource implements Production
         if (mail.getHeaders() != null) {
             requestData.setHeaders(mail.getHeaders());
         }
-        return httpClient.post(apiBaseUrl + "/api/send", mail, requestData, SendResponse.class);
+        return httpClient.post(apiHost + "/api/send", mail, requestData, SendResponse.class);
     }
 
 }

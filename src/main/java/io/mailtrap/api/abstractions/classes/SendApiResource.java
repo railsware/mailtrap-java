@@ -1,4 +1,4 @@
-package io.mailtrap.api.abstractions;
+package io.mailtrap.api.abstractions.classes;
 
 import io.mailtrap.CustomValidator;
 import io.mailtrap.config.MailtrapConfig;

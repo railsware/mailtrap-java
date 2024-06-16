@@ -1,4 +1,4 @@
-package io.mailtrap.api.abstractions;
+package io.mailtrap.api.abstractions.classes;
 
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.CustomHttpClient;
@@ -15,9 +15,9 @@ public abstract class ApiResource {
     protected final CustomHttpClient httpClient;
 
     /**
-     * The API base URL
+     * The API host
      */
-    protected String apiBaseUrl;
+    protected String apiHost;
 
     /**
      * The authentication token used for API requests.

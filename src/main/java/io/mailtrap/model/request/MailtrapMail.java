@@ -32,8 +32,10 @@ public class MailtrapMail extends AbstractModel {
     @Valid
     private List<Attachment> attachments;
 
+    // 'Content-Transfer-Encoding' header will be ignored and replaced with 'quoted-printable'
     private Map<String, String> headers;
 
+    // Values that are specific to the entire send that will be carried along with the email and its activity data
     @JsonProperty("custom_variables")
     private Map<String, String> customVariables;
 

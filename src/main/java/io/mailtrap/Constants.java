@@ -7,7 +7,7 @@ public final class Constants {
     private Constants() {
     }
 
-    public static final String SANDBOX_SEND_URL = "https://sandbox.api.mailtrap.io";
-    public static final String PRODUCTION_SEND_URL = "https://send.api.mailtrap.io";
+    public static final String EMAIL_TESTING_SEND_HOST = "https://sandbox.api.mailtrap.io";
+    public static final String EMAIL_SENDING_SEND_HOST = "https://send.api.mailtrap.io";
 
 }

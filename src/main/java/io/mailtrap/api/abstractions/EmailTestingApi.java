@@ -1,0 +1,23 @@
+package io.mailtrap.api.abstractions;
+
+import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.exception.http.HttpException;
+import io.mailtrap.model.request.MailtrapMail;
+import io.mailtrap.model.response.SendResponse;
+
+/**
+ * Interface representing the Mailtrap Testing API for sending emails.
+ */
+public interface EmailTestingApi {
+
+    /**
+     * Sends an email
+     *
+     * @param mail The email message to be sent.
+     * @return A response indicating the result of the send operation.
+     * <p>
+     * @throws HttpException               If there is an HTTP-related error during the send operation.
+     * @throws InvalidRequestBodyException If the request body is invalid.
+     */
+    SendResponse send(MailtrapMail mail, int inboxId) throws HttpException, InvalidRequestBodyException;
+}

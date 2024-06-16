@@ -1,7 +1,7 @@
 package io.mailtrap.client;
 
-import io.mailtrap.api.abstractions.ProductionSendApi;
-import io.mailtrap.api.abstractions.SandboxSendApi;
+import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
+import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -13,12 +13,12 @@ import lombok.RequiredArgsConstructor;
 public class MailtrapClient {
 
     /**
-     * The production environment API for sending emails.
+     * API for Mailtrap.io Sending functionality
      */
-    private final ProductionSendApi productionSendApi;
+    private final MailtrapEmailSendingApiLayer sendingApi;
 
     /**
-     * The sandbox environment API for sending emails.
+     * API for Mailtrap.io Testing functionality
      */
-    private final SandboxSendApi sandboxSendApi;
+    private final MailtrapEmailTestingApiLayer testingApi;
 }

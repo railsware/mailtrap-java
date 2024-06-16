@@ -1,15 +1,15 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.abstractions.SandboxSendApi;
+import io.mailtrap.api.abstractions.EmailTestingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
-import io.mailtrap.testutils.TestMailtrapClientFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,16 +17,16 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class SandboxSendApiImplTest extends BaseSendTest {
+class EmailTestingApiImplTest extends BaseSendTest {
 
     private final int inboxId = 1;
-    private SandboxSendApi sendApi;
+    private EmailTestingApi sendApi;
 
     @BeforeEach
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
                 DataMock.build(
-                        Constants.SANDBOX_SEND_URL + "/api/send/" + inboxId,
+                        Constants.EMAIL_TESTING_SEND_HOST + "/api/send/" + inboxId,
                         "POST",
                         createValidTestMail().toJson(),
                         """
@@ -42,7 +42,7 @@ class SandboxSendApiImplTest extends BaseSendTest {
                 .token("dummy_token")
                 .build();
 
-        sendApi = TestMailtrapClientFactory.getTestClient(testConfig).getSandboxSendApi();
+        sendApi = MailtrapClientFactory.createMailtrapClient(testConfig).getTestingApi().emails();
     }
 
     @Test

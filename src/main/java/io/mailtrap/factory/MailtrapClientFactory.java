@@ -1,9 +1,11 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.ProductionSendApiImpl;
-import io.mailtrap.api.SandboxSendApiImpl;
+import io.mailtrap.api.EmailTestingApiImpl;
+import io.mailtrap.api.EmailSendingApiImpl;
 import io.mailtrap.client.MailtrapClient;
+import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
+import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
 import io.mailtrap.config.MailtrapConfig;
 import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
@@ -25,10 +27,23 @@ public final class MailtrapClientFactory {
     public static MailtrapClient createMailtrapClient(MailtrapConfig config) {
         var customValidator = createValidator();
 
-        var sendApi = new ProductionSendApiImpl(config, customValidator);
-        var sandboxSendApi = new SandboxSendApiImpl(config, customValidator);
+        var sendingApi = createSendingApi(config, customValidator);
+        var testingApi = createTestingApi(config, customValidator);
 
-        return new MailtrapClient(sendApi, sandboxSendApi);
+        return new MailtrapClient(sendingApi, testingApi);
+    }
+
+    private static MailtrapEmailSendingApiLayer createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new EmailSendingApiImpl(config, customValidator);
+
+        return new MailtrapEmailSendingApiLayer(emails);
+    }
+
+
+    private static MailtrapEmailTestingApiLayer createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new EmailTestingApiImpl(config, customValidator);
+
+        return new MailtrapEmailTestingApiLayer(emails);
     }
 
     /**

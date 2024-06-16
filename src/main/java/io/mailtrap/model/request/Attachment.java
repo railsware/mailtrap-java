@@ -15,16 +15,22 @@ import lombok.Setter;
 @Builder
 public class Attachment extends AbstractModel {
 
+    // The Base64 encoded content of the attachment
     @NotEmpty
     private String content;
 
+    // The MIME type of the content
     private String type;
 
     @NotEmpty
     private String filename;
 
+    // The attachment's content-disposition
     private String disposition;
 
+    // The attachment's content ID.
+    // This is used when the disposition is set to “inline” and the attachment is an image,
+    // allowing the file to be displayed within the body of your email.
     @JsonProperty("content_id")
     private String contentId;
 
