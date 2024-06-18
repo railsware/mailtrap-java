@@ -92,7 +92,8 @@ public class MailtrapJavaSDKTest {
         // OR send email to the Mailtrap SANDBOX
 
         try {
-            System.out.println(mailtrapClient.getTestingApi().emails().send(mailtrapMail, 1000001));
+            int inboxId = 1000001;
+            System.out.println(mailtrapClient.getTestingApi().emails().send(mailtrapMail, inboxId));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
