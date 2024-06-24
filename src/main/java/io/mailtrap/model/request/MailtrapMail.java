@@ -54,6 +54,6 @@ public class MailtrapMail extends AbstractModel {
     private String templateUuid;
 
     @JsonProperty("template_variables")
-    private Map<String, String> templateVariables;
+    private Map<String, Object> templateVariables;
 
 }

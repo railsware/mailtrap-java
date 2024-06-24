@@ -10,6 +10,12 @@ import java.util.UUID;
 
 public class BaseSendTest {
 
+    protected final String INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL = "Invalid request body. Violations: from.email=must not be empty";
+    protected final String TEMPLATE_UUID_OR_TEXT_OR_HTML_MUST_NOT_BE_EMPTY = "Mail templateUuid or text or html or text and html must not be null or empty";
+    protected final String TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used - text and subject and html must not be used";
+    protected final String TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID = "Mail templateVariables must only be used with templateUuid";
+    protected final String MAIL_MUST_NOT_BE_NULL = "Mail must not be null";
+
     private Address getAddress(String email) {
         return Address.builder()
                 .email(email)
