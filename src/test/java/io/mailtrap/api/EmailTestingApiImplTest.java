@@ -55,6 +55,42 @@ class EmailTestingApiImplTest extends BaseSendTest {
     }
 
     @Test
+    void send_MailWithoutTemplateUuidAndTextAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithoutTemplateUuidAndTextAndHtml();
+
+        // Assert
+        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+    }
+
+    @Test
+    void send_MailWithTemplateUuidAndText_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateUuidAndText();
+
+        // Assert
+        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+    }
+
+    @Test
+    void send_MailWithTemplateUuidAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateUuidAndHtml();
+
+        // Assert
+        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+    }
+
+    @Test
+    void send_MailWithTemplateVariablesAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateVariablesAndHtml();
+
+        // Assert
+        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+    }
+
+    @Test
     void send_NullableMail_ThrowsInvalidRequestBodyException() {
         // Assert
         assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(null, inboxId));

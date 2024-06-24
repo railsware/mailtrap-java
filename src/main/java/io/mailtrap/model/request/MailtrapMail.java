@@ -8,6 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldNameConstants;
 
 import java.util.List;
 import java.util.Map;
@@ -15,6 +16,7 @@ import java.util.Map;
 @Getter
 @Setter
 @Builder
+@FieldNameConstants
 public class MailtrapMail extends AbstractModel {
 
     @NotNull
@@ -47,5 +49,11 @@ public class MailtrapMail extends AbstractModel {
     private String html;
 
     private String category;
+
+    @JsonProperty("template_uuid")
+    private String templateUuid;
+
+    @JsonProperty("template_variables")
+    private Map<String, String> templateVariables;
 
 }
