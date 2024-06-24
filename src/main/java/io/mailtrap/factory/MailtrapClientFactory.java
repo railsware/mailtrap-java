@@ -1,9 +1,11 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
+import io.mailtrap.api.BulkSendingApiImpl;
 import io.mailtrap.api.EmailTestingApiImpl;
 import io.mailtrap.api.EmailSendingApiImpl;
 import io.mailtrap.client.MailtrapClient;
+import io.mailtrap.client.layers.MailtrapBulkEmailSendingApiLayer;
 import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
 import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
 import io.mailtrap.config.MailtrapConfig;
@@ -29,8 +31,9 @@ public final class MailtrapClientFactory {
 
         var sendingApi = createSendingApi(config, customValidator);
         var testingApi = createTestingApi(config, customValidator);
+        var bulkSendingApi = createBulkSendingApi(config, customValidator);
 
-        return new MailtrapClient(sendingApi, testingApi);
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi);
     }
 
     private static MailtrapEmailSendingApiLayer createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
@@ -39,11 +42,16 @@ public final class MailtrapClientFactory {
         return new MailtrapEmailSendingApiLayer(emails);
     }
 
-
     private static MailtrapEmailTestingApiLayer createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
         var emails = new EmailTestingApiImpl(config, customValidator);
 
         return new MailtrapEmailTestingApiLayer(emails);
+    }
+
+    private static MailtrapBulkEmailSendingApiLayer createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new BulkSendingApiImpl(config, customValidator);
+
+        return new MailtrapBulkEmailSendingApiLayer(emails);
     }
 
     /**
