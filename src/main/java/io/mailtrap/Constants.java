@@ -9,5 +9,6 @@ public final class Constants {
 
     public static final String EMAIL_TESTING_SEND_HOST = "https://sandbox.api.mailtrap.io";
     public static final String EMAIL_SENDING_SEND_HOST = "https://send.api.mailtrap.io";
+    public static final String BULK_SENDING_HOST = "https://bulk.api.mailtrap.io";
 
 }
