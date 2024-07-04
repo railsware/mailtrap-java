@@ -7,6 +7,8 @@ import io.mailtrap.model.response.ErrorResponse;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 class ErrorResponseDeserializerTest {
 
     private final ErrorResponseDeserializer deserializer = new ErrorResponseDeserializer();
@@ -17,7 +19,8 @@ class ErrorResponseDeserializerTest {
         try (JsonParser parser = new JsonFactory().createParser(errorJson)) {
             parser.setCodec(Mapper.get());
             ErrorResponse deserialize = deserializer.deserialize(parser, null);
-            Assertions.assertEquals(2, deserialize.getErrors().size());
+
+            assertEquals(2, deserialize.getErrors().size());
         }
     }
 
@@ -27,7 +30,8 @@ class ErrorResponseDeserializerTest {
         try (JsonParser parser = new JsonFactory().createParser(errorJson)) {
             parser.setCodec(Mapper.get());
             ErrorResponse deserialize = deserializer.deserialize(parser, null);
-            Assertions.assertEquals(1, deserialize.getErrors().size());
+
+            assertEquals(1, deserialize.getErrors().size());
         }
     }
 }

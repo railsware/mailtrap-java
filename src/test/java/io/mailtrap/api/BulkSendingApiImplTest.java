@@ -1,7 +1,7 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.abstractions.EmailTestingApi;
+import io.mailtrap.api.abstractions.BulkSendingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.factory.MailtrapClientFactory;
@@ -17,16 +17,14 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmailTestingApiImplTest extends BaseSendTest {
-
-    private final int inboxId = 1;
-    private EmailTestingApi sendApi;
+class BulkSendingApiImplTest extends BaseSendTest {
+    private BulkSendingApi bulkSendingApi;
 
     @BeforeEach
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
                 DataMock.build(
-                        Constants.EMAIL_TESTING_SEND_HOST + "/api/send/" + inboxId,
+                        Constants.BULK_SENDING_HOST + "/api/send",
                         "POST",
                         createValidTestMail().toJson(),
                         """
@@ -42,7 +40,7 @@ class EmailTestingApiImplTest extends BaseSendTest {
                 .token("dummy_token")
                 .build();
 
-        sendApi = MailtrapClientFactory.createMailtrapClient(testConfig).getTestingApi().emails();
+        bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).getBulkSendingApi().emails();
     }
 
     @Test
@@ -51,7 +49,7 @@ class EmailTestingApiImplTest extends BaseSendTest {
         MailtrapMail mail = createInvalidTestMail();
 
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
         assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
     }
 
@@ -61,7 +59,7 @@ class EmailTestingApiImplTest extends BaseSendTest {
         MailtrapMail mail = createTestMailWithoutTemplateUuidAndTextAndHtml();
 
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
         assertEquals(TEMPLATE_UUID_OR_TEXT_OR_HTML_MUST_NOT_BE_EMPTY, exception.getMessage());
     }
 
@@ -71,7 +69,7 @@ class EmailTestingApiImplTest extends BaseSendTest {
         MailtrapMail mail = createTestMailWithTemplateUuidAndText();
 
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
         assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
     }
 
@@ -81,7 +79,7 @@ class EmailTestingApiImplTest extends BaseSendTest {
         MailtrapMail mail = createTestMailWithTemplateUuidAndHtml();
 
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
         assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
     }
 
@@ -91,14 +89,14 @@ class EmailTestingApiImplTest extends BaseSendTest {
         MailtrapMail mail = createTestMailWithTemplateVariablesAndHtml();
 
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
         assertEquals(TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID, exception.getMessage());
     }
 
     @Test
     void send_NullableMail_ThrowsInvalidRequestBodyException() {
         // Assert
-        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(null, inboxId));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(null));
         assertEquals(MAIL_MUST_NOT_BE_NULL, exception.getMessage());
     }
 
@@ -108,11 +106,10 @@ class EmailTestingApiImplTest extends BaseSendTest {
         var mail = createValidTestMail();
 
         // Perform call
-        SendResponse response = sendApi.send(mail, inboxId);
+        SendResponse response = bulkSendingApi.send(mail);
 
         // Assert
         assertTrue(response.isSuccess());
         assertEquals("11111", response.getMessageIds().get(0));
     }
-
 }

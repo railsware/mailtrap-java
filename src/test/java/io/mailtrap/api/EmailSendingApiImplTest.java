@@ -45,27 +45,60 @@ class EmailSendingApiImplTest extends BaseSendTest {
     }
 
     @Test
-    void send_InvalidMail_ThrowsInvalidRequestBodyException() {
+    void send_InvalidMailEmptyFromEmail_ThrowsInvalidRequestBodyException() {
         // Set up invalid data
         MailtrapMail mail = createInvalidTestMail();
 
         // Assert
-        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
+    }
+
+    @Test
+    void send_MailWithoutTemplateUuidAndTextAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithoutTemplateUuidAndTextAndHtml();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(TEMPLATE_UUID_OR_TEXT_OR_HTML_MUST_NOT_BE_EMPTY, exception.getMessage());
+    }
+
+    @Test
+    void send_MailWithTemplateUuidAndText_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateUuidAndText();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
+    }
+
+    @Test
+    void send_MailWithTemplateUuidAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateUuidAndHtml();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
+    }
+
+    @Test
+    void send_MailWithTemplateVariablesAndHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithTemplateVariablesAndHtml();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID, exception.getMessage());
     }
 
     @Test
     void send_NullableMail_ThrowsInvalidRequestBodyException() {
         // Assert
-        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(null));
-    }
-
-    @Test
-    void send_BothTextAndHtmlAreNullInvalidMail_ThrowsInvalidRequestBodyException() {
-        // Set up invalid data
-        MailtrapMail mail = MailtrapMail.builder().build();
-
-        // Assert
-        assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(null));
+        assertEquals(MAIL_MUST_NOT_BE_NULL, exception.getMessage());
     }
 
     @Test

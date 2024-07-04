@@ -4,6 +4,8 @@ import io.mailtrap.CustomValidator;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.model.request.MailtrapMail;
+import org.apache.commons.collections4.MapUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Abstract class representing a resource for sending emails via Mailtrap API.
@@ -31,8 +33,34 @@ public abstract class SendApiResource extends ApiResource {
             throw new InvalidRequestBodyException("Mail must not be null");
         }
 
-        if ((mail.getText() == null || mail.getText().isEmpty()) && (mail.getHtml() == null || mail.getHtml().isEmpty())) {
-            throw new InvalidRequestBodyException("Mail text or html or both must not be null or empty");
+        // All three fields can not be null - we should submit either text and/or html or templateUuid
+        if (StringUtils.isEmpty(mail.getText()) && StringUtils.isEmpty(mail.getHtml()) && StringUtils.isEmpty(mail.getTemplateUuid())) {
+            throw new InvalidRequestBodyException(String.format("Mail %s or %s or %s or %s and %s must not be null or empty",
+                    MailtrapMail.Fields.templateUuid,
+                    MailtrapMail.Fields.text,
+                    MailtrapMail.Fields.html,
+                    MailtrapMail.Fields.text,
+                    MailtrapMail.Fields.html));
+        }
+
+        if (StringUtils.isNotEmpty(mail.getTemplateUuid())) {
+            // When templateUuid is set
+            if (StringUtils.isNotEmpty(mail.getText()) ||
+                    StringUtils.isNotEmpty(mail.getHtml()) ||
+                    StringUtils.isNotEmpty(mail.getSubject())) {
+                throw new InvalidRequestBodyException(String.format("When %s is used - %s and %s and %s must not be used",
+                        MailtrapMail.Fields.templateUuid,
+                        MailtrapMail.Fields.text,
+                        MailtrapMail.Fields.subject,
+                        MailtrapMail.Fields.html));
+            }
+        } else {
+            // When templateUuid is not set - templateVariables should not be used
+            if (MapUtils.isNotEmpty(mail.getTemplateVariables())) {
+                throw new InvalidRequestBodyException(String.format("Mail %s must only be used with %s",
+                        MailtrapMail.Fields.templateVariables,
+                        MailtrapMail.Fields.templateUuid));
+            }
         }
 
         String violations = customValidator.validateAndGetViolationsAsString(mail);
