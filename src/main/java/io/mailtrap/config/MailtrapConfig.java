@@ -10,7 +10,7 @@ import java.time.Duration;
  * Configuration class for Mailtrap SDK.
  */
 @Getter
-@Builder
+@Builder(toBuilder = true)
 public class MailtrapConfig {
 
     /**
@@ -27,5 +27,10 @@ public class MailtrapConfig {
      * The custom HTTP client.
      */
     private final CustomHttpClient httpClient;
+
+    /**
+     * The sending config
+     */
+    private final SendingConfig sendingConfig;
 
 }

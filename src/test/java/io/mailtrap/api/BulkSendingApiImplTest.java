@@ -3,6 +3,7 @@ package io.mailtrap.api;
 import io.mailtrap.Constants;
 import io.mailtrap.api.abstractions.BulkSendingApi;
 import io.mailtrap.config.MailtrapConfig;
+import io.mailtrap.config.SendingConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
@@ -35,9 +36,14 @@ class BulkSendingApiImplTest extends BaseSendTest {
                 )
         ));
 
+        SendingConfig build = new SendingConfig.Builder().sandbox(true).build();
+        SendingConfig build1 = build.toBuilder()
+                .inboxId(123)
+                .build();
         MailtrapConfig testConfig = MailtrapConfig.builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
+                .sendingConfig(build)
                 .build();
 
         bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).getBulkSendingApi().emails();

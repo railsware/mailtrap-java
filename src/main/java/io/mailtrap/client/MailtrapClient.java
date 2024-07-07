@@ -1,30 +1,21 @@
 package io.mailtrap.client;
 
-import io.mailtrap.client.layers.MailtrapBulkEmailSendingApiLayer;
-import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
-import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
+import io.mailtrap.client.layers.wrapper.MailtrapSendingWrapper;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * Client for interacting with Mailtrap APIs.
  */
 @Getter
+@Accessors(fluent = true)
 @RequiredArgsConstructor
 public class MailtrapClient {
 
     /**
-     * API for Mailtrap.io Sending functionality
+     * Wrapper for all three send operations - sandbox, send and bulk send
      */
-    private final MailtrapEmailSendingApiLayer sendingApi;
+    private final MailtrapSendingWrapper emails;
 
-    /**
-     * API for Mailtrap.io Testing functionality
-     */
-    private final MailtrapEmailTestingApiLayer testingApi;
-
-    /**
-     * API for Mailtrap.io Bulk Sending functionality
-     */
-    private final MailtrapBulkEmailSendingApiLayer bulkSendingApi;
 }
