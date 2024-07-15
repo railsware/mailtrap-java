@@ -14,6 +14,7 @@ public interface EmailTestingApi {
      * Sends an email
      *
      * @param mail The email message to be sent.
+     * @param inboxId ID of the testing inbox, where to send an email.
      * @return A response indicating the result of the send operation.
      * <p>
      * @throws HttpException               If there is an HTTP-related error during the send operation.
