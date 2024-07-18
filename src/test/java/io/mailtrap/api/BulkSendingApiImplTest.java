@@ -1,16 +1,17 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
+import io.mailtrap.CustomValidator;
 import io.mailtrap.api.abstractions.BulkSendingApi;
 import io.mailtrap.config.MailtrapConfig;
-import io.mailtrap.config.SendingConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
-import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -36,17 +37,17 @@ class BulkSendingApiImplTest extends BaseSendTest {
                 )
         ));
 
-        SendingConfig build = new SendingConfig.Builder().sandbox(true).build();
-        SendingConfig build1 = build.toBuilder()
-                .inboxId(123)
-                .build();
         MailtrapConfig testConfig = MailtrapConfig.builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
-                .sendingConfig(build)
                 .build();
 
-        bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).getBulkSendingApi().emails();
+        CustomValidator customValidator;
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            customValidator = new CustomValidator(factory.getValidator());
+        }
+
+        bulkSendingApi = new BulkSendingApiImpl(testConfig, customValidator);
     }
 
     @Test
@@ -56,7 +57,7 @@ class BulkSendingApiImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
-        assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
+        assertEquals(INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL, exception.getMessage());
     }
 
     @Test

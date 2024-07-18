@@ -27,26 +27,17 @@ public final class MailtrapClientFactory {
     public static MailtrapClient createMailtrapClient(MailtrapConfig config) {
         var customValidator = createValidator();
 
-        var sendingApi = createSendingApi(config, customValidator);
-        var testingApi = createTestingApi(config, customValidator);
-        var bulkSendingApi = createBulkSendingApi(config, customValidator);
-
-        var sendWrapper = new MailtrapSendingWrapper(config.getSendingConfig(), sendingApi, testingApi, bulkSendingApi);
-
+        var sendWrapper = createSendingWrapper(config, customValidator);
 
         return new MailtrapClient(sendWrapper);
     }
 
-    private static EmailSendingApiImpl createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        return new EmailSendingApiImpl(config, customValidator);
-    }
+    private static MailtrapSendingWrapper createSendingWrapper(MailtrapConfig config, CustomValidator customValidator) {
+        var sendingApi = new EmailSendingApiImpl(config, customValidator);
+        var testingApi = new EmailTestingApiImpl(config, customValidator);
+        var bulkSendingApi = new BulkSendingApiImpl(config, customValidator);
 
-    private static EmailTestingApiImpl createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
-        return new EmailTestingApiImpl(config, customValidator);
-    }
-
-    private static BulkSendingApiImpl createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        return new BulkSendingApiImpl(config, customValidator);
+        return new MailtrapSendingWrapper(sendingApi, testingApi, bulkSendingApi);
     }
 
     /**

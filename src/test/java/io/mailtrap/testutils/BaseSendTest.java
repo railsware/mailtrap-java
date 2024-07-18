@@ -3,14 +3,19 @@ package io.mailtrap.testutils;
 import io.mailtrap.model.request.Address;
 import io.mailtrap.model.request.Attachment;
 import io.mailtrap.model.request.MailtrapMail;
+import io.mailtrap.model.response.SendResponse;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
 public class BaseSendTest {
 
-    protected final String INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL = "Invalid request body. Violations: from.email=must not be empty";
+    protected final int INBOX_ID = 4308;
+    protected final String BULK_AND_SANDBOX_TRUE_IN_SENDING_CONFIG = "Bulk mode is not applicable for Sandbox API";
+    protected final String INBOX_ID_REQUIRED = "Sandbox API requires inbox ID";
+    protected final String INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL = "Invalid request body. Violations: from.email=must not be empty";
     protected final String TEMPLATE_UUID_OR_TEXT_OR_HTML_MUST_NOT_BE_EMPTY = "Mail templateUuid or text or html or text and html must not be null or empty";
     protected final String TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used - text and subject and html must not be used";
     protected final String TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID = "Mail templateVariables must only be used with templateUuid";
@@ -28,6 +33,15 @@ public class BaseSendTest {
                 .type("text/plain")
                 .content("c2FtcGxlIHRleHQgaW4gdGV4dCBmaWxl")
                 .build();
+    }
+
+    protected SendResponse successfulResponse(String... messageIds) {
+        SendResponse expectedResponse = new SendResponse();
+
+        expectedResponse.setSuccess(true);
+        expectedResponse.setMessageIds(Arrays.asList(messageIds));
+
+        return expectedResponse;
     }
 
     protected MailtrapMail createValidTestMail() {

@@ -28,9 +28,4 @@ public class MailtrapConfig {
      */
     private final CustomHttpClient httpClient;
 
-    /**
-     * The sending config
-     */
-    private final SendingConfig sendingConfig;
-
 }

@@ -7,17 +7,15 @@ import io.mailtrap.config.SendingConfig;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import lombok.AllArgsConstructor;
-import lombok.NonNull;
 
 @AllArgsConstructor
 public class MailtrapSendingWrapper {
 
-    private final SendingConfig sendingConfig;
     private final EmailSendingApi sendingApi;
     private final EmailTestingApi testingApi;
     private final BulkSendingApi bulkSendingApi;
 
-    public SendResponse send(@NonNull MailtrapMail mailtrapMail) {
+    public SendResponse send(MailtrapMail mailtrapMail, SendingConfig sendingConfig) {
         if (sendingConfig.isBulk()) {
             return bulkSendingApi.send(mailtrapMail);
         } else if (sendingConfig.isSandbox()) {

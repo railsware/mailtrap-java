@@ -1,15 +1,17 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
+import io.mailtrap.CustomValidator;
 import io.mailtrap.api.abstractions.EmailSendingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
-import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +43,12 @@ class EmailSendingApiImplTest extends BaseSendTest {
                 .token("dummy_token")
                 .build();
 
-        sendApi = MailtrapClientFactory.createMailtrapClient(testConfig).getSendingApi().emails();
+        CustomValidator customValidator;
+        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
+            customValidator = new CustomValidator(factory.getValidator());
+        }
+
+        sendApi = new EmailSendingApiImpl(testConfig, customValidator);
     }
 
     @Test
@@ -51,7 +58,7 @@ class EmailSendingApiImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
-        assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
+        assertEquals(INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL, exception.getMessage());
     }
 
     @Test

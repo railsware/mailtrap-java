@@ -56,7 +56,7 @@ public class TestHttpClient implements CustomHttpClient {
     private <T, V extends AbstractModel> T request(String url, String methodName, V requestBody, RequestData requestData, Class<T> responseType) throws HttpException {
         try {
             String requestIdentifier = this.getRequestIdentifier(url, methodName);
-            
+
             if (!this.mocks.containsKey(requestIdentifier)) {
                 throw new AssertionError("No mock data for request : " + requestIdentifier);
             }
@@ -97,5 +97,5 @@ public class TestHttpClient implements CustomHttpClient {
     private String getRequestIdentifier(String url, String methodName) {
         return methodName + "_" + url;
     }
-    
+
 }

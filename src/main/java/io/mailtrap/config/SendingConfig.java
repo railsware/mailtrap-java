@@ -3,9 +3,7 @@ package io.mailtrap.config;
 import io.mailtrap.exception.BaseMailtrapException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 import lombok.ToString;
-import lombok.experimental.Accessors;
 
 import java.util.Objects;
 
@@ -34,7 +32,7 @@ public class SendingConfig {
         if (builder.sandbox && builder.bulk) {
             throw new BaseMailtrapException("Bulk mode is not applicable for Sandbox API");
         }
-        if(builder.sandbox && Objects.isNull(builder.inboxId)) {
+        if (builder.sandbox && Objects.isNull(builder.inboxId)) {
             throw new BaseMailtrapException("Sandbox API requires inbox ID");
         }
         this.sandbox = builder.sandbox;

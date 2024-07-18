@@ -4,18 +4,19 @@ import io.mailtrap.api.abstractions.BulkSendingApi;
 import io.mailtrap.api.abstractions.EmailSendingApi;
 import io.mailtrap.api.abstractions.EmailTestingApi;
 import io.mailtrap.config.SendingConfig;
+import io.mailtrap.exception.BaseMailtrapException;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class MailtrapSendingWrapperTest extends BaseSendTest {
 
-    private SendingConfig sendingConfig;
+    private SendingConfig.Builder sendingConfigBuilder;
     private EmailSendingApi sendingApi;
     private EmailTestingApi testingApi;
     private BulkSendingApi bulkSendingApi;
@@ -23,24 +24,30 @@ class MailtrapSendingWrapperTest extends BaseSendTest {
 
     @BeforeEach
     void setUp() {
-        sendingConfig = mock(SendingConfig.class);
+        sendingConfigBuilder = new SendingConfig.Builder()
+                .inboxId(INBOX_ID);
+
         sendingApi = mock(EmailSendingApi.class);
         testingApi = mock(EmailTestingApi.class);
         bulkSendingApi = mock(BulkSendingApi.class);
 
-        mailtrapSendingWrapper = new MailtrapSendingWrapper(sendingConfig, sendingApi, testingApi, bulkSendingApi);
+        mailtrapSendingWrapper = new MailtrapSendingWrapper(sendingApi, testingApi, bulkSendingApi);
     }
 
     @Test
-    void testSendBulk() {
-        MailtrapMail mailtrapMail = new MailtrapMail();
-        SendResponse expectedResponse = new SendResponse();
+    void test_sendBulk_success() {
+        // Set up test data
+        MailtrapMail mailtrapMail = createValidTestMail();
+        var expectedResponse = successfulResponse("123");
 
-        when(sendingConfig.isBulk()).thenReturn(true);
+        SendingConfig config = sendingConfigBuilder.bulk(true).build();
+
         when(bulkSendingApi.send(mailtrapMail)).thenReturn(expectedResponse);
 
-        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail);
+        // Call
+        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail, config);
 
+        // Assert
         verify(bulkSendingApi).send(mailtrapMail);
         verify(sendingApi, never()).send(mailtrapMail);
         verify(testingApi, never()).send(any(MailtrapMail.class), anyInt());
@@ -48,37 +55,66 @@ class MailtrapSendingWrapperTest extends BaseSendTest {
     }
 
     @Test
-    void testSendSandbox() {
-        MailtrapMail mailtrapMail = new MailtrapMail();
-        SendResponse expectedResponse = new SendResponse();
+    void test_sendSandbox_success() {
+        // Set up test data
+        MailtrapMail mailtrapMail = createValidTestMail();
+        SendResponse expectedResponse = successfulResponse("321");
 
-        when(sendingConfig.isBulk()).thenReturn(false);
-        when(sendingConfig.isSandbox()).thenReturn(true);
-        when(sendingConfig.getInboxId()).thenReturn(123); // Assuming getInboxId method exists
-        when(testingApi.send(mailtrapMail, 123)).thenReturn(expectedResponse);
+        SendingConfig config = sendingConfigBuilder.sandbox(true).build();
 
-        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail);
+        when(testingApi.send(same(mailtrapMail), eq(INBOX_ID))).thenReturn(expectedResponse);
 
-        verify(testingApi).send(mailtrapMail, 123);
+        // Call
+        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail, config);
+
+        // Assert
+        verify(testingApi).send(same(mailtrapMail), eq(INBOX_ID));
         verify(sendingApi, never()).send(mailtrapMail);
         verify(bulkSendingApi, never()).send(mailtrapMail);
         assertSame(expectedResponse, response);
     }
 
     @Test
-    void testSendProduction() {
-        MailtrapMail mailtrapMail = new MailtrapMail();
-        SendResponse expectedResponse = new SendResponse();
+    void test_send_success() {
+        // Set up test data
+        MailtrapMail mailtrapMail = createValidTestMail();
+        SendResponse expectedResponse = successfulResponse("123");
 
-        when(sendingConfig.isBulk()).thenReturn(false);
-        when(sendingConfig.isSandbox()).thenReturn(false);
+        SendingConfig config = sendingConfigBuilder.build();
         when(sendingApi.send(mailtrapMail)).thenReturn(expectedResponse);
 
-        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail);
+        // Call
+        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail, config);
 
+        // Assert
         verify(sendingApi).send(mailtrapMail);
         verify(testingApi, never()).send(any(MailtrapMail.class), anyInt());
         verify(bulkSendingApi, never()).send(mailtrapMail);
         assertSame(expectedResponse, response);
     }
+
+    @Test
+    void test_bulkAndSandboxTrue_ThrowsBaseMailtrapException() {
+        // Set up test data and call
+        BaseMailtrapException exception = assertThrows(BaseMailtrapException.class, () -> sendingConfigBuilder
+                .bulk(true)
+                .sandbox(true)
+                .build());
+
+        // Assert
+        assertEquals(BULK_AND_SANDBOX_TRUE_IN_SENDING_CONFIG, exception.getMessage());
+    }
+
+    @Test
+    void test_sandboxTrueAndNullInboxId_ThrowsBaseMailtrapException() {
+        // Set up test data and call
+        BaseMailtrapException exception = assertThrows(BaseMailtrapException.class, () -> sendingConfigBuilder
+                .sandbox(true)
+                .inboxId(null)
+                .build());
+
+        // Assert
+        assertEquals(INBOX_ID_REQUIRED, exception.getMessage());
+    }
+
 }
