@@ -42,6 +42,7 @@ implementation("io.mailtrap:mailtrap-java:1.0-SNAPSHOT")
 ```java
 import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
+import io.mailtrap.config.SendingConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.Address;
 import io.mailtrap.model.request.Attachment;
@@ -51,14 +52,14 @@ import java.util.List;
 import java.util.Map;
 
 public class MailtrapJavaSDKTest {
-    
+
     public static void main(String[] args) {
         Address from = Address.builder()
                 .email("sender@example.com")
                 .build();
 
         Address to = Address.builder()
-                .email("sender@example.com")
+                .email("receiver@example.com")
                 .build();
 
         Attachment attachment = Attachment.builder()
@@ -84,7 +85,10 @@ public class MailtrapJavaSDKTest {
                         .token("<YOUR_MAILTRAP_TOKEN>")
                         .build());
         try {
-            System.out.println(mailtrapClient.getSendingApi().emails().send(mailtrapMail));
+            SendingConfig sendingConfig = new SendingConfig.Builder()
+                    .build();
+
+            System.out.println(mailtrapClient.emails().send(mailtrapMail, sendingConfig));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
@@ -92,8 +96,12 @@ public class MailtrapJavaSDKTest {
         // OR send email to the Mailtrap SANDBOX
 
         try {
-            int inboxId = 1000001;
-            System.out.println(mailtrapClient.getTestingApi().emails().send(mailtrapMail, inboxId));
+            SendingConfig sendingConfig = new SendingConfig.Builder()
+                    .sandbox(true)
+                    .inboxId(1000001)
+                    .build();
+
+            System.out.println(mailtrapClient.emails().send(mailtrapMail, sendingConfig));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
