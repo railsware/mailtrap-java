@@ -94,6 +94,24 @@ class MailtrapSendingWrapperTest extends BaseSendTest {
     }
 
     @Test
+    void test_sendWithoutConfig_success() {
+        // Set up test data
+        MailtrapMail mailtrapMail = createValidTestMail();
+        SendResponse expectedResponse = successfulResponse("123");
+
+        when(sendingApi.send(mailtrapMail)).thenReturn(expectedResponse);
+
+        // Call
+        SendResponse response = mailtrapSendingWrapper.send(mailtrapMail);
+
+        // Assert
+        verify(sendingApi).send(mailtrapMail);
+        verify(testingApi, never()).send(any(MailtrapMail.class), anyInt());
+        verify(bulkSendingApi, never()).send(mailtrapMail);
+        assertSame(expectedResponse, response);
+    }
+
+    @Test
     void test_bulkAndSandboxTrue_ThrowsBaseMailtrapException() {
         // Set up test data and call
         BaseMailtrapException exception = assertThrows(BaseMailtrapException.class, () -> sendingConfigBuilder
@@ -106,7 +124,7 @@ class MailtrapSendingWrapperTest extends BaseSendTest {
     }
 
     @Test
-    void test_sandboxTrueAndNullInboxId_ThrowsBaseMailtrapException() {
+    void test_sandboxTrueAndInboxIdIsNull_ThrowsBaseMailtrapException() {
         // Set up test data and call
         BaseMailtrapException exception = assertThrows(BaseMailtrapException.class, () -> sendingConfigBuilder
                 .sandbox(true)

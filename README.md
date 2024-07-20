@@ -85,10 +85,7 @@ public class MailtrapJavaSDKTest {
                         .token("<YOUR_MAILTRAP_TOKEN>")
                         .build());
         try {
-            SendingConfig sendingConfig = new SendingConfig.Builder()
-                    .build();
-
-            System.out.println(mailtrapClient.emails().send(mailtrapMail, sendingConfig));
+            System.out.println(mailtrapClient.emails().send(mailtrapMail));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }

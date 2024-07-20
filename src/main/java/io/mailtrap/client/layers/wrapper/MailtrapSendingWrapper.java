@@ -15,6 +15,13 @@ public class MailtrapSendingWrapper {
     private final EmailTestingApi testingApi;
     private final BulkSendingApi bulkSendingApi;
 
+    /**
+     * Sends an email based on the specified sending configuration.
+     *
+     * @param mailtrapMail the email to send
+     * @param sendingConfig the configuration for sending
+     * @return the response from the sending operation
+     */
     public SendResponse send(MailtrapMail mailtrapMail, SendingConfig sendingConfig) {
         if (sendingConfig.isBulk()) {
             return bulkSendingApi.send(mailtrapMail);
@@ -23,5 +30,15 @@ public class MailtrapSendingWrapper {
         } else {
             return sendingApi.send(mailtrapMail);
         }
+    }
+
+    /**
+     * Sends an email with a default sending configuration.
+     *
+     * @param mailtrapMail the email to send
+     * @return the response from the sending operation
+     */
+    public SendResponse send(MailtrapMail mailtrapMail) {
+        return this.send(mailtrapMail, new SendingConfig.Builder().build());
     }
 }
