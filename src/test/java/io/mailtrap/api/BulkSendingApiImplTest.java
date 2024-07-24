@@ -1,17 +1,15 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.CustomValidator;
 import io.mailtrap.api.abstractions.BulkSendingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -37,17 +35,13 @@ class BulkSendingApiImplTest extends BaseSendTest {
                 )
         ));
 
-        MailtrapConfig testConfig = MailtrapConfig.builder()
+        MailtrapConfig testConfig = new MailtrapConfig.Builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
+                .bulk(true)
                 .build();
 
-        CustomValidator customValidator;
-        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-            customValidator = new CustomValidator(factory.getValidator());
-        }
-
-        bulkSendingApi = new BulkSendingApiImpl(testConfig, customValidator);
+        bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).bulkSendingApi().emails();
     }
 
     @Test

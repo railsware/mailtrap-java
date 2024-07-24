@@ -1,17 +1,15 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.CustomValidator;
 import io.mailtrap.api.abstractions.EmailTestingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
-import jakarta.validation.Validation;
-import jakarta.validation.ValidatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -38,18 +36,14 @@ class EmailTestingApiImplTest extends BaseSendTest {
                 )
         ));
 
-
-        MailtrapConfig testConfig = MailtrapConfig.builder()
+        MailtrapConfig testConfig = new MailtrapConfig.Builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
+                .sandbox(true)
+                .inboxId(INBOX_ID)
                 .build();
 
-        CustomValidator customValidator;
-        try (ValidatorFactory factory = Validation.buildDefaultValidatorFactory()) {
-            customValidator = new CustomValidator(factory.getValidator());
-        }
-
-        testingApi = new EmailTestingApiImpl(testConfig, customValidator);
+        testingApi = MailtrapClientFactory.createMailtrapClient(testConfig).testingApi().emails();
     }
 
     @Test

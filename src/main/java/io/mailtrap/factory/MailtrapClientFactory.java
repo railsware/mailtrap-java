@@ -5,8 +5,11 @@ import io.mailtrap.api.BulkSendingApiImpl;
 import io.mailtrap.api.EmailSendingApiImpl;
 import io.mailtrap.api.EmailTestingApiImpl;
 import io.mailtrap.client.MailtrapClient;
-import io.mailtrap.client.layers.wrapper.MailtrapSendingWrapper;
+import io.mailtrap.client.layers.MailtrapBulkEmailSendingApiLayer;
+import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
+import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
 import io.mailtrap.config.MailtrapConfig;
+import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
 
@@ -27,17 +30,40 @@ public final class MailtrapClientFactory {
     public static MailtrapClient createMailtrapClient(MailtrapConfig config) {
         var customValidator = createValidator();
 
-        var sendWrapper = createSendingWrapper(config, customValidator);
+        var sendingApi = createSendingApi(config, customValidator);
+        var testingApi = createTestingApi(config, customValidator);
+        var bulkSendingApi = createBulkSendingApi(config, customValidator);
 
-        return new MailtrapClient(sendWrapper);
+        var sendingContextHolder = configureSendingContext(config);
+
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, sendingContextHolder);
     }
 
-    private static MailtrapSendingWrapper createSendingWrapper(MailtrapConfig config, CustomValidator customValidator) {
-        var sendingApi = new EmailSendingApiImpl(config, customValidator);
-        var testingApi = new EmailTestingApiImpl(config, customValidator);
-        var bulkSendingApi = new BulkSendingApiImpl(config, customValidator);
+    private static SendingContextHolder configureSendingContext(MailtrapConfig config) {
 
-        return new MailtrapSendingWrapper(sendingApi, testingApi, bulkSendingApi);
+        return SendingContextHolder.builder()
+                .sandbox(config.isSandbox())
+                .inboxId(config.getInboxId())
+                .bulk(config.isBulk())
+                .build();
+    }
+
+    private static MailtrapEmailSendingApiLayer createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new EmailSendingApiImpl(config, customValidator);
+
+        return new MailtrapEmailSendingApiLayer(emails);
+    }
+
+    private static MailtrapEmailTestingApiLayer createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new EmailTestingApiImpl(config, customValidator);
+
+        return new MailtrapEmailTestingApiLayer(emails);
+    }
+
+    private static MailtrapBulkEmailSendingApiLayer createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new BulkSendingApiImpl(config, customValidator);
+
+        return new MailtrapBulkEmailSendingApiLayer(emails);
     }
 
     /**
