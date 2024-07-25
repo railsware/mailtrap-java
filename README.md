@@ -53,15 +53,9 @@ import java.util.Map;
 public class MailtrapJavaSDKTest {
 
     public static void main(String[] args) {
-        Address from = Address.builder()
-                .name("John Doe")
-                .email("sender@example.com")
-                .build();
+        Address from = new Address("sender@example.com", "John Doe");
 
-        Address to = Address.builder()
-                .name("Jane Doe")
-                .email("receiver@example.com")
-                .build();
+        Address to = new Address("receiver@example.com");
 
         Attachment attachment = Attachment.builder()
                 .filename("attachment.txt")
@@ -81,24 +75,18 @@ public class MailtrapJavaSDKTest {
                 .attachments(List.of(attachment))
                 .build();
 
-        // Default settings, only token is required
         MailtrapClient mailtrapClient = MailtrapClientFactory.createMailtrapClient(
                 new MailtrapConfig.Builder()
                         .token("<YOUR_MAILTRAP_TOKEN>")
                         .build());
 
-        // Send the email to Mailtrap Send API
-        
         try {
             System.out.println(mailtrapClient.send(mailtrapMail));
-            
-            // Alternatively you can use dedicated Mailtrap Send API
-            mailtrapClient.sendingApi().emails().send(mailtrapMail);
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
 
-        // OR send the email to the Mailtrap Sandbox
+        // OR send email to the Mailtrap Sandbox
 
         try {
             int inboxId = 1000001;
@@ -114,11 +102,11 @@ public class MailtrapJavaSDKTest {
             System.out.println(sandboxClient.send(mailtrapMail));
 
             // Or reuse already created client
-            mailtrapClient.initTestingSend(inboxId);
+            mailtrapClient.switchToEmailTestingApi(inboxId);
 
             System.out.println(mailtrapClient.send(mailtrapMail));
 
-            // Alternatively you can use dedicated Testing API to send the email to Mailtrap Sandbox
+            // Or use directly Testing API to send email to Sandbox
             System.out.println(mailtrapClient.testingApi().emails().send(mailtrapMail, inboxId));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);

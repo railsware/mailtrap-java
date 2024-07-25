@@ -29,26 +29,26 @@ public class MailtrapConfig {
     private final CustomHttpClient httpClient;
 
     /**
-     * Indicates whether to use Sandbox or Send API
+     * Indicates whether to use Email Testing API
      */
     private final boolean sandbox;
 
     /**
-     * Indicates whether to use Bulk API
+     * Indicates whether to use Bulk Sending API
      */
     private final boolean bulk;
 
     /**
-     * Inbox ID. Should be used alongside with {@link #sandbox}, as Sandbox API requires inbox ID
+     * Inbox ID. Should be used alongside with {@link #sandbox}, as Email Testing API requires inbox ID
      */
     private final Integer inboxId;
 
     private MailtrapConfig(Builder builder) {
         if (builder.sandbox && builder.bulk) {
-            throw new BaseMailtrapException("Bulk mode is not applicable for Sandbox API");
+            throw new BaseMailtrapException("Bulk mode is not applicable for Testing API");
         }
         if (builder.sandbox && Objects.isNull(builder.inboxId)) {
-            throw new BaseMailtrapException("Sandbox API requires inbox ID");
+            throw new BaseMailtrapException("Testing API requires inbox ID");
         }
 
         this.connectionTimeout = builder.connectionTimeout;

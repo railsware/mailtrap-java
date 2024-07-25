@@ -16,9 +16,7 @@ class CustomValidatorTest {
 
     @Test
     void validate_WithValidObject_ShouldReturnEmptyMap() {
-        Address validAddress = Address.builder()
-                .email("mail+123@gmail.com")
-                .build();
+        Address validAddress = new Address("mail+123@gmail.com");
 
         Map<String, String> errors = customValidator.validate(validAddress);
 
@@ -27,9 +25,7 @@ class CustomValidatorTest {
 
     @Test
     void validate_WithInvalidObject_ShouldReturnErrorsMap() {
-        Address invalidAddress = Address.builder()
-                .email("qwerty")
-                .build();
+        Address invalidAddress = new Address("qwerty");
 
         Map<String, String> errors = customValidator.validate(invalidAddress);
 
@@ -39,9 +35,7 @@ class CustomValidatorTest {
 
     @Test
     void validateAndGetViolationsAsString_WithValidObject_ShouldReturnEmptyString() {
-        Address validAddress = Address.builder()
-                .email("mail+123@gmail.com")
-                .build();
+        Address validAddress = new Address("mail+123@gmail.com");
 
         String violationsAsString = customValidator.validateAndGetViolationsAsString(validAddress);
 
@@ -50,9 +44,7 @@ class CustomValidatorTest {
 
     @Test
     void validateAndGetViolationsAsString_WithInvalidObject_ShouldReturnConcatenatedString() {
-        Address invalidAddress = Address.builder()
-                .email("qwerty")
-                .build();
+        Address invalidAddress = new Address("qwerty");
 
         String violationsAsString = customValidator.validateAndGetViolationsAsString(invalidAddress);
 

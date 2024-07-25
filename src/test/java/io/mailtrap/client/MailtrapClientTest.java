@@ -69,7 +69,7 @@ class MailtrapClientTest extends BaseSendTest {
         // Set up test data
         MailtrapMail mailtrapMail = createValidTestMail();
 
-        mailtrapClient.initBulkSend();
+        mailtrapClient.switchToBulkSendingApi();
 
         // Call
         SendResponse response = mailtrapClient.send(mailtrapMail);
@@ -83,7 +83,7 @@ class MailtrapClientTest extends BaseSendTest {
         // Set up test data
         MailtrapMail mailtrapMail = createValidTestMail();
 
-        mailtrapClient.initTestingSend(INBOX_ID);
+        mailtrapClient.switchToEmailTestingApi(INBOX_ID);
 
         // Call
         SendResponse response = mailtrapClient.send(mailtrapMail);

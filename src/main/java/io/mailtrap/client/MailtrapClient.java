@@ -39,8 +39,8 @@ public class MailtrapClient {
     private final MailtrapBulkEmailSendingApiLayer bulkSendingApi;
 
     /**
-     * Utility class which holds sending context (testing/bulk/production env, inbox id) to make it possible to perform
-     * send directly from MailtrapClient
+     * Utility class which holds sending context (which API to use: Email Sending API, Bulk Sending API or
+     * Email Testing API, inbox id for Email Testing API) to make it possible to perform send directly from MailtrapClient
      */
     private final SendingContextHolder sendingContextHolder;
 
@@ -61,29 +61,29 @@ public class MailtrapClient {
     }
 
     /**
-     * Initializes the context for bulk sending.
+     * Configures `send` method to use Bulk Sending API
      */
-    public void initBulkSend() {
+    public void switchToBulkSendingApi() {
         this.sendingContextHolder.setBulk(true);
         this.sendingContextHolder.setInboxId(null);
         this.sendingContextHolder.setSandbox(false);
     }
 
     /**
-     * Initializes the context for testing sending.
+     * Configures `send` method to use Email Testing API
      *
      * @param inboxId the inbox ID to use for testing
      */
-    public void initTestingSend(Integer inboxId) {
+    public void switchToEmailTestingApi(Integer inboxId) {
         this.sendingContextHolder.setInboxId(inboxId);
         this.sendingContextHolder.setSandbox(true);
         this.sendingContextHolder.setBulk(false);
     }
 
     /**
-     * Initializes the context for production sending.
+     * Configures `send` method to use Email Sending API.
      */
-    public void initProductionSend() {
+    public void switchToEmailSendingApi() {
         this.sendingContextHolder.setInboxId(null);
         this.sendingContextHolder.setSandbox(false);
         this.sendingContextHolder.setBulk(false);
