@@ -35,12 +35,13 @@ class BulkSendingApiImplTest extends BaseSendTest {
                 )
         ));
 
-        MailtrapConfig testConfig = MailtrapConfig.builder()
+        MailtrapConfig testConfig = new MailtrapConfig.Builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
+                .bulk(true)
                 .build();
 
-        bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).getBulkSendingApi().emails();
+        bulkSendingApi = MailtrapClientFactory.createMailtrapClient(testConfig).bulkSendingApi().emails();
     }
 
     @Test
@@ -50,7 +51,7 @@ class BulkSendingApiImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkSendingApi.send(mail));
-        assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
+        assertEquals(INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL, exception.getMessage());
     }
 
     @Test

@@ -36,12 +36,12 @@ class EmailSendingApiImplTest extends BaseSendTest {
                 )
         ));
 
-        MailtrapConfig testConfig = MailtrapConfig.builder()
+        MailtrapConfig testConfig = new MailtrapConfig.Builder()
                 .httpClient(httpClient)
                 .token("dummy_token")
                 .build();
 
-        sendApi = MailtrapClientFactory.createMailtrapClient(testConfig).getSendingApi().emails();
+        sendApi = MailtrapClientFactory.createMailtrapClient(testConfig).sendingApi().emails();
     }
 
     @Test
@@ -51,7 +51,7 @@ class EmailSendingApiImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
-        assertEquals(INVALID_REQUEST__EMPTY_BODY_FROM_EMAIL, exception.getMessage());
+        assertEquals(INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL, exception.getMessage());
     }
 
     @Test

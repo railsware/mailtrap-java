@@ -37,7 +37,7 @@ Gradle Kotlin DSL dependency
 implementation("io.mailtrap:mailtrap-java:1.0-SNAPSHOT")
 ```
 
-### Minimal
+### Usage
 
 ```java
 import io.mailtrap.client.MailtrapClient;
@@ -51,15 +51,11 @@ import java.util.List;
 import java.util.Map;
 
 public class MailtrapJavaSDKTest {
-    
-    public static void main(String[] args) {
-        Address from = Address.builder()
-                .email("sender@example.com")
-                .build();
 
-        Address to = Address.builder()
-                .email("sender@example.com")
-                .build();
+    public static void main(String[] args) {
+        Address from = new Address("sender@example.com", "John Doe");
+
+        Address to = new Address("receiver@example.com");
 
         Attachment attachment = Attachment.builder()
                 .filename("attachment.txt")
@@ -79,21 +75,39 @@ public class MailtrapJavaSDKTest {
                 .attachments(List.of(attachment))
                 .build();
 
-        MailtrapClient mailtrapClient = MailtrapClientFactory
-                .createMailtrapClient(MailtrapConfig.builder()
+        MailtrapClient mailtrapClient = MailtrapClientFactory.createMailtrapClient(
+                new MailtrapConfig.Builder()
                         .token("<YOUR_MAILTRAP_TOKEN>")
                         .build());
+
         try {
-            System.out.println(mailtrapClient.getSendingApi().emails().send(mailtrapMail));
+            System.out.println(mailtrapClient.send(mailtrapMail));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
 
-        // OR send email to the Mailtrap SANDBOX
+        // OR send email to the Mailtrap Sandbox
 
         try {
             int inboxId = 1000001;
-            System.out.println(mailtrapClient.getTestingApi().emails().send(mailtrapMail, inboxId));
+
+            // Either instantiate a new client
+            MailtrapClient sandboxClient = MailtrapClientFactory.createMailtrapClient(
+                    new MailtrapConfig.Builder()
+                            .sandbox(true)
+                            .inboxId(inboxId)
+                            .token("<YOUR_MAILTRAP_TOKEN>")
+                            .build());
+
+            System.out.println(sandboxClient.send(mailtrapMail));
+
+            // Or reuse already created client
+            mailtrapClient.switchToEmailTestingApi(inboxId);
+
+            System.out.println(mailtrapClient.send(mailtrapMail));
+
+            // Or use directly Testing API to send email to Sandbox
+            System.out.println(mailtrapClient.testingApi().emails().send(mailtrapMail, inboxId));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }

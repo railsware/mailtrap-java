@@ -10,13 +10,20 @@ import lombok.Getter;
  * Represents an email address.
  */
 @Getter
-@Builder
 public class Address extends AbstractModel {
 
     private String name;
 
     @Email
     @NotEmpty
-    private String email;
+    private final String email;
 
+    public Address(String email) {
+        this.email = email;
+    }
+
+    public Address(String email, String name) {
+        this.email = email;
+        this.name = name;
+    }
 }

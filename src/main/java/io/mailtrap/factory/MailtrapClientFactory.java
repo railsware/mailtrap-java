@@ -2,13 +2,14 @@ package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
 import io.mailtrap.api.BulkSendingApiImpl;
-import io.mailtrap.api.EmailTestingApiImpl;
 import io.mailtrap.api.EmailSendingApiImpl;
+import io.mailtrap.api.EmailTestingApiImpl;
 import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.client.layers.MailtrapBulkEmailSendingApiLayer;
 import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
 import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
 import io.mailtrap.config.MailtrapConfig;
+import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
 import jakarta.validation.ValidatorFactory;
 
@@ -33,7 +34,18 @@ public final class MailtrapClientFactory {
         var testingApi = createTestingApi(config, customValidator);
         var bulkSendingApi = createBulkSendingApi(config, customValidator);
 
-        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi);
+        var sendingContextHolder = configureSendingContext(config);
+
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, sendingContextHolder);
+    }
+
+    private static SendingContextHolder configureSendingContext(MailtrapConfig config) {
+
+        return SendingContextHolder.builder()
+                .sandbox(config.isSandbox())
+                .inboxId(config.getInboxId())
+                .bulk(config.isBulk())
+                .build();
     }
 
     private static MailtrapEmailSendingApiLayer createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
