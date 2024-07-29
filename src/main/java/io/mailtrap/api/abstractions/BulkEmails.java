@@ -8,7 +8,7 @@ import io.mailtrap.model.response.SendResponse;
 /**
  * Interface representing the Mailtrap Bulk Sending API for sending emails.
  */
-public interface BulkSendingApi {
+public interface BulkEmails {
 
     /**
      * Sends an email

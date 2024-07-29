@@ -1,7 +1,7 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.abstractions.EmailSendingApi;
+import io.mailtrap.api.abstractions.SendingEmails;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.factory.MailtrapClientFactory;
@@ -17,9 +17,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class EmailSendingApiImplTest extends BaseSendTest {
+class SendingEmailsImplTest extends BaseSendTest {
 
-    private EmailSendingApi sendApi;
+    private SendingEmails sendApi;
 
     @BeforeEach
     public void init() {

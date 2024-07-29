@@ -1,13 +1,13 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.BulkSendingApiImpl;
-import io.mailtrap.api.EmailSendingApiImpl;
-import io.mailtrap.api.EmailTestingApiImpl;
+import io.mailtrap.api.BulkEmailsImpl;
+import io.mailtrap.api.SendingEmailsImpl;
+import io.mailtrap.api.TestingEmailsImpl;
 import io.mailtrap.client.MailtrapClient;
-import io.mailtrap.client.layers.MailtrapBulkEmailSendingApiLayer;
-import io.mailtrap.client.layers.MailtrapEmailSendingApiLayer;
-import io.mailtrap.client.layers.MailtrapEmailTestingApiLayer;
+import io.mailtrap.client.layers.MailtrapBulkSendingApi;
+import io.mailtrap.client.layers.MailtrapEmailSendingApi;
+import io.mailtrap.client.layers.MailtrapEmailTestingApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
@@ -48,22 +48,22 @@ public final class MailtrapClientFactory {
                 .build();
     }
 
-    private static MailtrapEmailSendingApiLayer createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new EmailSendingApiImpl(config, customValidator);
+    private static MailtrapEmailSendingApi createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new SendingEmailsImpl(config, customValidator);
 
-        return new MailtrapEmailSendingApiLayer(emails);
+        return new MailtrapEmailSendingApi(emails);
     }
 
-    private static MailtrapEmailTestingApiLayer createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new EmailTestingApiImpl(config, customValidator);
+    private static MailtrapEmailTestingApi createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new TestingEmailsImpl(config, customValidator);
 
-        return new MailtrapEmailTestingApiLayer(emails);
+        return new MailtrapEmailTestingApi(emails);
     }
 
-    private static MailtrapBulkEmailSendingApiLayer createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new BulkSendingApiImpl(config, customValidator);
+    private static MailtrapBulkSendingApi createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
+        var emails = new BulkEmailsImpl(config, customValidator);
 
-        return new MailtrapBulkEmailSendingApiLayer(emails);
+        return new MailtrapBulkSendingApi(emails);
     }
 
     /**

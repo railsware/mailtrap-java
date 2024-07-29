@@ -1,16 +1,16 @@
 package io.mailtrap.client.layers;
 
-import io.mailtrap.api.abstractions.BulkSendingApi;
+import io.mailtrap.api.abstractions.TestingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
 
 /**
- * Represents an API for Mailtrap Bulk Sending functionality
+ * Represents an API for Mailtrap Testing functionality
  */
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor
-public class MailtrapBulkEmailSendingApiLayer {
-    private final BulkSendingApi emails;
+public class MailtrapEmailTestingApi {
+    private final TestingEmails emails;
 }
