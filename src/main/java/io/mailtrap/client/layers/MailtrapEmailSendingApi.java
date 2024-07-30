@@ -1,6 +1,6 @@
 package io.mailtrap.client.layers;
 
-import io.mailtrap.api.abstractions.EmailSendingApi;
+import io.mailtrap.api.abstractions.SendingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
@@ -11,6 +11,6 @@ import lombok.experimental.Accessors;
 @Getter
 @Accessors(fluent = true)
 @RequiredArgsConstructor
-public class MailtrapEmailSendingApiLayer {
-    private final EmailSendingApi emails;
+public class MailtrapEmailSendingApi {
+    private final SendingEmails emails;
 }

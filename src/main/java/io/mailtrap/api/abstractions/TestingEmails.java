@@ -8,7 +8,7 @@ import io.mailtrap.model.response.SendResponse;
 /**
  * Interface representing the Mailtrap Testing API for sending emails.
  */
-public interface EmailTestingApi {
+public interface TestingEmails {
 
     /**
      * Sends an email

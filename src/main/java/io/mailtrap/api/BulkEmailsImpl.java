@@ -2,7 +2,7 @@ package io.mailtrap.api;
 
 import io.mailtrap.Constants;
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.abstractions.EmailSendingApi;
+import io.mailtrap.api.abstractions.BulkEmails;
 import io.mailtrap.api.abstractions.classes.SendApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
@@ -10,13 +10,13 @@ import io.mailtrap.model.request.MailtrapMail;
 import io.mailtrap.model.response.SendResponse;
 
 /**
- * Implementation of the {@link EmailSendingApi} interface for sending emails in the production environment.
+ * Implementation of the {@link BulkEmails} interface for bulk sending emails.
  */
-public class EmailSendingApiImpl extends SendApiResource implements EmailSendingApi {
+public class BulkEmailsImpl extends SendApiResource implements BulkEmails {
 
-    public EmailSendingApiImpl(MailtrapConfig config, CustomValidator customValidator) {
+    public BulkEmailsImpl(MailtrapConfig config, CustomValidator customValidator) {
         super(config, customValidator);
-        this.apiHost = Constants.EMAIL_SENDING_SEND_HOST;
+        this.apiHost = Constants.BULK_SENDING_HOST;
     }
 
     @Override
@@ -28,5 +28,4 @@ public class EmailSendingApiImpl extends SendApiResource implements EmailSending
         }
         return httpClient.post(apiHost + "/api/send", mail, requestData, SendResponse.class);
     }
-
 }
