@@ -16,7 +16,7 @@ public class AttachmentsImpl extends ApiResource implements Attachments {
 
     public AttachmentsImpl(MailtrapConfig config) {
         super(config);
-        this.apiHost = Constants.DEFAULT_HOST;
+        this.apiHost = Constants.GENERAL_HOST;
     }
 
     @Override

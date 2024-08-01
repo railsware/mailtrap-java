@@ -27,7 +27,7 @@ class AttachmentsImplTest {
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
                 DataMock.build(
-                        Constants.DEFAULT_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments",
+                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments",
                         "GET",
                         null,
                         """
@@ -49,7 +49,7 @@ class AttachmentsImplTest {
                                 ]"""
                 ),
                 DataMock.build(
-                        Constants.DEFAULT_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments/" + attachmentId,
+                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments/" + attachmentId,
                         "GET",
                         null,
                         """
