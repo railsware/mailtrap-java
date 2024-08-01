@@ -80,7 +80,7 @@ class AttachmentsImplTest {
     }
 
     @Test
-    public void getAttachmentsTest() {
+    public void test_getAttachments() {
         List<AttachmentResponse> attachments = api.getAttachments(accountId, inboxId, messageId, null);
 
         assertEquals(1, attachments.size());
@@ -90,7 +90,7 @@ class AttachmentsImplTest {
     }
 
     @Test
-    public void getAttachmentTest() {
+    public void test_getAttachment() {
         AttachmentResponse attachment = api.getSingleAttachment(accountId, inboxId, messageId, attachmentId);
 
         assertNotNull(attachment);
