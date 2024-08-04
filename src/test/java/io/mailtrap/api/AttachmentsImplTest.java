@@ -22,18 +22,11 @@ class AttachmentsImplTest extends BaseTest {
     @BeforeEach
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments",
-                        "GET",
-                        null,
-                        "api/attachments/getAttachmentsResponse.json"
-                ),
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments/" + attachmentId,
-                        "GET",
-                        null,
-                        "api/attachments/getAttachmentResponse.json"
-                )
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments",
+                        "GET", null, "api/attachments/getAttachmentsResponse.json"),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments/" + attachmentId,
+                        "GET", null, "api/attachments/getAttachmentResponse.json")
         ));
 
         MailtrapConfig testConfig = new MailtrapConfig.Builder()
