@@ -9,6 +9,9 @@ import io.mailtrap.http.RequestData;
 import io.mailtrap.model.AbstractModel;
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -91,11 +94,19 @@ public class TestHttpClient implements CustomHttpClient {
 
                 // request
                 if (requestBody != null) {
-                    if (StringUtils.isEmpty(dataMock.getRequestJson())) {
+                    if (StringUtils.isEmpty(dataMock.getRequestFile())) {
                         throw new AssertionError("No mock request body provided: " + requestIdentifier);
                     }
 
-                    boolean sameRequests = dataMock.getRequestJson().equals(requestBody.toJson());
+                    InputStream requestInputStream = this.getClass().getClassLoader().getResourceAsStream(dataMock.getRequestFile());
+
+                    if (requestInputStream == null) {
+                        throw new AssertionError(String.format("Failed to load request mock payload %s for request %s", dataMock.getRequestFile(), requestIdentifier));
+                    }
+
+                    String requestPayloadMock = new BufferedReader(new InputStreamReader(requestInputStream)).lines().collect(Collectors.joining("\n"));
+
+                    boolean sameRequests = Mapper.get().readTree(requestPayloadMock).equals(Mapper.get().readTree(requestBody.toJson()));
 
                     if (!sameRequests && i == dataMocks.size() - 1) {
                         throw new AssertionError("No match for request payload " + requestIdentifier);
@@ -113,14 +124,21 @@ public class TestHttpClient implements CustomHttpClient {
                 if (Void.class.equals(responseClassType)) {
                     return null;
                 }
-                if (StringUtils.isEmpty(dataMock.getResponseJson())) {
+                if (StringUtils.isEmpty(dataMock.getResponseFile())) {
                     throw new AssertionError("No mock response body provided: " + requestIdentifier);
                 }
 
+                InputStream responseInputStream = this.getClass().getClassLoader().getResourceAsStream(dataMock.getResponseFile());
+                if (responseInputStream == null) {
+                    throw new AssertionError("Failed to load response mock payload " + dataMock.getResponseFile() + " for request" + requestIdentifier);
+                }
+                String responsePayloadMock = new BufferedReader(new InputStreamReader(responseInputStream)).lines().collect(Collectors.joining("\n"));
+
+
                 if (responseClassType != null) {
-                    return Mapper.get().readValue(dataMock.getResponseJson(), responseClassType);
+                    return Mapper.get().readValue(responsePayloadMock, responseClassType);
                 } else if (responseJavaType != null) {
-                    return Mapper.get().readValue(dataMock.getResponseJson(), responseJavaType);
+                    return Mapper.get().readValue(responsePayloadMock, responseJavaType);
                 } else {
                     throw new IllegalArgumentException("Both responseType and typeReference are null");
                 }

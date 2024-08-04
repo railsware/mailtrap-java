@@ -5,6 +5,7 @@ import io.mailtrap.api.abstractions.Attachments;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.response.AttachmentResponse;
+import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,12 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AttachmentsImplTest {
-
-    private final Long accountId = 1L;
-    private final int inboxId = 2;
-    private final Long messageId = 3L;
-    private final Long attachmentId = 4L;
+class AttachmentsImplTest extends BaseTest {
 
     private Attachments api;
 
@@ -30,44 +26,13 @@ class AttachmentsImplTest {
                         Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments",
                         "GET",
                         null,
-                        """
-                                [
-                                  {
-                                    "id": 4,
-                                    "message_id": 3,
-                                    "filename": "test.csv",
-                                    "attachment_type": "inline",
-                                    "content_type": "plain/text",
-                                    "content_id": null,
-                                    "transfer_encoding": null,
-                                    "attachment_size": 1,
-                                    "created_at": "2024-07-20T19:25:54.827Z",
-                                    "updated_at": "2024-07-20T19:25:54.827Z",
-                                    "attachment_human_size": "1 Byte",
-                                    "download_path": "/api/accounts/1/inboxes/2/messages/3/attachments/4/download"
-                                  }
-                                ]"""
+                        "api/attachments/getAttachmentsResponse.json"
                 ),
                 DataMock.build(
                         Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/attachments/" + attachmentId,
                         "GET",
                         null,
-                        """
-                                  {
-                                    "id": 4,
-                                    "message_id": 3,
-                                    "filename": "test.csv",
-                                    "attachment_type": "inline",
-                                    "content_type": "plain/text",
-                                    "content_id": null,
-                                    "transfer_encoding": null,
-                                    "attachment_size": 1,
-                                    "created_at": "2024-07-20T19:25:54.827Z",
-                                    "updated_at": "2024-07-20T19:25:54.827Z",
-                                    "attachment_human_size": "1 Byte",
-                                    "download_path": "/api/accounts/1/inboxes/2/messages/3/attachments/4/download"
-                                  }
-                                  """
+                        "api/attachments/getAttachmentResponse.json"
                 )
         ));
 

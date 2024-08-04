@@ -1,0 +1,16 @@
+[
+  {
+    "id": 4,
+    "message_id": 3,
+    "filename": "test.csv",
+    "attachment_type": "inline",
+    "content_type": "plain/text",
+    "content_id": null,
+    "transfer_encoding": null,
+    "attachment_size": 1,
+    "created_at": "2024-07-20T19:25:54.827Z",
+    "updated_at": "2024-07-20T19:25:54.827Z",
+    "attachment_human_size": "1 Byte",
+    "download_path": "/api/accounts/1/inboxes/2/messages/3/attachments/4/download"
+  }
+]
