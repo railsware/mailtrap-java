@@ -8,6 +8,7 @@ import io.mailtrap.http.impl.DefaultMailtrapHttpClient;
 import io.mailtrap.model.AbstractModel;
 
 import java.net.http.HttpClient;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -29,6 +30,16 @@ public interface CustomHttpClient {
      * @throws HttpException in case any error. Might throw specific {@link HttpClientException} for HTTP response codes 4xx or {@link HttpServerException} for HTTP response codes 5xx
      */
     <T> T get(String url, RequestData requestData, Class<T> responseType) throws HttpException;
+
+    /**
+     * @param url          Request url
+     * @param requestData  Additional request data - headers and query parameters
+     * @param responseType Return class type
+     * @param <T>          Return type
+     * @return Response type
+     * @throws HttpException in case any error. Might throw specific {@link HttpClientException} for HTTP response codes 4xx or {@link HttpServerException} for HTTP response codes 5xx
+     */
+    <T> List<T> getList(String url, RequestData requestData, Class<T> responseType) throws HttpException;
 
     /**
      * @param url          Request url
@@ -96,7 +107,10 @@ public interface CustomHttpClient {
      * @return The URL with appended query parameters. If no parameters are provided, returns the original URL unchanged.
      */
     default String appendUrlParams(String url, Map<String, ? extends Optional<?>> urlParams) {
-        if (urlParams.isEmpty()) {
+        if (urlParams.isEmpty()
+                || urlParams.entrySet()
+                        .stream()
+                        .noneMatch(e -> e.getValue().isPresent())) {
             return url;
         }
 

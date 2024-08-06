@@ -15,28 +15,28 @@ public class DataMock {
     @NonNull
     private final String methodName;
 
-    private final String requestJson;
-    private final String responseJson;
+    private final String requestFile;
+    private final String responseFile;
 
     @NonNull
     private final Map<String, ?> queryParams;
 
-    public static DataMock build(String url, String methodName, String requestJson, String responseJson) {
+    public static DataMock build(String url, String methodName, String requestFile, String responseFile) {
         return new DataMock(
                 url,
                 methodName,
-                requestJson,
-                responseJson,
+                requestFile,
+                responseFile,
                 Collections.emptyMap()
         );
     }
 
-    public static DataMock build(String url, String methodName, String requestJson, String responseJson, Map<String, ?> queryParams) {
+    public static DataMock build(String url, String methodName, String requestFile, String responseFile, Map<String, ?> queryParams) {
         return new DataMock(
                 url,
                 methodName,
-                requestJson,
-                responseJson,
+                requestFile,
+                responseFile,
                 queryParams
         );
     }

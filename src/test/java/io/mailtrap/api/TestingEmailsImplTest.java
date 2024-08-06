@@ -27,12 +27,8 @@ class TestingEmailsImplTest extends BaseSendTest {
                 DataMock.build(
                         Constants.EMAIL_TESTING_SEND_HOST + "/api/send/" + INBOX_ID,
                         "POST",
-                        createValidTestMail().toJson(),
-                        """
-                                {
-                                  "success": true,
-                                  "message_ids": ["11111"]
-                                }"""
+                        "api/emails/sendRequest.json",
+                        "api/emails/sendResponse.json"
                 )
         ));
 

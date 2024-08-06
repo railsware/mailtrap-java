@@ -24,36 +24,14 @@ class MailtrapClientTest extends BaseSendTest {
     @BeforeEach
     void setUp() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
-                DataMock.build(
-                        Constants.EMAIL_TESTING_SEND_HOST + "/api/send/" + INBOX_ID,
-                        "POST",
-                        createValidTestMail().toJson(),
-                        """
-                                {
-                                  "success": true,
-                                  "message_ids": ["11111"]
-                                }"""
-                ),
-                DataMock.build(
-                        Constants.BULK_SENDING_HOST + "/api/send",
-                        "POST",
-                        createValidTestMail().toJson(),
-                        """
-                                {
-                                  "success": true,
-                                  "message_ids": ["11111"]
-                                }"""
-                ),
-                DataMock.build(
-                        Constants.EMAIL_SENDING_SEND_HOST + "/api/send",
-                        "POST",
-                        createValidTestMail().toJson(),
-                        """
-                                {
-                                  "success": true,
-                                  "message_ids": ["11111"]
-                                }"""
-                )
+                DataMock.build(Constants.EMAIL_TESTING_SEND_HOST + "/api/send/" + INBOX_ID, "POST",
+                        "api/emails/sendRequest.json", "api/emails/sendResponse.json"),
+
+                DataMock.build(Constants.BULK_SENDING_HOST + "/api/send", "POST",
+                        "api/emails/sendRequest.json", "api/emails/sendResponse.json"),
+
+                DataMock.build(Constants.EMAIL_SENDING_SEND_HOST + "/api/send", "POST",
+                        "api/emails/sendRequest.json", "api/emails/sendResponse.json")
         ));
 
         MailtrapConfig mailtrapConfig = new MailtrapConfig.Builder()

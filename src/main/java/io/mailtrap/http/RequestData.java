@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,6 +29,10 @@ public class RequestData {
      */
     private Map<String, ?> headers = new HashMap<>();
 
+    public RequestData(Map<String, ? extends Optional<?>> queryParams) {
+        this.queryParams = queryParams;
+    }
+
     /**
      * Builds a map of query parameters from the specified key-value pairs.
      *
@@ -41,5 +46,9 @@ public class RequestData {
             params.put(entry.getKey(), entry.getValue());
         }
         return params;
+    }
+
+    public static <T extends Optional<?>> Map.Entry<String, T> entry(String key, T value) {
+        return new AbstractMap.SimpleEntry<>(key, value);
     }
 }

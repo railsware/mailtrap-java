@@ -26,12 +26,8 @@ class BulkEmailsImplTest extends BaseSendTest {
                 DataMock.build(
                         Constants.BULK_SENDING_HOST + "/api/send",
                         "POST",
-                        createValidTestMail().toJson(),
-                        """
-                                {
-                                  "success": true,
-                                  "message_ids": ["11111"]
-                                }"""
+                        "api/emails/sendRequest.json",
+                        "api/emails/sendResponse.json"
                 )
         ));
 
