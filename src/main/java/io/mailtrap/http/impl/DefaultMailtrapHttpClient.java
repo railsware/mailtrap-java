@@ -89,7 +89,7 @@ public class DefaultMailtrapHttpClient implements CustomHttpClient {
         var bodyPublisher = data == null ?
                 HttpRequest.BodyPublishers.noBody()
                 : HttpRequest.BodyPublishers.ofString(data.toJson());
-        
+
         HttpRequest httpRequest = prepareRequest(url, requestData)
                 .PUT(bodyPublisher)
                 .build();
@@ -101,7 +101,7 @@ public class DefaultMailtrapHttpClient implements CustomHttpClient {
         var bodyPublisher = data == null ?
                 HttpRequest.BodyPublishers.noBody()
                 : HttpRequest.BodyPublishers.ofString(data.toJson());
-        
+
         HttpRequest httpRequest = prepareRequest(url, requestData)
                 .method("PATCH", bodyPublisher)
                 .build();
@@ -143,6 +143,9 @@ public class DefaultMailtrapHttpClient implements CustomHttpClient {
             int statusCode = response.statusCode();
             if (statusCode == 200) {
                 if (responseClassType != null) {
+                    if (String.class.equals(responseClassType)) {
+                        return responseClassType.cast(response.body());
+                    }
                     return Mapper.get().readValue(response.body(), responseClassType);
                 } else if (responseJavaType != null) {
                     return Mapper.get().readValue(response.body(), responseJavaType);

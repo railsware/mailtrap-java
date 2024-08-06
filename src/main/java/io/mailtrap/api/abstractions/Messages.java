@@ -1,0 +1,146 @@
+package io.mailtrap.api.abstractions;
+
+import io.mailtrap.model.request.ForwardMessageRequest;
+import io.mailtrap.model.request.UpdateMessageRequest;
+import io.mailtrap.model.response.messages.*;
+
+import java.util.List;
+
+/**
+ * Interface representing the Mailtrap Testing API for interaction with email messages
+ */
+public interface Messages {
+
+    /**
+     * Get email message by ID
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return email message with its attributes
+     */
+    MessageResponse getMessage(long accountId, int inboxId, long messageId);
+
+    /**
+     * Update message attributes
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @param request   attributes to update
+     * @return email message with its updated attributes
+     */
+    MessageResponse updateMessage(long accountId, int inboxId, long messageId, UpdateMessageRequest request);
+
+    /**
+     * Delete message from inbox
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return attributes of the deleted message
+     */
+    MessageResponse deleteMessage(long accountId, int inboxId, long messageId);
+
+    /**
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param lastId    if specified, a page of records before `last_id` is returned. Overrides page if both are given
+     * @param page      page number for paginated results
+     * @param search    search query string. Matches `subject`, `to_email`, and `to_name`
+     * @return list of messages
+     */
+    List<MessageResponse> getMessages(long accountId, int inboxId, Integer lastId, Integer page, String search);
+
+    /**
+     * Forward message to an email address. The email address must be confirmed by the recipient in advance
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @param request   email where to forward message
+     * @return confirmation about forwarding
+     */
+    ForwardMessageResponse forwardMessage(long accountId, int inboxId, long messageId, ForwardMessageRequest request);
+
+    /**
+     * Get a brief spam report by message ID
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return message spam analysis report
+     */
+    MessageSpamScoreResponse getSpamScore(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get a brief HTML report by message ID
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return message HTML analysis report
+     */
+    MessageHtmlAnalysisResponse getMessageHtmlAnalysis(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get text email body, if it exists
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return message body in txt format
+     */
+    String getTextMessage(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get raw email body
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return raw message body
+     */
+    String getRawMessage(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get HTML source of email
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return HTML source of a message
+     */
+    String getMessageSource(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get formatted HTML email body. Not applicable for plain text emails
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return message body in html format
+     */
+    String getHtmlMessage(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get email message in .eml format
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return .eml of the message
+     */
+    String getMessageAsEml(long accountId, int inboxId, long messageId);
+
+    /**
+     * Get mail headers of a message
+     *
+     * @param accountId unique account ID
+     * @param inboxId   unique inbox ID
+     * @param messageId unique message ID
+     * @return mail headers of the message
+     */
+    MessageHeadersResponse getMailHeaders(long accountId, int inboxId, long messageId);
+
+}

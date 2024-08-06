@@ -1,0 +1,48 @@
+{
+  "report": {
+    "status": "success",
+    "errors": [
+      {
+        "error_line": 15,
+        "rule_name": "style",
+        "email_clients": {
+          "desktop": [
+            "Notes 6 / 7"
+          ],
+          "mobile": [
+            "Gmail"
+          ]
+        }
+      },
+      {
+        "error_line": 7,
+        "rule_name": "display",
+        "email_clients": {
+          "desktop": [
+            "AOL Desktop",
+            "IBM Notes 9",
+            "Outlook 2000–03",
+            "Outlook 2007–16",
+            "Outlook Express",
+            "Postbox",
+            "Windows 10 Mail",
+            "Windows Live Mail"
+          ],
+          "mobile": [
+            "Android 4.2.2 Mail",
+            "Android 4.4.4 Mail",
+            "BlackBerry",
+            "Gmail Android app IMAP",
+            "Google Inbox Android app",
+            "Windows Phone 8 Mail",
+            "Yahoo! Mail Android app",
+            "Yahoo! Mail iOS app"
+          ],
+          "web": [
+            "Yahoo! Mail"
+          ]
+        }
+      }
+    ]
+  }
+}

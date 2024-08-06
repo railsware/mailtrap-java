@@ -134,8 +134,10 @@ public class TestHttpClient implements CustomHttpClient {
                 }
                 String responsePayloadMock = new BufferedReader(new InputStreamReader(responseInputStream)).lines().collect(Collectors.joining("\n"));
 
-
                 if (responseClassType != null) {
+                    if (String.class.equals(responseClassType)) {
+                        return responseClassType.cast(responsePayloadMock);
+                    }
                     return Mapper.get().readValue(responsePayloadMock, responseClassType);
                 } else if (responseJavaType != null) {
                     return Mapper.get().readValue(responsePayloadMock, responseJavaType);
