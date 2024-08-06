@@ -1,10 +1,7 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.AttachmentsImpl;
-import io.mailtrap.api.BulkEmailsImpl;
-import io.mailtrap.api.SendingEmailsImpl;
-import io.mailtrap.api.TestingEmailsImpl;
+import io.mailtrap.api.*;
 import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.client.layers.MailtrapBulkSendingApi;
 import io.mailtrap.client.layers.MailtrapEmailSendingApi;
@@ -58,8 +55,9 @@ public final class MailtrapClientFactory {
     private static MailtrapEmailTestingApi createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
         var emails = new TestingEmailsImpl(config, customValidator);
         var attachments = new AttachmentsImpl(config);
+        var inbox = new InboxImpl(config, customValidator);
 
-        return new MailtrapEmailTestingApi(emails, attachments);
+        return new MailtrapEmailTestingApi(emails, attachments, inbox);
     }
 
     private static MailtrapBulkSendingApi createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {

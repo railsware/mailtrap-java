@@ -74,24 +74,36 @@ public class DefaultMailtrapHttpClient implements CustomHttpClient {
 
     @Override
     public <T, V extends AbstractModel> T post(String url, V data, RequestData requestData, Class<T> responseType) throws HttpException {
+        var bodyPublisher = data == null ?
+                HttpRequest.BodyPublishers.noBody()
+                : HttpRequest.BodyPublishers.ofString(data.toJson());
+
         HttpRequest httpRequest = prepareRequest(url, requestData)
-                .POST(HttpRequest.BodyPublishers.ofString(data.toJson()))
+                .POST(bodyPublisher)
                 .build();
         return this.request(httpRequest, responseType);
     }
 
     @Override
     public <T, V extends AbstractModel> T put(String url, V data, RequestData requestData, Class<T> responseType) throws HttpException {
+        var bodyPublisher = data == null ?
+                HttpRequest.BodyPublishers.noBody()
+                : HttpRequest.BodyPublishers.ofString(data.toJson());
+        
         HttpRequest httpRequest = prepareRequest(url, requestData)
-                .PUT(HttpRequest.BodyPublishers.ofString(data.toJson()))
+                .PUT(bodyPublisher)
                 .build();
         return this.request(httpRequest, responseType);
     }
 
     @Override
     public <T, V extends AbstractModel> T patch(String url, V data, RequestData requestData, Class<T> responseType) throws HttpException {
+        var bodyPublisher = data == null ?
+                HttpRequest.BodyPublishers.noBody()
+                : HttpRequest.BodyPublishers.ofString(data.toJson());
+        
         HttpRequest httpRequest = prepareRequest(url, requestData)
-                .method("PATCH", HttpRequest.BodyPublishers.ofString(data.toJson()))
+                .method("PATCH", bodyPublisher)
                 .build();
         return this.request(httpRequest, responseType);
     }

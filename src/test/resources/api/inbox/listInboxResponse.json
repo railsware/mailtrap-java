@@ -1,0 +1,39 @@
+[
+  {
+    "id": 2,
+    "name": "Test inbox",
+    "username": "test_username",
+    "password": "test_password",
+    "status": "active",
+    "max_size": 600,
+    "email_username": "my-test-username",
+    "email_username_enabled": false,
+    "sent_messages_count": 111,
+    "forwarded_messages_count": 0,
+    "used": true,
+    "forward_from_email_address": "a3484-i4032@forward.mailtrap.info",
+    "project_id": 2,
+    "domain": "localhost",
+    "pop3_domain": "localhost",
+    "email_domain": "localhost",
+    "emails_count": 0,
+    "emails_unread_count": 0,
+    "smtp_ports": [
+      25,
+      465,
+      587,
+      2525
+    ],
+    "pop3_ports": [
+      1100,
+      9950
+    ],
+    "max_message_size": 15728640,
+    "permissions": {
+      "can_read": true,
+      "can_update": true,
+      "can_destroy": true,
+      "can_leave": true
+    }
+  }
+]
