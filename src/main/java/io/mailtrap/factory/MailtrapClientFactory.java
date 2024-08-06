@@ -56,8 +56,9 @@ public final class MailtrapClientFactory {
         var emails = new TestingEmailsImpl(config, customValidator);
         var attachments = new AttachmentsImpl(config);
         var inbox = new InboxImpl(config, customValidator);
+        var projects = new ProjectsImpl(config, customValidator);
 
-        return new MailtrapEmailTestingApi(emails, attachments, inbox);
+        return new MailtrapEmailTestingApi(emails, attachments, inbox, projects);
     }
 
     private static MailtrapBulkSendingApi createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
