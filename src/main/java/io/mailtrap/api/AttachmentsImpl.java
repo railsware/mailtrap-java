@@ -20,7 +20,7 @@ public class AttachmentsImpl extends ApiResource implements Attachments {
     }
 
     @Override
-    public AttachmentResponse getSingleAttachment(long accountId, int inboxId, long messageId, long attachmentId) {
+    public AttachmentResponse getSingleAttachment(long accountId, long inboxId, long messageId, long attachmentId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/attachments/%s", accountId, inboxId, messageId, attachmentId),
                 new RequestData(),
@@ -28,7 +28,7 @@ public class AttachmentsImpl extends ApiResource implements Attachments {
     }
 
     @Override
-    public List<AttachmentResponse> getAttachments(long accountId, int inboxId, long messageId, String attachmentType) {
+    public List<AttachmentResponse> getAttachments(long accountId, long inboxId, long messageId, String attachmentType) {
         var queryParams = RequestData.buildQueryParams(
                 entry("attachment_type", Optional.ofNullable(attachmentType)));
 

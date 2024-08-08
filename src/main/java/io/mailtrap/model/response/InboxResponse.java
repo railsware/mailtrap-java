@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 public class InboxResponse {
 
-    private int id;
+    private long id;
 
     private String name;
 
