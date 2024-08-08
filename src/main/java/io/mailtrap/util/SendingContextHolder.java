@@ -14,6 +14,6 @@ import lombok.Setter;
 @Setter
 public class SendingContextHolder {
     private boolean sandbox;
-    private Integer inboxId;
+    private Long inboxId;
     private boolean bulk;
 }

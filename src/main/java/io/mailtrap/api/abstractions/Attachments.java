@@ -19,7 +19,7 @@ public interface Attachments {
      * @param attachmentId - unique attachment ID
      * @return attachment details and download path
      */
-    AttachmentResponse getSingleAttachment(long accountId, int inboxId, long messageId, long attachmentId);
+    AttachmentResponse getSingleAttachment(long accountId, long inboxId, long messageId, long attachmentId);
 
     /**
      * Get message attachments by inboxId and messageId
@@ -30,6 +30,6 @@ public interface Attachments {
      * @param attachmentType - attachment type; optional query param
      * @return attachments with their details and download paths
      */
-    List<AttachmentResponse> getAttachments(long accountId, int inboxId, long messageId, @Nullable String attachmentType);
+    List<AttachmentResponse> getAttachments(long accountId, long inboxId, long messageId, @Nullable String attachmentType);
 
 }

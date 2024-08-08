@@ -7,9 +7,9 @@ import io.mailtrap.model.response.InboxResponse;
 import java.util.List;
 
 /**
- * Interface representing the Mailtrap Testing API for interaction with inbox
+ * Interface representing the Mailtrap Testing API for interaction with inboxes
  */
-public interface Inbox {
+public interface Inboxes {
 
     /**
      * Create an inbox in a project
@@ -28,7 +28,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox
      */
-    InboxResponse getInboxAttributes(long accountId, int inboxId);
+    InboxResponse getInboxAttributes(long accountId, long inboxId);
 
     /**
      * Delete an inbox with all its emails
@@ -37,7 +37,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the deleted inbox
      */
-    InboxResponse deleteInbox(long accountId, int inboxId);
+    InboxResponse deleteInbox(long accountId, long inboxId);
 
     /**
      * Update inbox name, inbox email username
@@ -47,7 +47,7 @@ public interface Inbox {
      * @param request   request data
      * @return the attributes of the updated inbox
      */
-    InboxResponse updateInbox(long accountId, int inboxId, UpdateInboxRequest request);
+    InboxResponse updateInbox(long accountId, long inboxId, UpdateInboxRequest request);
 
     /**
      * Delete all messages (emails) from inbox
@@ -56,7 +56,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox. <b>permissions</b> returns the permissions of the token for the inbox.
      */
-    InboxResponse cleanInbox(long accountId, int inboxId);
+    InboxResponse cleanInbox(long accountId, long inboxId);
 
     /**
      * Mark all messages in the inbox as read
@@ -65,7 +65,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox. <b>permissions</b> returns the permissions of the token for the inbox
      */
-    InboxResponse markAsRead(long accountId, int inboxId);
+    InboxResponse markAsRead(long accountId, long inboxId);
 
     /**
      * Reset SMTP credentials of the inbox
@@ -74,7 +74,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox. <b>permissions</b> returns the permissions of the token for the inbox
      */
-    InboxResponse resetCredentials(long accountId, int inboxId);
+    InboxResponse resetCredentials(long accountId, long inboxId);
 
     /**
      * Turn the email address of the inbox on/off
@@ -83,7 +83,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox. <b>permissions</b> returns the permissions of the token for the inbox
      */
-    InboxResponse enableEmailAddress(long accountId, int inboxId);
+    InboxResponse enableEmailAddress(long accountId, long inboxId);
 
     /**
      * Reset username of email address per inbox
@@ -92,7 +92,7 @@ public interface Inbox {
      * @param inboxId   unique inbox ID
      * @return the attributes of the inbox. <b>permissions</b> returns the permissions of the token for the inbox
      */
-    InboxResponse resetEmailAddresses(long accountId, int inboxId);
+    InboxResponse resetEmailAddresses(long accountId, long inboxId);
 
     /**
      * Get a list of inboxes

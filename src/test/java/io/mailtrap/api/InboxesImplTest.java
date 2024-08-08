@@ -1,7 +1,7 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.abstractions.Inbox;
+import io.mailtrap.api.abstractions.Inboxes;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.CreateData;
@@ -19,9 +19,9 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InboxImplTest extends BaseTest {
+class InboxesImplTest extends BaseTest {
 
-    private Inbox api;
+    private Inboxes api;
 
     @BeforeEach
     public void init() {
@@ -62,7 +62,7 @@ class InboxImplTest extends BaseTest {
                 .token("dummy_token")
                 .build();
 
-        api = MailtrapClientFactory.createMailtrapClient(testConfig).testingApi().inbox();
+        api = MailtrapClientFactory.createMailtrapClient(testConfig).testingApi().inboxes();
     }
 
     @Test

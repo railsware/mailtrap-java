@@ -89,7 +89,7 @@ public class MailtrapJavaSDKTest {
         // OR send email to the Mailtrap Sandbox
 
         try {
-            int inboxId = 1000001;
+            long inboxId = 1000001L;
 
             // Either instantiate a new client
             MailtrapClient sandboxClient = MailtrapClientFactory.createMailtrapClient(

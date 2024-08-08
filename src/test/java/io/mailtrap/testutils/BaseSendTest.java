@@ -12,7 +12,7 @@ import java.util.UUID;
 
 public class BaseSendTest {
 
-    protected final int INBOX_ID = 4308;
+    protected final long INBOX_ID = 4308;
     protected final String BULK_AND_SANDBOX_TRUE_IN_SENDING_CONFIG = "Bulk mode is not applicable for Testing API";
     protected final String INBOX_ID_REQUIRED = "Testing API requires inbox ID";
     protected final String INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL = "Invalid request body. Violations: from.email=must not be empty";
