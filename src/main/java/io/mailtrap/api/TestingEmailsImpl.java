@@ -20,7 +20,7 @@ public class TestingEmailsImpl extends SendApiResource implements TestingEmails 
     }
 
     @Override
-    public SendResponse send(MailtrapMail mail, int inboxId) {
+    public SendResponse send(MailtrapMail mail, long inboxId) {
         validateRequestBodyOrThrowException(mail);
         RequestData requestData = new RequestData();
         if (mail.getHeaders() != null) {

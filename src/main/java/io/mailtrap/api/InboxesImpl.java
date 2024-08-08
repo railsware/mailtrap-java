@@ -2,7 +2,7 @@ package io.mailtrap.api;
 
 import io.mailtrap.Constants;
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.abstractions.Inbox;
+import io.mailtrap.api.abstractions.Inboxes;
 import io.mailtrap.api.abstractions.classes.ApiResourceWithValidation;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
@@ -12,9 +12,9 @@ import io.mailtrap.model.response.InboxResponse;
 
 import java.util.List;
 
-public class InboxImpl extends ApiResourceWithValidation implements Inbox {
+public class InboxesImpl extends ApiResourceWithValidation implements Inboxes {
 
-    public InboxImpl(MailtrapConfig config, CustomValidator validator) {
+    public InboxesImpl(MailtrapConfig config, CustomValidator validator) {
         super(config, validator);
         this.apiHost = Constants.GENERAL_HOST;
     }
@@ -33,7 +33,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse getInboxAttributes(long accountId, int inboxId) {
+    public InboxResponse getInboxAttributes(long accountId, long inboxId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s", accountId, inboxId),
                 new RequestData(),
@@ -42,7 +42,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse deleteInbox(long accountId, int inboxId) {
+    public InboxResponse deleteInbox(long accountId, long inboxId) {
         return httpClient.delete(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s", accountId, inboxId),
                 new RequestData(),
@@ -51,7 +51,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse updateInbox(long accountId, int inboxId, UpdateInboxRequest request) {
+    public InboxResponse updateInbox(long accountId, long inboxId, UpdateInboxRequest request) {
 
         validateRequestBodyAndThrowException(request);
 
@@ -64,7 +64,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse cleanInbox(long accountId, int inboxId) {
+    public InboxResponse cleanInbox(long accountId, long inboxId) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/clean", accountId, inboxId),
                 null,
@@ -74,7 +74,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse markAsRead(long accountId, int inboxId) {
+    public InboxResponse markAsRead(long accountId, long inboxId) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/all_read", accountId, inboxId),
                 null,
@@ -84,7 +84,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse resetCredentials(long accountId, int inboxId) {
+    public InboxResponse resetCredentials(long accountId, long inboxId) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/reset_credentials", accountId, inboxId),
                 null,
@@ -94,7 +94,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse enableEmailAddress(long accountId, int inboxId) {
+    public InboxResponse enableEmailAddress(long accountId, long inboxId) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/toggle_email_username", accountId, inboxId),
                 null,
@@ -104,7 +104,7 @@ public class InboxImpl extends ApiResourceWithValidation implements Inbox {
     }
 
     @Override
-    public InboxResponse resetEmailAddresses(long accountId, int inboxId) {
+    public InboxResponse resetEmailAddresses(long accountId, long inboxId) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/reset_email_username", accountId, inboxId),
                 null,
