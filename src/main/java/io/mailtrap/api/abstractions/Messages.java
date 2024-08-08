@@ -19,7 +19,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return email message with its attributes
      */
-    MessageResponse getMessage(long accountId, int inboxId, long messageId);
+    MessageResponse getMessage(long accountId, long inboxId, long messageId);
 
     /**
      * Update message attributes
@@ -30,7 +30,7 @@ public interface Messages {
      * @param request   attributes to update
      * @return email message with its updated attributes
      */
-    MessageResponse updateMessage(long accountId, int inboxId, long messageId, UpdateMessageRequest request);
+    MessageResponse updateMessage(long accountId, long inboxId, long messageId, UpdateMessageRequest request);
 
     /**
      * Delete message from inbox
@@ -40,7 +40,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return attributes of the deleted message
      */
-    MessageResponse deleteMessage(long accountId, int inboxId, long messageId);
+    MessageResponse deleteMessage(long accountId, long inboxId, long messageId);
 
     /**
      * @param accountId unique account ID
@@ -50,7 +50,7 @@ public interface Messages {
      * @param search    search query string. Matches `subject`, `to_email`, and `to_name`
      * @return list of messages
      */
-    List<MessageResponse> getMessages(long accountId, int inboxId, Integer lastId, Integer page, String search);
+    List<MessageResponse> getMessages(long accountId, long inboxId, Integer lastId, Integer page, String search);
 
     /**
      * Forward message to an email address. The email address must be confirmed by the recipient in advance
@@ -61,7 +61,7 @@ public interface Messages {
      * @param request   email where to forward message
      * @return confirmation about forwarding
      */
-    ForwardMessageResponse forwardMessage(long accountId, int inboxId, long messageId, ForwardMessageRequest request);
+    ForwardMessageResponse forwardMessage(long accountId, long inboxId, long messageId, ForwardMessageRequest request);
 
     /**
      * Get a brief spam report by message ID
@@ -71,7 +71,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return message spam analysis report
      */
-    MessageSpamScoreResponse getSpamScore(long accountId, int inboxId, long messageId);
+    MessageSpamScoreResponse getSpamScore(long accountId, long inboxId, long messageId);
 
     /**
      * Get a brief HTML report by message ID
@@ -81,7 +81,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return message HTML analysis report
      */
-    MessageHtmlAnalysisResponse getMessageHtmlAnalysis(long accountId, int inboxId, long messageId);
+    MessageHtmlAnalysisResponse getMessageHtmlAnalysis(long accountId, long inboxId, long messageId);
 
     /**
      * Get text email body, if it exists
@@ -91,7 +91,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return message body in txt format
      */
-    String getTextMessage(long accountId, int inboxId, long messageId);
+    String getTextMessage(long accountId, long inboxId, long messageId);
 
     /**
      * Get raw email body
@@ -101,7 +101,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return raw message body
      */
-    String getRawMessage(long accountId, int inboxId, long messageId);
+    String getRawMessage(long accountId, long inboxId, long messageId);
 
     /**
      * Get HTML source of email
@@ -111,7 +111,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return HTML source of a message
      */
-    String getMessageSource(long accountId, int inboxId, long messageId);
+    String getMessageSource(long accountId, long inboxId, long messageId);
 
     /**
      * Get formatted HTML email body. Not applicable for plain text emails
@@ -121,7 +121,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return message body in html format
      */
-    String getHtmlMessage(long accountId, int inboxId, long messageId);
+    String getHtmlMessage(long accountId, long inboxId, long messageId);
 
     /**
      * Get email message in .eml format
@@ -131,7 +131,7 @@ public interface Messages {
      * @param messageId unique message ID
      * @return .eml of the message
      */
-    String getMessageAsEml(long accountId, int inboxId, long messageId);
+    String getMessageAsEml(long accountId, long inboxId, long messageId);
 
     /**
      * Get mail headers of a message
@@ -141,6 +141,6 @@ public interface Messages {
      * @param messageId unique message ID
      * @return mail headers of the message
      */
-    MessageHeadersResponse getMailHeaders(long accountId, int inboxId, long messageId);
+    MessageHeadersResponse getMailHeaders(long accountId, long inboxId, long messageId);
 
 }

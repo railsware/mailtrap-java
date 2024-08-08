@@ -22,7 +22,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageResponse getMessage(long accountId, int inboxId, long messageId) {
+    public MessageResponse getMessage(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s", accountId, inboxId, messageId),
                 new RequestData(),
@@ -31,7 +31,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageResponse updateMessage(long accountId, int inboxId, long messageId, UpdateMessageRequest request) {
+    public MessageResponse updateMessage(long accountId, long inboxId, long messageId, UpdateMessageRequest request) {
         return httpClient.patch(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s", accountId, inboxId, messageId),
                 request,
@@ -41,7 +41,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageResponse deleteMessage(long accountId, int inboxId, long messageId) {
+    public MessageResponse deleteMessage(long accountId, long inboxId, long messageId) {
         return httpClient.delete(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s", accountId, inboxId, messageId),
                 new RequestData(),
@@ -50,7 +50,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public List<MessageResponse> getMessages(long accountId, int inboxId, Integer lastId, Integer page, String search) {
+    public List<MessageResponse> getMessages(long accountId, long inboxId, Integer lastId, Integer page, String search) {
         var queryParams = RequestData.buildQueryParams(
                 entry("last_id", Optional.ofNullable(lastId)),
                 entry("page", Optional.ofNullable(page)),
@@ -64,7 +64,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public ForwardMessageResponse forwardMessage(long accountId, int inboxId, long messageId, ForwardMessageRequest request) {
+    public ForwardMessageResponse forwardMessage(long accountId, long inboxId, long messageId, ForwardMessageRequest request) {
         return httpClient.post(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/forward", accountId, inboxId, messageId),
                 request,
@@ -74,7 +74,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageSpamScoreResponse getSpamScore(long accountId, int inboxId, long messageId) {
+    public MessageSpamScoreResponse getSpamScore(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/spam_report", accountId, inboxId, messageId),
                 new RequestData(),
@@ -83,7 +83,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageHtmlAnalysisResponse getMessageHtmlAnalysis(long accountId, int inboxId, long messageId) {
+    public MessageHtmlAnalysisResponse getMessageHtmlAnalysis(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/analyze", accountId, inboxId, messageId),
                 new RequestData(),
@@ -92,7 +92,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public String getTextMessage(long accountId, int inboxId, long messageId) {
+    public String getTextMessage(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/body.txt", accountId, inboxId, messageId),
                 new RequestData(),
@@ -101,7 +101,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public String getRawMessage(long accountId, int inboxId, long messageId) {
+    public String getRawMessage(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/body.raw", accountId, inboxId, messageId),
                 new RequestData(),
@@ -110,7 +110,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public String getMessageSource(long accountId, int inboxId, long messageId) {
+    public String getMessageSource(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/body.htmlsource", accountId, inboxId, messageId),
                 new RequestData(),
@@ -119,7 +119,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public String getHtmlMessage(long accountId, int inboxId, long messageId) {
+    public String getHtmlMessage(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/body.html", accountId, inboxId, messageId),
                 new RequestData(),
@@ -128,7 +128,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public String getMessageAsEml(long accountId, int inboxId, long messageId) {
+    public String getMessageAsEml(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/body.eml", accountId, inboxId, messageId),
                 new RequestData(),
@@ -137,7 +137,7 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public MessageHeadersResponse getMailHeaders(long accountId, int inboxId, long messageId) {
+    public MessageHeadersResponse getMailHeaders(long accountId, long inboxId, long messageId) {
         return httpClient.get(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages/%s/mail_headers", accountId, inboxId, messageId),
                 new RequestData(),
