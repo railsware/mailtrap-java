@@ -4,10 +4,9 @@ import io.mailtrap.Constants;
 import io.mailtrap.api.abstractions.Inboxes;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.request.CreateData;
 import io.mailtrap.model.request.CreateInboxRequest;
-import io.mailtrap.model.request.UpdateData;
 import io.mailtrap.model.request.UpdateInboxRequest;
+import io.mailtrap.model.request.UpdateInboxRequest.InboxUpdateData;
 import io.mailtrap.model.response.InboxResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
@@ -17,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
+import static io.mailtrap.model.request.CreateInboxRequest.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class InboxesImplTest extends BaseTest {
@@ -67,7 +67,7 @@ class InboxesImplTest extends BaseTest {
 
     @Test
     void test_createInbox() {
-        InboxResponse createdInbox = api.createInbox(accountId, projectId, new CreateInboxRequest(new CreateData("Test inbox")));
+        InboxResponse createdInbox = api.createInbox(accountId, projectId, new CreateInboxRequest(new InboxCreateData("Test inbox")));
 
         assertNotNull(createdInbox);
         assertEquals(createdInbox.getProjectId(), projectId);
@@ -96,7 +96,7 @@ class InboxesImplTest extends BaseTest {
 
     @Test
     void test_updateInbox() {
-        InboxResponse updatedInbox = api.updateInbox(accountId, inboxId, new UpdateInboxRequest(new UpdateData("Updated Inbox Name", "updated-email-username")));
+        InboxResponse updatedInbox = api.updateInbox(accountId, inboxId, new UpdateInboxRequest(new InboxUpdateData("Updated Inbox Name", "updated-email-username")));
 
         assertNotNull(updatedInbox);
         assertTrue(updatedInbox.getPermissions().isCanRead());

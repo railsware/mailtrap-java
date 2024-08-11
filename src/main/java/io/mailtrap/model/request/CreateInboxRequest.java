@@ -2,6 +2,7 @@ package io.mailtrap.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.mailtrap.model.AbstractModel;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -10,6 +11,16 @@ import lombok.Getter;
 public class CreateInboxRequest extends AbstractModel {
 
     @JsonProperty("inbox")
-    private CreateData createData;
+    private InboxCreateData inboxCreateData;
+
+    @Getter
+    @AllArgsConstructor
+    public static class InboxCreateData {
+
+        @JsonProperty("name")
+        @Size(min = 2, max = 100)
+        private String name;
+
+    }
 
 }
