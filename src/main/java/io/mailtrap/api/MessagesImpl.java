@@ -6,8 +6,10 @@ import io.mailtrap.api.abstractions.classes.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.ForwardMessageRequest;
+import io.mailtrap.model.request.ListMessagesQueryParams;
 import io.mailtrap.model.request.UpdateMessageRequest;
 import io.mailtrap.model.response.messages.*;
+import lombok.NonNull;
 
 import java.util.List;
 import java.util.Optional;
@@ -50,11 +52,11 @@ public class MessagesImpl extends ApiResource implements Messages {
     }
 
     @Override
-    public List<MessageResponse> getMessages(long accountId, long inboxId, Integer lastId, Integer page, String search) {
+    public List<MessageResponse> getMessages(long accountId, long inboxId, @NonNull ListMessagesQueryParams listMessagesQueryParams) {
         var queryParams = RequestData.buildQueryParams(
-                entry("last_id", Optional.ofNullable(lastId)),
-                entry("page", Optional.ofNullable(page)),
-                entry("search", Optional.ofNullable(search)));
+                entry("last_id", Optional.ofNullable(listMessagesQueryParams.getLastId())),
+                entry("page", Optional.ofNullable(listMessagesQueryParams.getPage())),
+                entry("search", Optional.ofNullable(listMessagesQueryParams.getSearch())));
 
         return httpClient.getList(
                 String.format(apiHost + "/api/accounts/%s/inboxes/%s/messages", accountId, inboxId),

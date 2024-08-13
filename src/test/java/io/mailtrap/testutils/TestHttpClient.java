@@ -88,8 +88,10 @@ public class TestHttpClient implements CustomHttpClient {
                 Map<String, Object> urlParams = requestData.getQueryParams().entrySet().stream()
                         .filter(entry -> entry.getValue().isPresent())
                         .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().get()));
-                if (!urlParams.equals(dataMock.getQueryParams())) {
+                if (!urlParams.equals(dataMock.getQueryParams()) && i == dataMocks.size() - 1) {
                     throw new AssertionError("No match for url query parameters : " + requestIdentifier);
+                } else if (!urlParams.equals(dataMock.getQueryParams()) && i < dataMocks.size() - 1) {
+                    continue;
                 }
 
                 // request

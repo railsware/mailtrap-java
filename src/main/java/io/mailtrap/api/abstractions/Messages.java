@@ -1,6 +1,7 @@
 package io.mailtrap.api.abstractions;
 
 import io.mailtrap.model.request.ForwardMessageRequest;
+import io.mailtrap.model.request.ListMessagesQueryParams;
 import io.mailtrap.model.request.UpdateMessageRequest;
 import io.mailtrap.model.response.messages.*;
 
@@ -45,12 +46,10 @@ public interface Messages {
     /**
      * @param accountId unique account ID
      * @param inboxId   unique inbox ID
-     * @param lastId    if specified, a page of records before `last_id` is returned. Overrides page if both are given
-     * @param page      page number for paginated results
-     * @param search    search query string. Matches `subject`, `to_email`, and `to_name`
+     * @param queryParams additional query parameters
      * @return list of messages
      */
-    List<MessageResponse> getMessages(long accountId, long inboxId, Integer lastId, Integer page, String search);
+    List<MessageResponse> getMessages(long accountId, long inboxId, ListMessagesQueryParams queryParams);
 
     /**
      * Forward message to an email address. The email address must be confirmed by the recipient in advance

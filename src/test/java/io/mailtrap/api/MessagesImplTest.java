@@ -5,6 +5,7 @@ import io.mailtrap.api.abstractions.Messages;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.ForwardMessageRequest;
+import io.mailtrap.model.request.ListMessagesQueryParams;
 import io.mailtrap.model.request.UpdateMessageData;
 import io.mailtrap.model.request.UpdateMessageRequest;
 import io.mailtrap.model.response.messages.*;
@@ -15,6 +16,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -36,6 +38,12 @@ class MessagesImplTest extends BaseTest {
 
                 DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages",
                         "GET", null, "api/messages/listMessagesResponse.json"),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages",
+                        "GET", null, "api/messages/listMessagesWithSearchEmptyResponse.json", Map.of("search", "qqqqqqqq")),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages",
+                        "GET", null, "api/messages/listMessagesWithSearchSingleEmailResponse.json",  Map.of("search", "mary")),
 
                 DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/inboxes/" + inboxId + "/messages/" + messageId + "/forward",
                         "POST", "api/messages/forwardMessageRequest.json", "api/messages/forwardMessageResponse.json"),
@@ -101,7 +109,30 @@ class MessagesImplTest extends BaseTest {
 
     @Test
     void test_getMessages() {
-        List<MessageResponse> messages = api.getMessages(accountId, inboxId, null, null, null);
+        List<MessageResponse> messages = api.getMessages(accountId, inboxId, ListMessagesQueryParams.empty());
+
+        assertNotNull(messages);
+        assertEquals(1, messages.size());
+        assertEquals(messageId, messages.get(0).getId());
+    }
+
+    @Test
+    void test_getMessagesWithSearchQueryParam_emptyResponse() {
+        ListMessagesQueryParams queryParams = new ListMessagesQueryParams();
+        queryParams.setSearch("qqqqqqqq");
+
+        List<MessageResponse> messages = api.getMessages(accountId, inboxId, queryParams);
+
+        assertNotNull(messages);
+        assertTrue(messages.isEmpty());
+    }
+
+    @Test
+    void test_getMessagesWithSearchQueryParam_notEmptyResponse() {
+        ListMessagesQueryParams queryParams = new ListMessagesQueryParams();
+        queryParams.setSearch("mary");
+
+        List<MessageResponse> messages = api.getMessages(accountId, inboxId, queryParams);
 
         assertNotNull(messages);
         assertEquals(1, messages.size());
