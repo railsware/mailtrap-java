@@ -1,0 +1,32 @@
+[
+  {
+    "id": 3,
+    "inbox_id": 2,
+    "subject": "Test email",
+    "sent_at": "2022-07-01T19:29:59.295Z",
+    "from_email": "john@mailtrap.io",
+    "from_name": "John",
+    "to_email": "mary@mailtrap.io",
+    "to_name": "Mary",
+    "email_size": 300,
+    "is_read": true,
+    "created_at": "2022-07-01T19:29:59.295Z",
+    "updated_at": "2022-07-01T19:29:59.295Z",
+    "html_body_size": 150,
+    "text_body_size": 100,
+    "human_size": "300 Bytes",
+    "html_path": "/api/accounts/1/inboxes/2/messages/3/body.html",
+    "txt_path": "/api/accounts/1/inboxes/2/messages/3/body.txt",
+    "raw_path": "/api/accounts/1/inboxes/2/messages/3/body.raw",
+    "download_path": "/api/accounts/1/inboxes/2/messages/3/body.eml",
+    "html_source_path": "/api/accounts/1/inboxes/2/messages/3/body.htmlsource",
+    "blacklists_report_info": false,
+    "smtp_information": {
+      "ok": true,
+      "data": {
+        "mail_from_addr": "john@mailtrap.io",
+        "client_ip": "193.62.62.184"
+      }
+    }
+  }
+]

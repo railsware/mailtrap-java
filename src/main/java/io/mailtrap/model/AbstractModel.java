@@ -8,6 +8,7 @@ import io.mailtrap.exception.JsonException;
  * Abstract class representing a model with common functionality for serialization.
  */
 public abstract class AbstractModel {
+
     /**
      * Converts the object to JSON.
      *

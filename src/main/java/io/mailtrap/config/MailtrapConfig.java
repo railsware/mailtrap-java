@@ -41,7 +41,7 @@ public class MailtrapConfig {
     /**
      * Inbox ID. Should be used alongside with {@link #sandbox}, as Email Testing API requires inbox ID
      */
-    private final Integer inboxId;
+    private final Long inboxId;
 
     private MailtrapConfig(Builder builder) {
         if (builder.sandbox && builder.bulk) {
@@ -65,7 +65,7 @@ public class MailtrapConfig {
         private CustomHttpClient httpClient;
         private boolean sandbox;
         private boolean bulk;
-        private Integer inboxId;
+        private Long inboxId;
 
         public Builder connectionTimeout(Duration connectionTimeout) {
             this.connectionTimeout = connectionTimeout;
@@ -92,7 +92,7 @@ public class MailtrapConfig {
             return this;
         }
 
-        public Builder inboxId(Integer inboxId) {
+        public Builder inboxId(Long inboxId) {
             this.inboxId = inboxId;
             return this;
         }

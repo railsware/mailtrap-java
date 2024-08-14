@@ -10,16 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Abstract class representing a resource for sending emails via Mailtrap API.
  */
-public abstract class SendApiResource extends ApiResource {
-
-    /**
-     * The custom validator used for validating email request bodies.
-     */
-    protected final CustomValidator customValidator;
+public abstract class SendApiResource extends ApiResourceWithValidation {
 
     protected SendApiResource(MailtrapConfig config, CustomValidator customValidator) {
-        super(config);
-        this.customValidator = customValidator;
+        super(config, customValidator);
     }
 
     /**
@@ -63,10 +57,6 @@ public abstract class SendApiResource extends ApiResource {
             }
         }
 
-        String violations = customValidator.validateAndGetViolationsAsString(mail);
-
-        if (!violations.isEmpty()) {
-            throw new InvalidRequestBodyException("Invalid request body. Violations: " + violations);
-        }
+        validateRequestBodyAndThrowException(mail);
     }
 }

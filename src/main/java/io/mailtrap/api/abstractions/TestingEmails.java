@@ -20,5 +20,5 @@ public interface TestingEmails {
      * @throws HttpException               If there is an HTTP-related error during the send operation.
      * @throws InvalidRequestBodyException If the request body is invalid.
      */
-    SendResponse send(MailtrapMail mail, int inboxId) throws HttpException, InvalidRequestBodyException;
+    SendResponse send(MailtrapMail mail, long inboxId) throws HttpException, InvalidRequestBodyException;
 }

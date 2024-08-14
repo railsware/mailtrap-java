@@ -1,6 +1,9 @@
 package io.mailtrap.client.layers;
 
 import io.mailtrap.api.abstractions.Attachments;
+import io.mailtrap.api.abstractions.Messages;
+import io.mailtrap.api.abstractions.Inboxes;
+import io.mailtrap.api.abstractions.Projects;
 import io.mailtrap.api.abstractions.TestingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -15,4 +18,7 @@ import lombok.experimental.Accessors;
 public class MailtrapEmailTestingApi {
     private final TestingEmails emails;
     private final Attachments attachments;
+    private final Inboxes inboxes;
+    private final Projects projects;
+    private final Messages messages;
 }

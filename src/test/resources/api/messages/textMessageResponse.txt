@@ -1,0 +1,6 @@
+Congrats for sending test email with Mailtrap!
+
+Inspect it using the tabs above and learn how this email can be improved.
+Now send your email using our fake SMTP server and integration of your choice!
+
+Good luck! Hope it works.
