@@ -1,0 +1,15 @@
+{
+  "id": 2,
+  "name": "My New Project",
+  "share_links": {
+    "admin": "https://localhost/projects/2/share/QEVuQwEAS-hQfYV1hqw15p7p9VcsuCrASDQUkcuV_N5G-zdVBPrd58V8Ce09AUl-JGFEJsQbt-K6IzRIMhjpU7zxAnIo9QpB8mJwuOqBiottfwdDhgKO-ab7t7WDCyyoGeG5dLK_",
+    "viewer": "https://localhost/projects/2/share/QEVuQwEAS-hQfYV1hqw15p7p9VcsuCrASDQUkcuV_N5G-zdVBPrd58V8Ce09AUl-JGFEJsQbHDFqI6Mk2wRVlVSxLNMgI-3LnWpSSSyCSbjqkQRAMPVoTPYF7WcXfw4H_CwkAc4e"
+  },
+  "inboxes": [],
+  "permissions": {
+    "can_read": true,
+    "can_update": true,
+    "can_destroy": true,
+    "can_leave": false
+  }
+}
