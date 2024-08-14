@@ -141,6 +141,9 @@ public class DefaultMailtrapHttpClient implements CustomHttpClient {
             int statusCode = response.statusCode();
             if (statusCode == 200) {
                 if (responseClassType != null) {
+                    if (String.class.equals(responseClassType)) {
+                        return responseClassType.cast(response.body());
+                    }
                     return Mapper.get().readValue(response.body(), responseClassType);
                 } else if (responseJavaType != null) {
                     return Mapper.get().readValue(response.body(), responseJavaType);

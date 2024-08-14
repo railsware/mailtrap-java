@@ -1,0 +1,9 @@
+{
+  "headers": {
+    "bcc": "john_doe@example.com",
+    "cc": "john_doe@example.com",
+    "from": "john_doe@example.com",
+    "to": "john_doe@example.com",
+    "subject": "Your Example Order Confirmation"
+  }
+}

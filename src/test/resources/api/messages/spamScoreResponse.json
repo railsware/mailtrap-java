@@ -1,0 +1,37 @@
+{
+  "report": {
+    "ResponseCode": 2,
+    "ResponseMessage": "Not spam",
+    "ResponseVersion": "1.2",
+    "Score": 1.2,
+    "Spam": false,
+    "Threshold": 5,
+    "Details": [
+      {
+        "Pts": -0.0,
+        "RuleName": "NO_RELAYS",
+        "Description": "Informational: message was not relayed via SMTP"
+      },
+      {
+        "Pts": 0.0,
+        "RuleName": "HTML_MESSAGE",
+        "Description": "BODY: HTML included in message"
+      },
+      {
+        "Pts": 0.7,
+        "RuleName": "MPART_ALT_DIFF",
+        "Description": "BODY: HTML and text parts are different"
+      },
+      {
+        "Pts": -0.0,
+        "RuleName": "NO_RECEIVED",
+        "Description": "Informational: message has no Received headers"
+      },
+      {
+        "Pts": 0.1,
+        "RuleName": "MISSING_MID",
+        "Description": "Missing Message-Id: header"
+      }
+    ]
+  }
+}
