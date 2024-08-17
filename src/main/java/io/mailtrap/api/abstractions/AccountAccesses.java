@@ -7,7 +7,7 @@ import io.mailtrap.model.response.RemoveAccountAccessResponse;
 import java.util.List;
 
 /**
- * Interface representing the Mailtrap Testing API for interaction with email message attachments.
+ * Interface representing the Mailtrap Testing API for interaction with account accesses
  */
 public interface AccountAccesses {
 
