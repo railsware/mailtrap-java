@@ -1,4 +1,4 @@
-package io.mailtrap.model.response;
+package io.mailtrap.model.response.account_accesses;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
@@ -26,6 +26,6 @@ public enum SpecifierType {
                 return type;
             }
         }
-        throw new IllegalArgumentException("Invalid specifier type: " + value);
+        throw new IllegalArgumentException("Invalid specifier_type provided: " + value);
     }
 }

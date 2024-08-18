@@ -7,6 +7,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.mailtrap.model.response.ErrorResponse;
+import io.mailtrap.model.response.account_accesses.Specifier;
+import io.mailtrap.serialization.SpecifierDeserializer;
 import io.mailtrap.serialization.ErrorResponseDeserializer;
 
 /**
@@ -19,6 +21,7 @@ public class Mapper {
             .serializationInclusion(JsonInclude.Include.NON_NULL)
             .serializationInclusion(JsonInclude.Include.NON_EMPTY)
             .addModule(new SimpleModule().addDeserializer(ErrorResponse.class, new ErrorResponseDeserializer()))
+            .addModule(new SimpleModule().addDeserializer(Specifier.class, new SpecifierDeserializer()))
             .build();
 
     public static ObjectMapper get() {

@@ -1,4 +1,4 @@
-package io.mailtrap.model.response;
+package io.mailtrap.model.response.account_accesses;
 
 import lombok.Data;
 

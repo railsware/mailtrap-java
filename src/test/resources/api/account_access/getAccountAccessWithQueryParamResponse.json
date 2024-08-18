@@ -1,11 +1,13 @@
 [
   {
     "id": 5,
-    "specifier_type": "User",
+    "specifier_type": "ApiToken",
     "specifier": {
-      "id": 0,
-      "email": "user@example.com",
-      "name": "string"
+      "id": 1,
+      "name": "custom-api-token",
+      "author_name": "John Doe",
+      "token": "token-value-11-22-33",
+      "expires_at": "2025-01-01T00:00:00"
     },
     "resources": [
       {

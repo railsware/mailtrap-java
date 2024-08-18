@@ -1,8 +1,8 @@
 package io.mailtrap.api.abstractions;
 
 import io.mailtrap.model.request.ListAccountAccessQueryParams;
-import io.mailtrap.model.response.AccountAccessResponse;
-import io.mailtrap.model.response.RemoveAccountAccessResponse;
+import io.mailtrap.model.response.account_accesses.AccountAccessResponse;
+import io.mailtrap.model.response.account_accesses.RemoveAccountAccessResponse;
 
 import java.util.List;
 

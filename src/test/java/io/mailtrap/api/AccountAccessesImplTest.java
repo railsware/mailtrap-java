@@ -5,8 +5,7 @@ import io.mailtrap.api.abstractions.AccountAccesses;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.ListAccountAccessQueryParams;
-import io.mailtrap.model.response.AccountAccessResponse;
-import io.mailtrap.model.response.RemoveAccountAccessResponse;
+import io.mailtrap.model.response.account_accesses.*;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -51,6 +50,8 @@ class AccountAccessesImplTest extends BaseTest {
         assertFalse(accountAccessResponses.isEmpty());
         AccountAccessResponse accountAccessResponse = accountAccessResponses.get(0);
         assertEquals(accountAccessResponse.getId(), accountAccessId);
+        assertEquals(SpecifierType.USER, accountAccessResponse.getSpecifierType());
+        assertEquals(((UserSpecifier) accountAccessResponse.getSpecifier()).getName(), "Jack Sparrow");
         assertEquals(accountAccessResponse.getResources().size(), 3);
     }
 
@@ -64,6 +65,8 @@ class AccountAccessesImplTest extends BaseTest {
         assertFalse(accountAccessResponses.isEmpty());
         AccountAccessResponse accountAccessResponse = accountAccessResponses.get(0);
         assertEquals(accountAccessResponse.getId(), accountAccessId);
+        assertEquals(SpecifierType.API_TOKEN, accountAccessResponse.getSpecifierType());
+        assertEquals(((ApiTokenSpecifier) accountAccessResponse.getSpecifier()).getToken(), "token-value-11-22-33");
         assertEquals(accountAccessResponse.getResources().size(), 2);
         assertEquals(accountAccessResponse.getResources().get(0).getResourceId(), projectId);
     }

@@ -6,8 +6,8 @@ import io.mailtrap.api.abstractions.classes.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.ListAccountAccessQueryParams;
-import io.mailtrap.model.response.AccountAccessResponse;
-import io.mailtrap.model.response.RemoveAccountAccessResponse;
+import io.mailtrap.model.response.account_accesses.AccountAccessResponse;
+import io.mailtrap.model.response.account_accesses.RemoveAccountAccessResponse;
 import lombok.NonNull;
 
 import java.util.List;
