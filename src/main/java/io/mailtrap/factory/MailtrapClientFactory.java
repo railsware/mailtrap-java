@@ -41,8 +41,9 @@ public final class MailtrapClientFactory {
 
     private static MailtrapGeneralApi createGeneralApi(MailtrapConfig config) {
         var accountAccess = new AccountAccessesImpl(config);
+        var permissions = new PermissionsImpl(config);
 
-        return new MailtrapGeneralApi(accountAccess);
+        return new MailtrapGeneralApi(accountAccess, permissions);
     }
 
     private static SendingContextHolder configureSendingContext(MailtrapConfig config) {
