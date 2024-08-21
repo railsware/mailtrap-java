@@ -7,6 +7,7 @@ import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.ManagePermissionsRequest;
 import io.mailtrap.model.request.Permission;
 import io.mailtrap.model.response.ManagePermissionsResponse;
+import io.mailtrap.model.response.AccessLevel;
 import io.mailtrap.model.response.account_accesses.ResourceType;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
@@ -44,8 +45,8 @@ class PermissionsImplTest extends BaseTest {
     @Test
     void managePermissions() {
         ManagePermissionsRequest request = new ManagePermissionsRequest(List.of(
-                new Permission(String.valueOf(accountId), ResourceType.ACCOUNT.getValue(), "viewer", null),
-                new Permission(String.valueOf(inboxId), ResourceType.INBOX.getValue(), null, "true")
+                new Permission(String.valueOf(accountId), ResourceType.ACCOUNT, AccessLevel.VIEWER, false),
+                new Permission(String.valueOf(inboxId), ResourceType.INBOX, AccessLevel.ADMIN, true)
         ));
 
         ManagePermissionsResponse response = api.managePermissions(accountAccessId, accountId, request);

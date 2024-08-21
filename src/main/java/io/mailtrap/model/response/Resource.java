@@ -16,7 +16,7 @@ public class Resource {
     private ResourceType type;
 
     @JsonProperty("access_level")
-    private int accessLevel;
+    private AccessLevel accessLevel;
 
     private List<Resource> resources;
 

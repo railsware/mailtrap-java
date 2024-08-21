@@ -2,6 +2,7 @@ package io.mailtrap.model.request;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.mailtrap.model.response.AccessLevel;
 import io.mailtrap.model.response.account_accesses.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -16,23 +17,22 @@ public class Permission {
     @JsonProperty("resource_id")
     private String resourceId;
 
-    /**
-     * See {@link ResourceType}
-     */
     @JsonProperty("resource_type")
-    private String resourceType;
+    private ResourceType resourceType;
 
-    /**
-     * Can be admin (100) or viewer (10)
-     */
     @JsonProperty("access_level")
-    private String accessLevel;
+    private AccessLevel accessLevel;
 
     /**
      * Optional parameter.
      * If true, instead of creating/updating the permission, it destroys it
      */
     @JsonProperty("_destroy")
-    private String destroy;
+    private boolean destroy;
+
+    @JsonProperty("_destroy")
+    public String isDestroy() {
+        return String.valueOf(destroy);
+    }
 
 }
