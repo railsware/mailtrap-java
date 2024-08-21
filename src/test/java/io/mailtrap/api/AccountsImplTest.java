@@ -5,6 +5,7 @@ import io.mailtrap.api.abstractions.Accounts;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.response.AccountsResponse;
+import io.mailtrap.model.response.account_accesses.AccessLevel;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -14,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class AccountsImplTest extends BaseTest {
 
@@ -40,6 +42,8 @@ class AccountsImplTest extends BaseTest {
 
         assertEquals(2, accounts.size());
         assertEquals(accountId, accounts.get(0).getId());
+        assertTrue(accounts.get(0).getAccessLevels().contains(AccessLevel.ADMIN));
         assertEquals(anotherAccountId, accounts.get(1).getId());
+        assertTrue(accounts.get(1).getAccessLevels().contains(AccessLevel.OWNER));
     }
 }

@@ -1,6 +1,7 @@
 package io.mailtrap.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.mailtrap.model.response.account_accesses.AccessLevel;
 import lombok.Data;
 
 import java.util.List;
@@ -12,12 +13,6 @@ public class AccountsResponse {
 
     private String name;
 
-    /**
-     * Possible values are<p>
-     * 10 - viewer <p>
-     * 100 - admin <p>
-     * 1000 - account owner
-     */
     @JsonProperty("access_levels")
-    private List<Integer> accessLevels;
+    private List<AccessLevel> accessLevels;
 }
