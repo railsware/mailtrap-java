@@ -1,7 +1,6 @@
 package io.mailtrap.api;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.abstractions.Attachments;
 import io.mailtrap.api.abstractions.Billing;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
@@ -14,7 +13,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 class BillingImplTest extends BaseTest {
     private Billing api;
@@ -39,7 +39,7 @@ class BillingImplTest extends BaseTest {
         BillingResponse billingResponse = api.getCurrentBillingCycleUsage(accountId);
 
         assertNotNull(billingResponse);
-        assertEquals(billingResponse.getTesting().getPlan().getName(), "Individual");
-        assertEquals(billingResponse.getSending().getPlan().getName(), "Basic 10K");
+        assertEquals(billingResponse.getTestingBillingInfo().getPlan().getName(), "Individual");
+        assertEquals(billingResponse.getSendingBillingInfo().getPlan().getName(), "Basic 10K");
     }
 }

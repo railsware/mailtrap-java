@@ -1,14 +1,18 @@
 package io.mailtrap.model.response.billing;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 public class BillingResponse {
 
-    private Billing billing;
+    @JsonProperty("billing")
+    private BillingCycleInfo billingCycleInfo;
 
-    private Testing testing;
+    @JsonProperty("testing")
+    private TestingBillingInfo testingBillingInfo;
 
-    private Sending sending;
+    @JsonProperty("sending")
+    private SendingBillingInfo sendingBillingInfo;
 
 }
