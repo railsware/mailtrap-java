@@ -1,6 +1,7 @@
 package io.mailtrap.model.response.account_accesses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.mailtrap.model.response.AccessLevel;
 import lombok.Data;
 
 @Data
