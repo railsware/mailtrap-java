@@ -3,7 +3,7 @@ package io.mailtrap.model.request;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.mailtrap.model.response.AccessLevel;
-import io.mailtrap.model.response.account_accesses.ResourceType;
+import io.mailtrap.model.response.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -15,6 +15,7 @@ public class Permission {
      * The ID of the resource
      */
     @JsonProperty("resource_id")
+    // TODO update type to long as soon as domain UUIDs will use bigints as identifiers
     private String resourceId;
 
     @JsonProperty("resource_type")
@@ -31,7 +32,7 @@ public class Permission {
     private boolean destroy;
 
     @JsonProperty("_destroy")
-    public String isDestroy() {
+    public String destroy() {
         return String.valueOf(destroy);
     }
 

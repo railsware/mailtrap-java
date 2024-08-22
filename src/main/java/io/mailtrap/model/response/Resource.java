@@ -1,7 +1,6 @@
 package io.mailtrap.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.mailtrap.model.response.account_accesses.ResourceType;
 import lombok.Data;
 
 import java.util.List;

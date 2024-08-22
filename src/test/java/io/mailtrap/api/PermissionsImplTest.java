@@ -8,7 +8,7 @@ import io.mailtrap.model.request.ManagePermissionsRequest;
 import io.mailtrap.model.request.Permission;
 import io.mailtrap.model.response.ManagePermissionsResponse;
 import io.mailtrap.model.response.AccessLevel;
-import io.mailtrap.model.response.account_accesses.ResourceType;
+import io.mailtrap.model.response.ResourceType;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
