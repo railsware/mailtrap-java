@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "James",
+    "access_levels": [
+      100
+    ]
+  },
+  {
+    "id": 2,
+    "name": "John",
+    "access_levels": [
+      1000
+    ]
+  }
+]

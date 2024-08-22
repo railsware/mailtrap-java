@@ -41,9 +41,11 @@ public final class MailtrapClientFactory {
 
     private static MailtrapGeneralApi createGeneralApi(MailtrapConfig config) {
         var accountAccess = new AccountAccessesImpl(config);
+        var accounts = new AccountsImpl(config);
+        var billing = new BillingImpl(config);
         var permissions = new PermissionsImpl(config);
 
-        return new MailtrapGeneralApi(accountAccess, permissions);
+        return new MailtrapGeneralApi(accountAccess, accounts, billing, permissions);
     }
 
     private static SendingContextHolder configureSendingContext(MailtrapConfig config) {

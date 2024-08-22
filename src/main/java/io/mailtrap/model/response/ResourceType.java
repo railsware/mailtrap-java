@@ -1,4 +1,4 @@
-package io.mailtrap.model.response.account_accesses;
+package io.mailtrap.model.response;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
