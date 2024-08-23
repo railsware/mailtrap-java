@@ -31,9 +31,4 @@ public class Permission {
     @JsonProperty("_destroy")
     private boolean destroy;
 
-    @JsonProperty("_destroy")
-    public String destroy() {
-        return String.valueOf(destroy);
-    }
-
 }
