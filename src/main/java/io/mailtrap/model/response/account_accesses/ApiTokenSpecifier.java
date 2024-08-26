@@ -4,6 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ApiTokenSpecifier extends Specifier {
@@ -16,6 +19,6 @@ public class ApiTokenSpecifier extends Specifier {
     private String token;
 
     @JsonProperty("expires_at")
-    private String expiresAt;
+    private OffsetDateTime expiresAt;
 
 }

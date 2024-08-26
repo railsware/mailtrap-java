@@ -8,6 +8,8 @@ import io.mailtrap.model.response.account_accesses.InviteSpecifier;
 import io.mailtrap.model.response.account_accesses.UserSpecifier;
 import org.junit.jupiter.api.Test;
 
+import java.time.OffsetDateTime;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AccountAccessResponseDeserializerTest {
@@ -24,7 +26,7 @@ class AccountAccessResponseDeserializerTest {
                       "id": 1,
                       "name": "Token",
                       "token": "xyz",
-                      "expires_at": "2025-01-01T00:00:00"
+                      "expires_at": "2025-01-01T00:00:00Z"
                     },
                     "resources": [],
                     "permissions": {
@@ -43,7 +45,7 @@ class AccountAccessResponseDeserializerTest {
         assertEquals(1, apiTokenSpecifier.getId());
         assertEquals("Token", apiTokenSpecifier.getName());
         assertEquals("xyz", apiTokenSpecifier.getToken());
-        assertEquals("2025-01-01T00:00:00", apiTokenSpecifier.getExpiresAt());
+        assertEquals(OffsetDateTime.parse("2025-01-01T00:00:00Z"), apiTokenSpecifier.getExpiresAt());
     }
 
     @Test

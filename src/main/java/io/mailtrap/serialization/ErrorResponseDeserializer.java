@@ -12,6 +12,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Custom deserializer for {@link ErrorResponse} that handles the deserialization
+ * of error messages from a variety of possible JSON structures.
+ *
+ * <p>This deserializer can handle different formats of error representations in JSON:
+ * <ul>
+ *   <li>An array of error messages under the "errors" field.</li>
+ *   <li>A single textual error message under the "errors" or "error" field.</li>
+ *   <li>An object containing nested fields with error messages under the "errors" field.</li>
+ * </ul>
+ *
+ * <p>The deserializer collects all error messages into a list and constructs
+ * an {@link ErrorResponse} object that encapsulates these messages.
+ */
 public class ErrorResponseDeserializer extends JsonDeserializer<ErrorResponse> {
 
     @Override

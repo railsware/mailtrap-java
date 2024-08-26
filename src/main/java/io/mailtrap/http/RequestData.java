@@ -48,6 +48,13 @@ public class RequestData {
         return params;
     }
 
+    /**
+     * Wrapper for AbstractMap.SimpleEntry
+     *
+     * @param key   entry's key
+     * @param value entry's value
+     * @return An entry
+     */
     public static <T extends Optional<?>> Map.Entry<String, T> entry(String key, T value) {
         return new AbstractMap.SimpleEntry<>(key, value);
     }

@@ -10,4 +10,5 @@ public class MessageHeadersResponse {
 
     @JsonProperty("headers")
     private Map<String, String> headers;
+
 }

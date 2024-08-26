@@ -120,7 +120,7 @@ public interface CustomHttpClient {
                     if (value instanceof Collection<?> collection) {
                         return collection.stream()
                                 .filter(Objects::nonNull)
-                                .filter(v -> !v.toString().isEmpty())
+                                .filter(v -> !v.toString().isBlank())
                                 .map(v -> entry.getKey() + "=" + v);
                     } else {
                         return Stream.of(entry.getKey() + "=" + value);
