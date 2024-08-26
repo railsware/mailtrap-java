@@ -15,6 +15,7 @@ public class ListAccountAccessQueryParams {
     /**
      * The identifiers of the domains for which to include the results
      */
+    // TODO update type to List<Long> as soon as domain UUIDs will use bigints as identifiers
     private List<String> domainUuids;
 
     /**

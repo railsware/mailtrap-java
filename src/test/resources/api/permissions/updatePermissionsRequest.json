@@ -1,0 +1,16 @@
+{
+  "permissions": [
+    {
+      "resource_id": "1",
+      "resource_type": "account",
+      "access_level": "viewer",
+      "_destroy": false
+    },
+    {
+      "resource_id": "2",
+      "resource_type": "inbox",
+      "access_level": "admin",
+      "_destroy": true
+    }
+  ]
+}
