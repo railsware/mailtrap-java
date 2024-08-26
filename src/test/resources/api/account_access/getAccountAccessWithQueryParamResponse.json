@@ -1,0 +1,31 @@
+[
+  {
+    "id": 5,
+    "specifier_type": "ApiToken",
+    "specifier": {
+      "id": 1,
+      "name": "custom-api-token",
+      "author_name": "John Doe",
+      "token": "token-value-11-22-33",
+      "expires_at": "2025-01-01T00:00:00"
+    },
+    "resources": [
+      {
+        "resource_id": 2,
+        "resource_type": "project",
+        "access_level": 100
+      },
+      {
+        "resource_id": 5,
+        "resource_type": "project",
+        "access_level": 1000
+      }
+    ],
+    "permissions": {
+      "can_read": true,
+      "can_update": true,
+      "can_destroy": true,
+      "can_leave": true
+    }
+  }
+]

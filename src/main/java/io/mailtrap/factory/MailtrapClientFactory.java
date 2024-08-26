@@ -6,6 +6,7 @@ import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.client.layers.MailtrapBulkSendingApi;
 import io.mailtrap.client.layers.MailtrapEmailSendingApi;
 import io.mailtrap.client.layers.MailtrapEmailTestingApi;
+import io.mailtrap.client.layers.MailtrapGeneralApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
@@ -31,10 +32,20 @@ public final class MailtrapClientFactory {
         var sendingApi = createSendingApi(config, customValidator);
         var testingApi = createTestingApi(config, customValidator);
         var bulkSendingApi = createBulkSendingApi(config, customValidator);
+        var generalApi = createGeneralApi(config);
 
         var sendingContextHolder = configureSendingContext(config);
 
-        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, sendingContextHolder);
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, sendingContextHolder);
+    }
+
+    private static MailtrapGeneralApi createGeneralApi(MailtrapConfig config) {
+        var accountAccess = new AccountAccessesImpl(config);
+        var accounts = new AccountsImpl(config);
+        var billing = new BillingImpl(config);
+        var permissions = new PermissionsImpl(config);
+
+        return new MailtrapGeneralApi(accountAccess, accounts, billing, permissions);
     }
 
     private static SendingContextHolder configureSendingContext(MailtrapConfig config) {

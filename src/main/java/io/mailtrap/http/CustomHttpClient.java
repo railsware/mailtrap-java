@@ -8,10 +8,9 @@ import io.mailtrap.http.impl.DefaultMailtrapHttpClient;
 import io.mailtrap.model.AbstractModel;
 
 import java.net.http.HttpClient;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Interface representing a custom HTTP client for accessing API.
@@ -116,9 +115,16 @@ public interface CustomHttpClient {
 
         return url + urlParams.entrySet().stream()
                 .filter(entry -> entry.getValue().isPresent())
-                .map(entry -> {
-                    Object value = entry.getValue().get().toString();
-                    return entry.getKey() + "=" + value.toString();
+                .flatMap(entry -> {
+                    Object value = entry.getValue().get();
+                    if (value instanceof Collection<?> collection) {
+                        return collection.stream()
+                                .filter(Objects::nonNull)
+                                .filter(v -> !v.toString().isEmpty())
+                                .map(v -> entry.getKey() + "=" + v);
+                    } else {
+                        return Stream.of(entry.getKey() + "=" + value);
+                    }
                 })
                 .collect(Collectors.joining("&", "?", ""));
     }
