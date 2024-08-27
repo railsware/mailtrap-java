@@ -45,6 +45,9 @@ public class MailtrapMail extends AbstractModel {
     @JsonProperty("custom_variables")
     private Map<String, String> customVariables;
 
+    /**
+     * Should be used in conjunction with {@link #text} and/or {@link #html}
+     */
     private String subject;
 
     private String text;
@@ -54,7 +57,7 @@ public class MailtrapMail extends AbstractModel {
     private String category;
 
     /**
-     * Should be used in conjunction with {@link #subject}, {@link #text} or {@link #html}
+     * Should NOT be used if {@link #subject}, {@link #text} or {@link #html} is used
      */
     @JsonProperty("template_uuid")
     private String templateUuid;

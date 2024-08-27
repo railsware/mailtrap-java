@@ -68,7 +68,7 @@ class SendingEmailsImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
-        assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
+        assertEquals(TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
     }
 
     @Test
@@ -78,7 +78,7 @@ class SendingEmailsImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
-        assertEquals(TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
+        assertEquals(TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
     }
 
     @Test

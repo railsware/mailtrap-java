@@ -23,47 +23,50 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
      * @throws InvalidRequestBodyException If the request body is invalid.
      */
     protected void validateRequestBodyOrThrowException(MailtrapMail mail) throws InvalidRequestBodyException {
+        // Check if the mail object itself is null
         if (mail == null) {
             throw new InvalidRequestBodyException("Mail must not be null");
         }
 
-        // All three fields can not be null - we should submit either subject and text and/or html or templateUuid
-        if (StringUtils.isEmpty(mail.getSubject())
+        // Check if all three subject, text, and html are empty
+        boolean isSubjectTextHtmlEmpty = StringUtils.isEmpty(mail.getSubject())
                 && StringUtils.isEmpty(mail.getText())
-                && StringUtils.isEmpty(mail.getHtml())
-                && StringUtils.isEmpty(mail.getTemplateUuid())) {
-            throw new InvalidRequestBodyException(String.format("Mail %s or %s and %s or %s or both must not be null or empty",
-                    MailtrapMail.Fields.templateUuid,
-                    MailtrapMail.Fields.subject,
-                    MailtrapMail.Fields.text,
-                    MailtrapMail.Fields.html));
-        }
+                && StringUtils.isEmpty(mail.getHtml());
 
-        if (StringUtils.isNotEmpty(mail.getTemplateUuid())) {
-            // When templateUuid is set
-            if (StringUtils.isNotEmpty(mail.getText()) ||
-                    StringUtils.isNotEmpty(mail.getHtml()) ||
-                    StringUtils.isNotEmpty(mail.getSubject())) {
-                throw new InvalidRequestBodyException(String.format("When %s is used - %s and %s and %s must not be used",
-                        MailtrapMail.Fields.templateUuid,
-                        MailtrapMail.Fields.text,
-                        MailtrapMail.Fields.subject,
-                        MailtrapMail.Fields.html));
-            }
+        // Validate depending on whether the templateUuid is set
+        if (StringUtils.isEmpty(mail.getTemplateUuid())) {
+            // Validation for the scenario where templateUuid is not provided
+            validateWithoutTemplate(mail, isSubjectTextHtmlEmpty);
         } else {
-            // When templateUuid is not set - templateVariables should not be used
-            if (MapUtils.isNotEmpty(mail.getTemplateVariables())) {
-                throw new InvalidRequestBodyException(String.format("Mail %s must only be used with %s",
-                        MailtrapMail.Fields.templateVariables,
-                        MailtrapMail.Fields.templateUuid));
-            }
-            if(StringUtils.isEmpty(mail.getSubject())) {
-                throw new InvalidRequestBodyException(String.format("When %s is not set - the %s must be set",
-                        MailtrapMail.Fields.templateUuid,
-                        MailtrapMail.Fields.subject));
-            }
+            // Validation for the scenario where templateUuid is provided
+            validateWithTemplate(mail);
         }
 
+        // Additional validation logic (assumed to be provided by the user)
         validateRequestBodyAndThrowException(mail);
+    }
+
+    private void validateWithoutTemplate(MailtrapMail mail, boolean isSubjectTextHtmlEmpty) throws InvalidRequestBodyException {
+        // Ensure that at least subject, text, or html is provided if templateUuid is not set
+        if (isSubjectTextHtmlEmpty) {
+            throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
+        }
+
+        // Ensure templateVariables are not used if templateUuid is not set
+        if (MapUtils.isNotEmpty(mail.getTemplateVariables())) {
+            throw new InvalidRequestBodyException("Mail templateVariables must only be used with templateUuid");
+        }
+
+        // Ensure the subject is not empty
+        if (StringUtils.isEmpty(mail.getSubject())) {
+            throw new InvalidRequestBodyException("Subject must not be null or empty");
+        }
+    }
+
+    private void validateWithTemplate(MailtrapMail mail) throws InvalidRequestBodyException {
+        // Ensure that subject, text, and html are not used when templateUuid is set
+        if (StringUtils.isNotEmpty(mail.getText()) || StringUtils.isNotEmpty(mail.getHtml()) || StringUtils.isNotEmpty(mail.getSubject())) {
+            throw new InvalidRequestBodyException("When templateUuid is used, subject, text, and html must not be used");
+        }
     }
 }

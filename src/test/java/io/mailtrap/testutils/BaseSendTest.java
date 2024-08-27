@@ -14,8 +14,8 @@ public class BaseSendTest {
     protected final String BULK_AND_SANDBOX_TRUE_IN_SENDING_CONFIG = "Bulk mode is not applicable for Testing API";
     protected final String INBOX_ID_REQUIRED = "Testing API requires inbox ID";
     protected final String INVALID_REQUEST_EMPTY_BODY_FROM_EMAIL = "Invalid request body. Violations: from.email=must not be empty";
-    protected final String TEMPLATE_UUID_OR_SUBJECT_AND_TEXT_OR_HTML_MUST_NOT_BE_EMPTY = "Mail templateUuid or subject and text or html or both must not be null or empty";
-    protected final String TEMPLATE_UUID_IS_USED_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used - text and subject and html must not be used";
+    protected final String TEMPLATE_UUID_OR_SUBJECT_AND_TEXT_OR_HTML_MUST_NOT_BE_EMPTY = "Mail must have subject and either text or html when templateUuid is not provided";
+    protected final String TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used, subject, text, and html must not be used";
     protected final String TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID = "Mail templateVariables must only be used with templateUuid";
     protected final String MAIL_MUST_NOT_BE_NULL = "Mail must not be null";
 
