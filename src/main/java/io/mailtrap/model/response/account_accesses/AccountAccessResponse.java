@@ -2,7 +2,7 @@ package io.mailtrap.model.response.account_accesses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-import io.mailtrap.model.response.Permissions;
+import io.mailtrap.model.response.Permission;
 import io.mailtrap.serialization.AccountAccessResponseDeserializer;
 import lombok.Data;
 
@@ -21,6 +21,6 @@ public class AccountAccessResponse {
 
     private List<Resource> resources;
 
-    private Permissions permissions;
+    private Permission permission;
 
 }

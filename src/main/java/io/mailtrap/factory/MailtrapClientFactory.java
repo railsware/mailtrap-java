@@ -1,12 +1,22 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.*;
+import io.mailtrap.api.account_accesses.AccountAccessesImpl;
+import io.mailtrap.api.accounts.AccountsImpl;
+import io.mailtrap.api.attachments.AttachmentsImpl;
+import io.mailtrap.api.billing.BillingImpl;
+import io.mailtrap.api.bulk_emails.BulkEmailsImpl;
+import io.mailtrap.api.inboxes.InboxesImpl;
+import io.mailtrap.api.messages.MessagesImpl;
+import io.mailtrap.api.permissions.PermissionsImpl;
+import io.mailtrap.api.projects.ProjectsImpl;
+import io.mailtrap.api.sending_emails.SendingEmailsImpl;
+import io.mailtrap.api.testing_emails.TestingEmailsImpl;
 import io.mailtrap.client.MailtrapClient;
-import io.mailtrap.client.layers.MailtrapBulkSendingApi;
-import io.mailtrap.client.layers.MailtrapEmailSendingApi;
-import io.mailtrap.client.layers.MailtrapEmailTestingApi;
-import io.mailtrap.client.layers.MailtrapGeneralApi;
+import io.mailtrap.client.api.MailtrapBulkSendingApi;
+import io.mailtrap.client.api.MailtrapEmailSendingApi;
+import io.mailtrap.client.api.MailtrapEmailTestingApi;
+import io.mailtrap.client.api.MailtrapGeneralApi;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
@@ -48,15 +58,6 @@ public final class MailtrapClientFactory {
         return new MailtrapGeneralApi(accountAccess, accounts, billing, permissions);
     }
 
-    private static SendingContextHolder configureSendingContext(MailtrapConfig config) {
-
-        return SendingContextHolder.builder()
-                .sandbox(config.isSandbox())
-                .inboxId(config.getInboxId())
-                .bulk(config.isBulk())
-                .build();
-    }
-
     private static MailtrapEmailSendingApi createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
         var emails = new SendingEmailsImpl(config, customValidator);
 
@@ -77,6 +78,15 @@ public final class MailtrapClientFactory {
         var emails = new BulkEmailsImpl(config, customValidator);
 
         return new MailtrapBulkSendingApi(emails);
+    }
+
+    private static SendingContextHolder configureSendingContext(MailtrapConfig config) {
+
+        return SendingContextHolder.builder()
+                .sandbox(config.isSandbox())
+                .inboxId(config.getInboxId())
+                .bulk(config.isBulk())
+                .build();
     }
 
     /**

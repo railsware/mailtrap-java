@@ -43,9 +43,9 @@ implementation("io.mailtrap:mailtrap-java:1.0-SNAPSHOT")
 import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.request.Address;
-import io.mailtrap.model.request.Attachment;
-import io.mailtrap.model.request.MailtrapMail;
+import io.mailtrap.model.request.emails.Address;
+import io.mailtrap.model.request.emails.EmailAttachment;
+import io.mailtrap.model.request.emails.MailtrapMail;
 
 import java.util.List;
 import java.util.Map;
@@ -57,7 +57,7 @@ public class MailtrapJavaSDKTest {
 
         Address to = new Address("receiver@example.com");
 
-        Attachment attachment = Attachment.builder()
+        EmailAttachment attachment = EmailAttachment.builder()
                 .filename("attachment.txt")
                 .type("text/plain")
                 // Should the Base64 encoded content of the attachment

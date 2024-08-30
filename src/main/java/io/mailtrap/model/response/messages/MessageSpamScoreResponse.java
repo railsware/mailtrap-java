@@ -6,4 +6,5 @@ import lombok.Data;
 public class MessageSpamScoreResponse {
 
     private SpamScoreReport report;
+
 }

@@ -13,4 +13,5 @@ public class BillingCycleInfo {
 
     @JsonProperty("cycle_end")
     private OffsetDateTime cycleEnd;
+
 }

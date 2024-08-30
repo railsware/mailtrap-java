@@ -11,4 +11,5 @@ public class MessageSmtpData {
 
     @JsonProperty("client_ip")
     private String clientIp;
+
 }

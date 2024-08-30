@@ -1,6 +1,6 @@
 package io.mailtrap;
 
-import io.mailtrap.model.request.Address;
+import io.mailtrap.model.request.emails.Address;
 import jakarta.validation.Validation;
 import jakarta.validation.Validator;
 import org.junit.jupiter.api.Test;

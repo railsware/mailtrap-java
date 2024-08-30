@@ -15,6 +15,7 @@
   "domain": "localhost",
   "pop3_domain": "localhost",
   "email_domain": "localhost",
+  "api_domain": "localhost",
   "emails_count": 0,
   "emails_unread_count": 0,
   "smtp_ports": [

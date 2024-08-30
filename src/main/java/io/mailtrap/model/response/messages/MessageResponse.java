@@ -3,6 +3,8 @@ package io.mailtrap.model.response.messages;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
+import java.time.OffsetDateTime;
+
 @Data
 public class MessageResponse {
 
@@ -16,7 +18,7 @@ public class MessageResponse {
     private String subject;
 
     @JsonProperty("sent_at")
-    private String sentAt;
+    private OffsetDateTime sentAt;
 
     @JsonProperty("from_email")
     private String fromEmail;
@@ -37,10 +39,10 @@ public class MessageResponse {
     private boolean isRead;
 
     @JsonProperty("created_at")
-    private String createdAt;
+    private OffsetDateTime createdAt;
 
     @JsonProperty("updated_at")
-    private String updatedAt;
+    private OffsetDateTime updatedAt;
 
     @JsonProperty("html_body_size")
     private int htmlBodySize;

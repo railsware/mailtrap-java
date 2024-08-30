@@ -11,5 +11,7 @@ import java.util.List;
 @AllArgsConstructor
 @JsonDeserialize(using = ErrorResponseDeserializer.class)
 public class ErrorResponse {
+
     private List<String> errors;
+
 }

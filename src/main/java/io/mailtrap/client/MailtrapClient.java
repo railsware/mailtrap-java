@@ -1,12 +1,12 @@
 package io.mailtrap.client;
 
-import io.mailtrap.client.layers.MailtrapBulkSendingApi;
-import io.mailtrap.client.layers.MailtrapEmailSendingApi;
-import io.mailtrap.client.layers.MailtrapEmailTestingApi;
-import io.mailtrap.client.layers.MailtrapGeneralApi;
+import io.mailtrap.client.api.MailtrapBulkSendingApi;
+import io.mailtrap.client.api.MailtrapEmailSendingApi;
+import io.mailtrap.client.api.MailtrapEmailTestingApi;
+import io.mailtrap.client.api.MailtrapGeneralApi;
 import io.mailtrap.config.MailtrapConfig;
-import io.mailtrap.model.request.MailtrapMail;
-import io.mailtrap.model.response.SendResponse;
+import io.mailtrap.model.request.emails.MailtrapMail;
+import io.mailtrap.model.response.emails.SendResponse;
 import io.mailtrap.util.SendingContextHolder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
