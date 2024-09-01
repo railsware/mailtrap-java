@@ -6,7 +6,34 @@
 
     <groupId>io.mailtrap</groupId>
     <artifactId>mailtrap-java</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.0.1</version>
+
+    <name>Mailtrap Java SDK</name>
+    <description>The official Mailtrap SDK for Java provides Java APIs
+        for quickly adding email sending functionality to Java applications.
+        Mailtrap Java SDK allows developers to use all Mailtrap API - General, Sending, Testing and Bulk.
+    </description>
+    <url>https://mailtrap.io/</url>
+
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://www.opensource.org/licenses/mit-license.php</url>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mailtrap</id>
+            <organization>Mailtrap</organization>
+            <organizationUrl>https://mailtrap.io/</organizationUrl>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>https://github.com/railsware/mailtrap-java</url>
+        <connection>scm:git:git://github.com/railsware/mailtrap-java.git</connection>
+    </scm>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -125,6 +152,16 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.sonatype.central</groupId>
+                <artifactId>central-publishing-maven-plugin</artifactId>
+                <version>0.5.0</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <publishingServerId>central</publishingServerId>
+                </configuration>
             </plugin>
         </plugins>
     </build>
