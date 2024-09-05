@@ -38,4 +38,4 @@ jobs:
             ${{ runner.os }}-m2-
 
       - name: Install dependencies and run tests
-        run: mvn clean install -B -q
+        run: mvn clean install -B -q -Dgpg.skip=true
