@@ -11,8 +11,8 @@ import java.util.List;
 public class BulkSend {
 
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final String SENDER_EMAIL = "<sender@domain.com>";
-    private static final String RECIPIENT_EMAIL = "<recipient@domain.com>";
+    private static final String SENDER_EMAIL = "sender@domain.com";
+    private static final String RECIPIENT_EMAIL = "recipient@domain.com";
 
     public static void main(String[] args) {
         final MailtrapConfig config = new MailtrapConfig.Builder()

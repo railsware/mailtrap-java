@@ -14,7 +14,7 @@ import java.util.List;
 public class Messages {
 
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final String FORWARD_EMAIL_TO = "<recipient@domain.com>";
+    private static final String FORWARD_EMAIL_TO = "recipient@domain.com";
     private static final long ACCOUNT_ID = 1L;
 
     public static void main(String[] args) {

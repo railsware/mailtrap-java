@@ -53,8 +53,8 @@ import java.util.List;
 public class MailtrapJavaSDKTest {
 
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final String SENDER_EMAIL = "<sender@domain.com>";
-    private static final String RECIPIENT_EMAIL = "<recipient@domain.com>";
+    private static final String SENDER_EMAIL = "sender@domain.com";
+    private static final String RECIPIENT_EMAIL = "recipient@domain.com";
 
     public static void main(String[] args) {
         final MailtrapConfig config = new MailtrapConfig.Builder()
@@ -107,6 +107,10 @@ public class MailtrapJavaSDKTest {
 
 Refer to the [`examples`](examples) folder for the source code of this and other advanced examples.
 
+### API Reference
+
+You can find the API reference [here](https://railsware.github.io/mailtrap-java/index.html).
+
 ### General API
 
 - [List User & Invite account accesses](examples/java/io/mailtrap/examples/general/AccountAccess.java)
@@ -118,6 +122,7 @@ Refer to the [`examples`](examples) folder for the source code of this and other
 
 - [Advanced](examples/java/io/mailtrap/examples/sending/Everything.java)
 - [Minimal](examples/java/io/mailtrap/examples/sending/Minimal.java)
+- [Error handling](examples/java/io/mailtrap/examples/sending/Errors.java)
 - [Send email using template](examples/java/io/mailtrap/examples/sending/Template.java)
 
 ### Email testing API

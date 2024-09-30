@@ -12,8 +12,8 @@ import java.util.Map;
 public class Email {
 
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final String SENDER_EMAIL = "<sender@domain.com>";
-    private static final String RECIPIENT_EMAIL = "<recipient@domain.com>";
+    private static final String SENDER_EMAIL = "sender@domain.com";
+    private static final String RECIPIENT_EMAIL = "recipient@domain.com";
     private static final long INBOX_ID = 1337L;
 
     public static void main(String[] args) {
