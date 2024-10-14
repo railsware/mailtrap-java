@@ -10,6 +10,7 @@ import io.mailtrap.api.inboxes.InboxesImpl;
 import io.mailtrap.api.messages.MessagesImpl;
 import io.mailtrap.api.permissions.PermissionsImpl;
 import io.mailtrap.api.projects.ProjectsImpl;
+import io.mailtrap.api.sending_domains.SendingDomainsImpl;
 import io.mailtrap.api.sending_emails.SendingEmailsImpl;
 import io.mailtrap.api.testing_emails.TestingEmailsImpl;
 import io.mailtrap.client.MailtrapClient;
@@ -60,8 +61,9 @@ public final class MailtrapClientFactory {
 
     private static MailtrapEmailSendingApi createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
         var emails = new SendingEmailsImpl(config, customValidator);
+        var domains = new SendingDomainsImpl(config);
 
-        return new MailtrapEmailSendingApi(emails);
+        return new MailtrapEmailSendingApi(emails, domains);
     }
 
     private static MailtrapEmailTestingApi createTestingApi(MailtrapConfig config, CustomValidator customValidator) {

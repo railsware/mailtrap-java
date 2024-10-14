@@ -1,5 +1,6 @@
 package io.mailtrap.client.api;
 
+import io.mailtrap.api.sending_domains.SendingDomains;
 import io.mailtrap.api.sending_emails.SendingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,4 +14,5 @@ import lombok.experimental.Accessors;
 @RequiredArgsConstructor
 public class MailtrapEmailSendingApi {
     private final SendingEmails emails;
+    private final SendingDomains domains;
 }

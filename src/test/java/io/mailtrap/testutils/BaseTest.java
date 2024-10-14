@@ -9,4 +9,5 @@ public class BaseTest {
     protected final Long messageId = 3L;
     protected final Long attachmentId = 4L;
     protected final Long accountAccessId = 5L;
+    protected final Long sendingDomainId = 6L;
 }
