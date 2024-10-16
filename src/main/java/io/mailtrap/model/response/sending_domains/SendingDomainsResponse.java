@@ -47,6 +47,6 @@ public class SendingDomainsResponse {
     private String alertRecipientEmail;
 
     @JsonProperty("permissions")
-    private Permission permission;
+    private SendingDomainPermission permission;
 
 }
