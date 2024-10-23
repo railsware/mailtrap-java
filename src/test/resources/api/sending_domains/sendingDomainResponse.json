@@ -1,0 +1,69 @@
+{
+  "id": 6,
+  "domain_name": "test.io",
+  "demo": true,
+  "compliance_status": "compliant",
+  "dns_verified": true,
+  "dns_records": [
+    {
+      "key": "verification",
+      "domain": "ve6wza2rbpe60x7z.test.io",
+      "type": "CNAME",
+      "value": "smtp.test.live",
+      "status": "pass",
+      "name": "ve6wza2rbpe60x7z"
+    },
+    {
+      "key": "spf",
+      "domain": "test.io",
+      "type": "TXT",
+      "value": "v=spf1 include:_spf.smtp.test.live ~all",
+      "status": "pass",
+      "name": ""
+    },
+    {
+      "key": "dkim1",
+      "domain": "rwmt1._domainkey.test.io",
+      "type": "CNAME",
+      "value": "rwmt1.dkim.smtp.test.live",
+      "status": "pass",
+      "name": "rwmt1._domainkey"
+    },
+    {
+      "key": "dkim2",
+      "domain": "rwmt2._domainkey.test.io",
+      "type": "CNAME",
+      "value": "rwmt2.dkim.smtp.test.live",
+      "status": "pass",
+      "name": "rwmt2._domainkey"
+    },
+    {
+      "key": "dmarc",
+      "domain": "_dmarc.test.io",
+      "type": "TXT",
+      "value": "v=DMARC1; p=none; rua=mailto:dmarc@smtp.test.live; ruf=mailto:dmarc@smtp.test.live; rf=afrf; pct=100",
+      "status": "pass",
+      "name": "_dmarc"
+    },
+    {
+      "key": "link_verification",
+      "domain": "mt-link.test.io",
+      "type": "CNAME",
+      "value": "t.test.live",
+      "status": "pass",
+      "name": "mt-link"
+    }
+  ],
+  "open_tracking_enabled": true,
+  "click_tracking_enabled": true,
+  "auto_unsubscribe_link_enabled": true,
+  "custom_domain_tracking_enabled": true,
+  "health_alerts_enabled": true,
+  "critical_alerts_enabled": true,
+  "alert_recipient_email": "john.doe@test.io",
+  "permissions": {
+    "can_read": true,
+    "can_update": true,
+    "can_destroy": true
+  }
+}
