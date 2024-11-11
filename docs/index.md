@@ -3,7 +3,7 @@ _layout: landing
 ---
 # Official Mailtrap Java Client
 
-Welcome to the documentation portal for official Java client for <a href="https://mailtrap.io/" target="_blank">Mailtrap</a>!
+Welcome to the documentation portal for the official <a href="https://mailtrap.io/" target="_blank">Mailtrap</a> Java client!
 
 This client allows you to quickly and easily integrate your Java application with Mailtrap API.
 
