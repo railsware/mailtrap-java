@@ -22,9 +22,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Install .NET SDK # required for DocFX as a .NET tool
-        uses: actions/setup-dotnet@v3
-        with:
-          dotnet-version: '7.x'
+        uses: actions/setup-dotnet@v4
 
       - name: Install DocFX Tool
         run: dotnet tool install -g docfx
@@ -36,7 +34,15 @@ jobs:
         run: docfx ./docs/docfx.json
 
       - name: Copy Javadocs to _site/api-docs
-        run: mv -r target/reports/apidocs/* docs/_site/java-docs/
+        run: |
+          mkdir -p docs/_site/java-docs
+          mv -v target/reports/apidocs/* docs/_site/java-docs/
+
+      # Upload the Javadocs as an artifact to be deployed
+      - name: Upload Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/_site
 
   deploy:
     name: Deploy to GitHub Pages
