@@ -194,6 +194,22 @@
                             <goal>jar</goal>
                         </goals>
                     </execution>
+                    <execution>
+                        <id>javadoc-xml</id>
+                        <goals>
+                            <goal>javadoc</goal>
+                        </goals>
+                        <configuration>
+                            <additionalOptions>
+                                <option>-docletpath</option>
+                                <option>${java.home}/../lib/tools.jar</option>
+                                <option>-doclet</option>
+                                <option>com.sun.tools.javadoc.Main</option>
+                                <option>-xml</option>
+                            </additionalOptions>
+                            <outputDirectory>target/site/apidocs</outputDirectory>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 

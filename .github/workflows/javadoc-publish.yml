@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build Javadocs
+    name: Build Javadocs and DocFX Site
 
     runs-on: ubuntu-latest
 
@@ -21,17 +21,31 @@ jobs:
           java-version: 17
           distribution: 'temurin'
 
+      - name: Install .NET SDK # required for DocFX as a .NET tool
+        uses: actions/setup-dotnet@v4
+
+      - name: Install DocFX Tool
+        run: dotnet tool install -g docfx
+
       - name: Install dependencies and generate Javadocs
         run: mvn clean install -B -q -Dgpg.skip=true javadoc:javadoc javadoc:jar
 
+      - name: Build Documentation Site
+        run: docfx ./docs/docfx.json
+
+      - name: Copy Javadocs to _site/api-docs
+        run: |
+          mkdir -p docs/_site/java-docs
+          mv -v target/reports/apidocs/* docs/_site/java-docs/
+
       # Upload the Javadocs as an artifact to be deployed
-      - name: Upload Javadocs Artifact
+      - name: Upload Artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: target/reports/apidocs
+          path: docs/_site
 
   deploy:
-    name: Deploy Javadocs to GitHub Pages
+    name: Deploy to GitHub Pages
 
     runs-on: ubuntu-latest
     needs: build
