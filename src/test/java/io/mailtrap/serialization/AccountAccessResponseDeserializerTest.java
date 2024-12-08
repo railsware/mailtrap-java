@@ -85,7 +85,8 @@ class AccountAccessResponseDeserializerTest {
                          "specifier": {
                            "id": 3,
                            "email": "user@example.com",
-                           "name": "John Doe"
+                           "name": "John Doe",
+                           "two_factor_authentication_enabled": false
                          },
                          "resources": [],
                          "permissions": {
@@ -104,6 +105,7 @@ class AccountAccessResponseDeserializerTest {
         assertEquals(3, userSpecifier.getId());
         assertEquals("user@example.com", userSpecifier.getEmail());
         assertEquals("John Doe", userSpecifier.getName());
+        assertFalse(userSpecifier.isTwoFactorAuthenticationEnabled());
     }
 
     @Test
