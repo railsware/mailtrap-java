@@ -9,7 +9,6 @@ public enum ResourceType {
     PROJECT("project"),
     INBOX("inbox"),
     SENDING_DOMAIN("sending_domain"),
-    //TODO clarify name and rename enum value
     EMAIL_CAMPAIGN_PERMISSION_SCOPE("email_campaign_permission_scope");
 
     private final String value;
