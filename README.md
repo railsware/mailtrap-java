@@ -55,6 +55,7 @@ public class MailtrapJavaSDKTest {
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
     private static final String SENDER_EMAIL = "sender@domain.com";
     private static final String RECIPIENT_EMAIL = "recipient@domain.com";
+    private static final String REPLY_TO_EMAIL = "reply_to@domain.com";
 
     public static void main(String[] args) {
         final MailtrapConfig config = new MailtrapConfig.Builder()
@@ -66,6 +67,7 @@ public class MailtrapJavaSDKTest {
         final MailtrapMail mail = MailtrapMail.builder()
                 .from(new Address(SENDER_EMAIL))
                 .to(List.of(new Address(RECIPIENT_EMAIL)))
+                .replyTo(new Address(REPLY_TO_EMAIL, "Vincent Vega"))
                 .subject("Hello from Mailtrap Sending!")
                 .text("Welcome to Mailtrap Sending!")
                 .build();

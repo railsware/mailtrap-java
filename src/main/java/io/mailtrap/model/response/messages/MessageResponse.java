@@ -1,6 +1,8 @@
 package io.mailtrap.model.response.messages;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import io.mailtrap.serialization.BlacklistsReportInfoDeserializer;
 import lombok.Data;
 
 import java.time.OffsetDateTime;
@@ -69,7 +71,8 @@ public class MessageResponse {
     private String htmlSourcePath;
 
     @JsonProperty("blacklists_report_info")
-    private boolean blacklistsReportInfo;
+    @JsonDeserialize(using = BlacklistsReportInfoDeserializer.class)
+    private BlacklistsReportInfoWrapper blacklistsReportInfoWrapper;
 
     @JsonProperty("smtp_information")
     private SmtpInformation smtpInformation;

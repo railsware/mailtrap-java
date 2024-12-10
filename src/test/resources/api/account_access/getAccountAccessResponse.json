@@ -5,7 +5,8 @@
     "specifier": {
       "id": 0,
       "email": "user@example.com",
-      "name": "Jack Sparrow"
+      "name": "Jack Sparrow",
+      "two_factor_authentication_enabled": true
     },
     "resources": [
       {

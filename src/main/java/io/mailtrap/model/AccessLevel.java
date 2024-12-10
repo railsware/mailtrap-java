@@ -8,6 +8,7 @@ public enum AccessLevel {
 
     OWNER(1000, "owner"),
     ADMIN(100, "admin"),
+    VIEWER_PLUS(50, "viewer+"),
     VIEWER(10, "viewer"),
     INDETERMINATE(1, "indeterminate");
 

@@ -31,6 +31,9 @@ public class MailtrapMail extends AbstractModel {
 
     private List<Address> bcc;
 
+    @JsonProperty("reply_to")
+    private Address replyTo;
+
     @Valid
     private List<EmailAttachment> attachments;
 
