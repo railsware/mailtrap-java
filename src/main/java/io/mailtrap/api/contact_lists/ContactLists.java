@@ -1,6 +1,6 @@
 package io.mailtrap.api.contact_lists;
 
-import io.mailtrap.model.response.contact_lists.ContactListsResponse;
+import io.mailtrap.model.response.contact_lists.ContactListResponse;
 
 import java.util.List;
 
@@ -12,5 +12,5 @@ public interface ContactLists {
      * @param accountId unique account ID
      * @return contacts list
      */
-    List<ContactListsResponse> findAll(long accountId);
+    List<ContactListResponse> findAll(long accountId);
 }

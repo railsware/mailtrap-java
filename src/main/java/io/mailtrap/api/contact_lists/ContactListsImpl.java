@@ -4,7 +4,7 @@ import io.mailtrap.Constants;
 import io.mailtrap.api.api_resource.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
-import io.mailtrap.model.response.contact_lists.ContactListsResponse;
+import io.mailtrap.model.response.contact_lists.ContactListResponse;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public class ContactListsImpl extends ApiResource implements ContactLists {
     }
 
     @Override
-    public List<ContactListsResponse> findAll(long accountId) {
+    public List<ContactListResponse> findAll(long accountId) {
         return httpClient.getList(
                 String.format(apiHost + "/api/accounts/%s/contacts/lists", accountId),
                 new RequestData(),
-                ContactListsResponse.class
+                ContactListResponse.class
         );
     }
 }

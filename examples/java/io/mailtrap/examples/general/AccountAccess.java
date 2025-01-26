@@ -1,10 +1,8 @@
 package io.mailtrap.examples.general;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.account_accesses.ListAccountAccessQueryParams;
-import io.mailtrap.model.response.account_accesses.AccountAccessResponse;
 
 import java.util.List;
 
@@ -15,16 +13,16 @@ public class AccountAccess {
     private static final String INBOX_ID = "2";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        ListAccountAccessQueryParams queryParams = new ListAccountAccessQueryParams();
+        var queryParams = new ListAccountAccessQueryParams();
         queryParams.setInboxIds(List.of(INBOX_ID));
 
-        List<AccountAccessResponse> responses = client.generalApi().accountAccesses().listUserAndInviteAccountAccesses(ACCOUNT_ID, queryParams);
+        var responses = client.generalApi().accountAccesses().listUserAndInviteAccountAccesses(ACCOUNT_ID, queryParams);
 
         System.out.println(responses);
 

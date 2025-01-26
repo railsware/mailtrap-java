@@ -3,7 +3,7 @@ package io.mailtrap.api.contact_lists;
 import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.response.contact_lists.ContactListsResponse;
+import io.mailtrap.model.response.contact_lists.ContactListResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -12,7 +12,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 class ContactListsImplTest extends BaseTest {
     private ContactLists api;
@@ -34,7 +35,7 @@ class ContactListsImplTest extends BaseTest {
 
     @Test
     void test_findAll() {
-        List<ContactListsResponse> contacts = api.findAll(accountId);
+        List<ContactListResponse> contacts = api.findAll(accountId);
 
         assertFalse(contacts.isEmpty());
         assertEquals(2, contacts.size());

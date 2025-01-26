@@ -1,13 +1,11 @@
 package io.mailtrap.examples.general;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.AccessLevel;
 import io.mailtrap.model.ResourceType;
 import io.mailtrap.model.request.permissions.ManagePermissionsRequest;
 import io.mailtrap.model.request.permissions.Permission;
-import io.mailtrap.model.response.permissions.Resource;
 
 import java.util.List;
 
@@ -21,16 +19,16 @@ public class Permissions {
     private static final String SECOND_RESOURCE_ID = "21";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        Resource firstResource = client.generalApi().permissions().getResources(ACCOUNT_ID).get(0);
+        var firstResource = client.generalApi().permissions().getResources(ACCOUNT_ID).get(0);
         System.out.println(firstResource);
 
-        ManagePermissionsRequest request = new ManagePermissionsRequest(List.of(
+        var request = new ManagePermissionsRequest(List.of(
                 new Permission(
                         FIRST_RESOURCE_ID, ResourceType.ACCOUNT, AccessLevel.VIEWER, false
                 ),

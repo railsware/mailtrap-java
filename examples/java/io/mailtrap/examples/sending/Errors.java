@@ -1,6 +1,5 @@
 package io.mailtrap.examples.sending;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.exception.http.HttpClientException;
@@ -18,13 +17,13 @@ public class Errors {
     private static final String RECIPIENT_EMAIL = "recipient@domain.com";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        final MailtrapMail invalidMail_TemplateUUIDAndSubjectAreUsed = MailtrapMail.builder()
+        final var invalidMail_TemplateUUIDAndSubjectAreUsed = MailtrapMail.builder()
                 .from(new Address(SENDER_EMAIL))
                 .to(List.of(new Address(RECIPIENT_EMAIL)))
                 .subject("Hello from Mailtrap Sending!")
@@ -38,11 +37,11 @@ public class Errors {
             System.out.println("Caught invalid request body exception : " + e);
         }
 
-        MailtrapClient clientWithInvalidToken = MailtrapClientFactory.createMailtrapClient(new MailtrapConfig.Builder()
+        var clientWithInvalidToken = MailtrapClientFactory.createMailtrapClient(new MailtrapConfig.Builder()
                 .token("invalid token")
                 .build());
 
-        final MailtrapMail validMail = MailtrapMail.builder()
+        final var validMail = MailtrapMail.builder()
                 .from(new Address(SENDER_EMAIL))
                 .to(List.of(new Address(RECIPIENT_EMAIL)))
                 .subject("Hello from Mailtrap Sending!")

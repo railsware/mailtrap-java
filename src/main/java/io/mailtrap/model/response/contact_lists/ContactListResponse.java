@@ -3,7 +3,7 @@ package io.mailtrap.model.response.contact_lists;
 import lombok.Data;
 
 @Data
-public class ContactListsResponse {
+public class ContactListResponse {
 
     private long id;
 
