@@ -29,6 +29,6 @@ public class Contacts {
 
         System.out.println(response);
 
-        client.contactsApi().contacts().deleteContact(ACCOUNT_ID, email);
+        client.contactsApi().contacts().deleteContact(ACCOUNT_ID, EMAIL);
     }
 }
