@@ -1,6 +1,5 @@
 package io.mailtrap.examples.sending;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.emails.Address;
@@ -20,15 +19,15 @@ public class Everything {
     private static final String REPLY_TO_EMAIL = "reply_to@domain.com";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
         final String welcomeImage = readAndEncodeAttachment("welcome.png");
 
-        final MailtrapMail mail = MailtrapMail.builder()
+        final var mail = MailtrapMail.builder()
                 .category("test")
                 .customVariables(Map.of(
                         "hello", "world",

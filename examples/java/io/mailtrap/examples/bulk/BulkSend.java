@@ -1,6 +1,5 @@
 package io.mailtrap.examples.bulk;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.emails.Address;
@@ -15,13 +14,13 @@ public class BulkSend {
     private static final String RECIPIENT_EMAIL = "recipient@domain.com";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        final MailtrapMail mail = MailtrapMail.builder()
+        final var mail = MailtrapMail.builder()
                 .from(new Address(SENDER_EMAIL))
                 .to(List.of(new Address(RECIPIENT_EMAIL)))
                 .subject("Hello from Mailtrap!")

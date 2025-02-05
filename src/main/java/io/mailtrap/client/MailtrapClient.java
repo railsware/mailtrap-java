@@ -1,9 +1,6 @@
 package io.mailtrap.client;
 
-import io.mailtrap.client.api.MailtrapBulkSendingApi;
-import io.mailtrap.client.api.MailtrapEmailSendingApi;
-import io.mailtrap.client.api.MailtrapEmailTestingApi;
-import io.mailtrap.client.api.MailtrapGeneralApi;
+import io.mailtrap.client.api.*;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.model.request.emails.MailtrapMail;
 import io.mailtrap.model.response.emails.SendResponse;
@@ -44,6 +41,12 @@ public class MailtrapClient {
      */
     @Getter
     private final MailtrapGeneralApi generalApi;
+
+    /**
+     * API for Mailtrap.io Contacts functionality
+     */
+    @Getter
+    private final MailtrapContactsApi contactsApi;
 
     /**
      * Utility class which holds sending context (which API to use: Email Sending API, Bulk Sending API or

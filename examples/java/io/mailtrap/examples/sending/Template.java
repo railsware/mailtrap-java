@@ -1,6 +1,5 @@
 package io.mailtrap.examples.sending;
 
-import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.emails.Address;
@@ -16,13 +15,13 @@ public class Template {
     private static final String RECIPIENT_EMAIL = "recipient@domain.com";
 
     public static void main(String[] args) {
-        final MailtrapConfig config = new MailtrapConfig.Builder()
+        final var config = new MailtrapConfig.Builder()
                 .token(TOKEN)
                 .build();
 
-        final MailtrapClient client = MailtrapClientFactory.createMailtrapClient(config);
+        final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        final MailtrapMail mail = MailtrapMail.builder()
+        final var mail = MailtrapMail.builder()
                 .from(new Address("John Doe", SENDER_EMAIL))
                 .to(List.of(new Address("Jane Doe", RECIPIENT_EMAIL)))
                 .templateUuid("813e39db-c74a-4830-b037-0e6ba8b1fe88")

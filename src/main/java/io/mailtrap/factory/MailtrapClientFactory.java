@@ -6,6 +6,8 @@ import io.mailtrap.api.accounts.AccountsImpl;
 import io.mailtrap.api.attachments.AttachmentsImpl;
 import io.mailtrap.api.billing.BillingImpl;
 import io.mailtrap.api.bulk_emails.BulkEmailsImpl;
+import io.mailtrap.api.contact_lists.ContactListsImpl;
+import io.mailtrap.api.contacts.ContactsImpl;
 import io.mailtrap.api.inboxes.InboxesImpl;
 import io.mailtrap.api.messages.MessagesImpl;
 import io.mailtrap.api.permissions.PermissionsImpl;
@@ -14,10 +16,7 @@ import io.mailtrap.api.sending_domains.SendingDomainsImpl;
 import io.mailtrap.api.sending_emails.SendingEmailsImpl;
 import io.mailtrap.api.testing_emails.TestingEmailsImpl;
 import io.mailtrap.client.MailtrapClient;
-import io.mailtrap.client.api.MailtrapBulkSendingApi;
-import io.mailtrap.client.api.MailtrapEmailSendingApi;
-import io.mailtrap.client.api.MailtrapEmailTestingApi;
-import io.mailtrap.client.api.MailtrapGeneralApi;
+import io.mailtrap.client.api.*;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.util.SendingContextHolder;
 import jakarta.validation.Validation;
@@ -38,46 +37,54 @@ public final class MailtrapClientFactory {
      * @return A new Mailtrap client instance.
      */
     public static MailtrapClient createMailtrapClient(MailtrapConfig config) {
-        var customValidator = createValidator();
+        final var customValidator = createValidator();
 
-        var sendingApi = createSendingApi(config, customValidator);
-        var testingApi = createTestingApi(config, customValidator);
-        var bulkSendingApi = createBulkSendingApi(config, customValidator);
-        var generalApi = createGeneralApi(config);
+        final var sendingApi = createSendingApi(config, customValidator);
+        final var testingApi = createTestingApi(config, customValidator);
+        final var bulkSendingApi = createBulkSendingApi(config, customValidator);
+        final var generalApi = createGeneralApi(config);
+        final var contactsApi = createContactsApi(config);
 
-        var sendingContextHolder = configureSendingContext(config);
+        final var sendingContextHolder = configureSendingContext(config);
 
-        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, sendingContextHolder);
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, contactsApi, sendingContextHolder);
+    }
+
+    private static MailtrapContactsApi createContactsApi(MailtrapConfig config) {
+        final var contactLists = new ContactListsImpl(config);
+        final var contacts = new ContactsImpl(config);
+
+        return new MailtrapContactsApi(contactLists, contacts);
     }
 
     private static MailtrapGeneralApi createGeneralApi(MailtrapConfig config) {
-        var accountAccess = new AccountAccessesImpl(config);
-        var accounts = new AccountsImpl(config);
-        var billing = new BillingImpl(config);
-        var permissions = new PermissionsImpl(config);
+        final var accountAccess = new AccountAccessesImpl(config);
+        final var accounts = new AccountsImpl(config);
+        final var billing = new BillingImpl(config);
+        final var permissions = new PermissionsImpl(config);
 
         return new MailtrapGeneralApi(accountAccess, accounts, billing, permissions);
     }
 
     private static MailtrapEmailSendingApi createSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new SendingEmailsImpl(config, customValidator);
-        var domains = new SendingDomainsImpl(config);
+        final var emails = new SendingEmailsImpl(config, customValidator);
+        final var domains = new SendingDomainsImpl(config);
 
         return new MailtrapEmailSendingApi(emails, domains);
     }
 
     private static MailtrapEmailTestingApi createTestingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new TestingEmailsImpl(config, customValidator);
-        var attachments = new AttachmentsImpl(config);
-        var inboxes = new InboxesImpl(config, customValidator);
-        var projects = new ProjectsImpl(config, customValidator);
-        var messages = new MessagesImpl(config);
+        final var emails = new TestingEmailsImpl(config, customValidator);
+        final var attachments = new AttachmentsImpl(config);
+        final var inboxes = new InboxesImpl(config, customValidator);
+        final var projects = new ProjectsImpl(config, customValidator);
+        final var messages = new MessagesImpl(config);
 
         return new MailtrapEmailTestingApi(emails, attachments, inboxes, projects, messages);
     }
 
     private static MailtrapBulkSendingApi createBulkSendingApi(MailtrapConfig config, CustomValidator customValidator) {
-        var emails = new BulkEmailsImpl(config, customValidator);
+        final var emails = new BulkEmailsImpl(config, customValidator);
 
         return new MailtrapBulkSendingApi(emails);
     }

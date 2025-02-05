@@ -1,9 +1,9 @@
-package io.mailtrap.examples.general;
+package io.mailtrap.examples.contact_lists;
 
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 
-public class Billing {
+public class ContactLists {
 
     private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
     private static final long ACCOUNT_ID = 1L;
@@ -15,7 +15,8 @@ public class Billing {
 
         final var client = MailtrapClientFactory.createMailtrapClient(config);
 
-        System.out.println(client.generalApi().billing().getCurrentBillingCycleUsage(ACCOUNT_ID));
-    }
+        var contacts = client.contactsApi().contactLists().findAll(ACCOUNT_ID);
 
+        System.out.println(contacts);
+    }
 }

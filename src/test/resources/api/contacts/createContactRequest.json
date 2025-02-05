@@ -1,0 +1,12 @@
+{
+  "contact": {
+    "email": "email@mailtrap.io",
+    "fields": {
+      "first_name": "Nick"
+    },
+    "list_ids": [
+      1,
+      2
+    ]
+  }
+}

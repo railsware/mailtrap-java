@@ -50,9 +50,9 @@ class AccountAccessesImplTest extends BaseTest {
         AccountAccessResponse accountAccessResponse = accountAccessResponses.get(0);
         assertEquals(accountAccessResponse.getId(), accountAccessId);
         assertEquals(SpecifierType.USER, accountAccessResponse.getSpecifierType());
-        assertEquals(((UserSpecifier) accountAccessResponse.getSpecifier()).getName(), "Jack Sparrow");
+        assertEquals("Jack Sparrow", ((UserSpecifier) accountAccessResponse.getSpecifier()).getName());
         assertTrue(((UserSpecifier) accountAccessResponse.getSpecifier()).isTwoFactorAuthenticationEnabled());
-        assertEquals(accountAccessResponse.getResources().size(), 3);
+        assertEquals(3, accountAccessResponse.getResources().size());
     }
 
     @Test
