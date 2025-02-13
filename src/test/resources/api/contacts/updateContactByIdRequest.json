@@ -1,0 +1,17 @@
+{
+  "contact": {
+    "email": "email@mailtrap.io",
+    "fields": {
+      "zip_code": 11111
+    },
+    "list_ids_included": [
+      1,
+      2
+    ],
+    "list_ids_excluded": [
+      3,
+      4
+    ],
+    "unsubscribed": false
+  }
+}

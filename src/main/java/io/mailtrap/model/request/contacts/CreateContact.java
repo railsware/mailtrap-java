@@ -9,11 +9,11 @@ import java.util.Map;
 
 @Getter
 @AllArgsConstructor
-public class Contact {
+public class CreateContact {
 
     private String email;
 
-    private Map<String, String> fields;
+    private Map<String, Object> fields;
 
     @JsonProperty("list_ids")
     private List<Long> listIds;

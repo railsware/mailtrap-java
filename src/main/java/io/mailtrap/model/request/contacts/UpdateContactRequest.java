@@ -6,8 +6,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateContactRequest extends AbstractModel {
+public class UpdateContactRequest extends AbstractModel {
 
-    private CreateContact contact;
+  private UpdateContact contact;
 
 }

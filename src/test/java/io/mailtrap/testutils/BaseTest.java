@@ -16,6 +16,6 @@ public class BaseTest {
     protected final Long sendingDomainId = 6L;
     protected final String email = "email@mailtrap.io";
     protected final String emailEncoded = URLEncoder.encode(email, Charset.defaultCharset());
-    protected final String contactUUID = UUID.randomUUID().toString();
+    protected final String contactUUID = "018dd5e3-f6d2-7c00-8f9b-e5c3f2d8a132";
     protected final String contactUUIDEncoded = URLEncoder.encode(contactUUID, Charset.defaultCharset());
 }
