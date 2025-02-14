@@ -4,36 +4,38 @@ Follow these few simple steps to add Mailtrap API functionality into your Java p
 
 # Prerequisites
 
-Make sure your project uses JDK 11 or higher
+Make sure your project uses JDK 11 or higher.
 
 ## Setup
 
 ### 1. Add the library as a Maven/Gradle dependency
-Maven dependency
+
+Maven dependency:
 
 ```xml
 
 <dependency>
     <groupId>io.mailtrap</groupId>
     <artifactId>mailtrap-java</artifactId>
-    <version>*latest-version*</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
-Gradle Groovy dependency
+Gradle Groovy dependency:
 
 ```groovy
-implementation 'io.mailtrap:mailtrap-java:*latest-version*'
+implementation 'io.mailtrap:mailtrap-java:1.0.0'
 ```
 
-Gradle Kotlin DSL dependency
+Gradle Kotlin DSL dependency:
 
 ```kotlin
-implementation("io.mailtrap:mailtrap-java:*latest-version*")
+implementation("io.mailtrap:mailtrap-java:1.0.0")
 ```
 
-### 2. Register/login into Mailtrap account
-Obtain API token to configure and use MailtrapClient
+### 2. Register/login into Mailtrap
+
+Obtain API token to configure and use MailtrapClient.
 
 ### 3. Configuration and usage
 
