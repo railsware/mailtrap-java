@@ -33,9 +33,10 @@ Gradle Kotlin DSL dependency:
 implementation("io.mailtrap:mailtrap-java:1.0.0")
 ```
 
-### 2. Register/login into Mailtrap
+### 2. Authentication
 
-Obtain API token to configure and use MailtrapClient.
+- Register/login into Mailtrap
+- Obtain an API token [with respective permissions and access level](https://help.mailtrap.io/article/103-api-tokens) to configure and use MailtrapClient.
 
 ### 3. Configuration and usage
 
