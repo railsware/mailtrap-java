@@ -1,6 +1,6 @@
 package io.mailtrap.client.api;
 
-import io.mailtrap.api.account_accesses.AccountAccesses;
+import io.mailtrap.api.accountaccesses.AccountAccesses;
 import io.mailtrap.api.accounts.Accounts;
 import io.mailtrap.api.billing.Billing;
 import io.mailtrap.api.permissions.Permissions;

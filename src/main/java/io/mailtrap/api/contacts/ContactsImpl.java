@@ -1,7 +1,7 @@
 package io.mailtrap.api.contacts;
 
 import io.mailtrap.Constants;
-import io.mailtrap.api.api_resource.ApiResource;
+import io.mailtrap.api.apiresource.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.contacts.CreateContactRequest;

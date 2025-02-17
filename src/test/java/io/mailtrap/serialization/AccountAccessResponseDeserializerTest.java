@@ -2,10 +2,10 @@ package io.mailtrap.serialization;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.mailtrap.Mapper;
-import io.mailtrap.model.response.account_accesses.AccountAccessResponse;
-import io.mailtrap.model.response.account_accesses.ApiTokenSpecifier;
-import io.mailtrap.model.response.account_accesses.InviteSpecifier;
-import io.mailtrap.model.response.account_accesses.UserSpecifier;
+import io.mailtrap.model.response.accountaccesses.AccountAccessResponse;
+import io.mailtrap.model.response.accountaccesses.ApiTokenSpecifier;
+import io.mailtrap.model.response.accountaccesses.InviteSpecifier;
+import io.mailtrap.model.response.accountaccesses.UserSpecifier;
 import org.junit.jupiter.api.Test;
 
 import java.time.OffsetDateTime;

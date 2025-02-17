@@ -140,7 +140,7 @@ You can find the API reference [here](https://railsware.github.io/mailtrap-java/
 ### Contacts API
 
 - [Contacts](examples/java/io/mailtrap/examples/contacts/Contacts.java)
-- [Contact lists](examples/java/io/mailtrap/examples/contact_lists/ContactLists.java)
+- [Contact lists](examples/java/io/mailtrap/examples/contactlists/ContactLists.java)
 
 ## Contributing
 

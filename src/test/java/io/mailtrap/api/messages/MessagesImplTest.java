@@ -4,7 +4,7 @@ import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.messages.ForwardMessageRequest;
-import io.mailtrap.model.request.account_accesses.ListMessagesQueryParams;
+import io.mailtrap.model.request.accountaccesses.ListMessagesQueryParams;
 import io.mailtrap.model.request.messages.UpdateMessageRequest;
 import io.mailtrap.model.response.messages.*;
 import io.mailtrap.testutils.BaseTest;

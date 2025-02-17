@@ -2,7 +2,7 @@ package io.mailtrap.examples.general;
 
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.request.account_accesses.ListAccountAccessQueryParams;
+import io.mailtrap.model.request.accountaccesses.ListAccountAccessQueryParams;
 
 import java.util.List;
 

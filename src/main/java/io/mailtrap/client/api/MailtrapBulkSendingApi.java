@@ -1,6 +1,6 @@
 package io.mailtrap.client.api;
 
-import io.mailtrap.api.bulk_emails.BulkEmails;
+import io.mailtrap.api.bulkemails.BulkEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
