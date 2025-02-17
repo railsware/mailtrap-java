@@ -8,33 +8,31 @@ Quickly add email sending functionality to your Java application with Mailtrap.
 
 ## Java Version
 
-Requires JDK 11 or higher
+Requires JDK 11 or higher.
 
-## Usage
+## Install package
 
-### Dependency
-
-Maven dependency
+As Maven dependency:
 
 ```xml
 
 <dependency>
     <groupId>io.mailtrap</groupId>
     <artifactId>mailtrap-java</artifactId>
-    <version>0.0.1</version>
+    <version>1.0.0</version>
 </dependency>
 ```
 
-Gradle Groovy dependency
+As Gradle Groovy dependency:
 
 ```groovy
-implementation 'io.mailtrap:mailtrap-java:0.0.1'
+implementation 'io.mailtrap:mailtrap-java:1.0.0'
 ```
 
-Gradle Kotlin DSL dependency
+As Gradle Kotlin DSL dependency:
 
 ```kotlin
-implementation("io.mailtrap:mailtrap-java:0.0.1")
+implementation("io.mailtrap:mailtrap-java:1.0.0")
 ```
 
 ## Usage
@@ -72,14 +70,14 @@ public class MailtrapJavaSDKTest {
                 .text("Welcome to Mailtrap Sending!")
                 .build();
 
+        // Send email using Mailtrap Sending API
         try {
             System.out.println(client.send(mail));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
         }
 
-        // OR send email to the Mailtrap Sandbox
-
+        // Or send email using Mailtrap Testing API
         try {
             long inboxId = 1000001L;
 
@@ -98,7 +96,7 @@ public class MailtrapJavaSDKTest {
 
             System.out.println(client.send(mail));
 
-            // Or use directly Testing API to send email to Sandbox
+            // Or use Testing API directly
             System.out.println(client.testingApi().emails().send(mail, inboxId));
         } catch (Exception e) {
             System.out.println("Caught exception : " + e);
@@ -127,7 +125,7 @@ You can find the API reference [here](https://railsware.github.io/mailtrap-java/
 - [Error handling](examples/java/io/mailtrap/examples/sending/Errors.java)
 - [Send email using template](examples/java/io/mailtrap/examples/sending/Template.java)
 
-### Email testing API
+### Email Testing API
 
 - [Attachments](examples/java/io/mailtrap/examples/testing/Attachments.java)
 - [Inboxes](examples/java/io/mailtrap/examples/testing/Inboxes.java)
@@ -135,9 +133,14 @@ You can find the API reference [here](https://railsware.github.io/mailtrap-java/
 - [Projects](examples/java/io/mailtrap/examples/testing/Projects.java)
 - [Send mail using template](examples/java/io/mailtrap/examples/testing/Email.java)
 
-### Bulk sending API
+### Bulk Sending API
 
 - [Send mail](examples/java/io/mailtrap/examples/bulk/BulkSend.java)
+
+### Contacts API
+
+- [Contacts](examples/java/io/mailtrap/examples/contacts/Contacts.java)
+- [Contact lists](examples/java/io/mailtrap/examples/contact_lists/ContactLists.java)
 
 ## Contributing
 

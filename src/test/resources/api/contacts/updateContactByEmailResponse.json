@@ -1,0 +1,15 @@
+{
+  "action": "updated",
+  "data": {
+    "id": "018dd5e3-f6d2-7c00-8f9b-e5c3f2d8a132",
+    "status": "subscribed",
+    "email": "email@mailtrap.io",
+    "fields": {
+      "first_name": "Joe"
+    },
+    "list_ids": [
+      1,
+      2
+    ]
+  }
+}

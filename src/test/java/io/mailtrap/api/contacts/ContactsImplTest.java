@@ -3,10 +3,14 @@ package io.mailtrap.api.contacts;
 import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.request.contacts.Contact;
+import io.mailtrap.model.request.contacts.CreateContact;
 import io.mailtrap.model.request.contacts.CreateContactRequest;
+import io.mailtrap.model.request.contacts.UpdateContact;
+import io.mailtrap.model.request.contacts.UpdateContactRequest;
+import io.mailtrap.model.response.contacts.ContactAction;
 import io.mailtrap.model.response.contacts.ContactStatus;
 import io.mailtrap.model.response.contacts.CreateContactResponse;
+import io.mailtrap.model.response.contacts.UpdateContactResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -32,7 +36,13 @@ class ContactsImplTest extends BaseTest {
                         "DELETE", null, null),
 
                 DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/" + contactUUIDEncoded,
-                        "DELETE", null, null)
+                        "DELETE", null, null),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/" + emailEncoded,
+                        "PATCH", "api/contacts/updateContactByEmailRequest.json", "api/contacts/updateContactByEmailResponse.json"),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/" + contactUUIDEncoded,
+                        "PATCH", "api/contacts/updateContactByIdRequest.json", "api/contacts/updateContactByIdResponse.json")
         ));
 
         MailtrapConfig testConfig = new MailtrapConfig.Builder()
@@ -45,7 +55,7 @@ class ContactsImplTest extends BaseTest {
 
     @Test
     void test_createContact() {
-        CreateContactRequest request = new CreateContactRequest(new Contact(email, Map.of("first_name", "Nick"), List.of(1L, 2L)));
+        CreateContactRequest request = new CreateContactRequest(new CreateContact(email, Map.of("first_name", "Nick"), List.of(1L, 2L)));
 
         CreateContactResponse response = api.createContact(accountId, request);
 
@@ -61,5 +71,27 @@ class ContactsImplTest extends BaseTest {
     @Test
     void test_deleteContact_byId() {
         api.deleteContact(accountId, contactUUID);
+    }
+
+    @Test
+    void test_updateContact_byEmail() {
+        UpdateContactRequest request = new UpdateContactRequest(new UpdateContact(email, Map.of("first_name", "Joe"), List.of(1L, 2L), List.of(3L, 4L), false));
+
+        UpdateContactResponse response = api.updateContact(accountId, email, request);
+
+        assertNotNull(response);
+        assertEquals(ContactAction.UPDATED, response.getAction());
+        assertEquals(ContactStatus.SUBSCRIBED, response.getData().getStatus());
+    }
+
+    @Test
+    void test_createContact_byId() {
+        UpdateContactRequest request = new UpdateContactRequest(new UpdateContact(email, Map.of("zip_code", 11111), List.of(1L, 2L), List.of(3L, 4L), false));
+
+        UpdateContactResponse response = api.updateContact(accountId, contactUUID, request);
+
+        assertNotNull(response);
+        assertEquals(ContactAction.UPDATED, response.getAction());
+        assertEquals(ContactStatus.SUBSCRIBED, response.getData().getStatus());
     }
 }
