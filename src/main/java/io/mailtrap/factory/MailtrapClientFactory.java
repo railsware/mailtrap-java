@@ -1,20 +1,20 @@
 package io.mailtrap.factory;
 
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.account_accesses.AccountAccessesImpl;
+import io.mailtrap.api.accountaccesses.AccountAccessesImpl;
 import io.mailtrap.api.accounts.AccountsImpl;
 import io.mailtrap.api.attachments.AttachmentsImpl;
 import io.mailtrap.api.billing.BillingImpl;
-import io.mailtrap.api.bulk_emails.BulkEmailsImpl;
-import io.mailtrap.api.contact_lists.ContactListsImpl;
+import io.mailtrap.api.bulkemails.BulkEmailsImpl;
+import io.mailtrap.api.contactlists.ContactListsImpl;
 import io.mailtrap.api.contacts.ContactsImpl;
 import io.mailtrap.api.inboxes.InboxesImpl;
 import io.mailtrap.api.messages.MessagesImpl;
 import io.mailtrap.api.permissions.PermissionsImpl;
 import io.mailtrap.api.projects.ProjectsImpl;
-import io.mailtrap.api.sending_domains.SendingDomainsImpl;
-import io.mailtrap.api.sending_emails.SendingEmailsImpl;
-import io.mailtrap.api.testing_emails.TestingEmailsImpl;
+import io.mailtrap.api.sendingdomains.SendingDomainsImpl;
+import io.mailtrap.api.sendingemails.SendingEmailsImpl;
+import io.mailtrap.api.testingemails.TestingEmailsImpl;
 import io.mailtrap.client.MailtrapClient;
 import io.mailtrap.client.api.*;
 import io.mailtrap.config.MailtrapConfig;

@@ -1,7 +1,7 @@
 package io.mailtrap.api.messages;
 
 import io.mailtrap.model.request.messages.ForwardMessageRequest;
-import io.mailtrap.model.request.account_accesses.ListMessagesQueryParams;
+import io.mailtrap.model.request.accountaccesses.ListMessagesQueryParams;
 import io.mailtrap.model.request.messages.UpdateMessageRequest;
 import io.mailtrap.model.response.messages.*;
 

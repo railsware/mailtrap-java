@@ -1,6 +1,6 @@
 package io.mailtrap.client.api;
 
-import io.mailtrap.api.contact_lists.ContactLists;
+import io.mailtrap.api.contactlists.ContactLists;
 import io.mailtrap.api.contacts.Contacts;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

@@ -2,7 +2,7 @@ package io.mailtrap.examples.testing;
 
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
-import io.mailtrap.model.request.account_accesses.ListMessagesQueryParams;
+import io.mailtrap.model.request.accountaccesses.ListMessagesQueryParams;
 
 public class Attachments {
 

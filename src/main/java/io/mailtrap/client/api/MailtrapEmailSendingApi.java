@@ -1,7 +1,7 @@
 package io.mailtrap.client.api;
 
-import io.mailtrap.api.sending_domains.SendingDomains;
-import io.mailtrap.api.sending_emails.SendingEmails;
+import io.mailtrap.api.sendingdomains.SendingDomains;
+import io.mailtrap.api.sendingemails.SendingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;

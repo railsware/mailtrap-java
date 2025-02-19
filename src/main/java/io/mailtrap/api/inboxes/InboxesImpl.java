@@ -2,7 +2,7 @@ package io.mailtrap.api.inboxes;
 
 import io.mailtrap.Constants;
 import io.mailtrap.CustomValidator;
-import io.mailtrap.api.api_resource.ApiResourceWithValidation;
+import io.mailtrap.api.apiresource.ApiResourceWithValidation;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.inboxes.CreateInboxRequest;

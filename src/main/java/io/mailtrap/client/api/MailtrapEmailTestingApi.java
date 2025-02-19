@@ -4,7 +4,7 @@ import io.mailtrap.api.attachments.Attachments;
 import io.mailtrap.api.messages.Messages;
 import io.mailtrap.api.inboxes.Inboxes;
 import io.mailtrap.api.projects.Projects;
-import io.mailtrap.api.testing_emails.TestingEmails;
+import io.mailtrap.api.testingemails.TestingEmails;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;

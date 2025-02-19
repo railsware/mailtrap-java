@@ -7,7 +7,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import io.mailtrap.model.response.Permission;
-import io.mailtrap.model.response.account_accesses.*;
+import io.mailtrap.model.response.accountaccesses.*;
 
 import java.io.IOException;
 import java.util.List;
