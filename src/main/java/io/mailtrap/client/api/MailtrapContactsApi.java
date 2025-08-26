@@ -1,5 +1,6 @@
 package io.mailtrap.client.api;
 
+import io.mailtrap.api.contactimports.ContactImports;
 import io.mailtrap.api.contactlists.ContactLists;
 import io.mailtrap.api.contacts.Contacts;
 import lombok.Getter;
@@ -15,4 +16,5 @@ import lombok.experimental.Accessors;
 public class MailtrapContactsApi {
     private final ContactLists contactLists;
     private final Contacts contacts;
+    private final ContactImports contactImports;
 }

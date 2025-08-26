@@ -1,0 +1,28 @@
+{
+  "contacts": [
+    {
+      "email": "customer1@example.com",
+      "fields": {
+        "full_name": "Jane Doe"
+      },
+      "list_ids_included": [
+        1
+      ],
+      "list_ids_excluded": [
+        2
+      ]
+    },
+    {
+      "email": "customer2@example.com",
+      "fields": {
+        "full_name": "John Doe"
+      },
+      "list_ids_included": [
+        3
+      ],
+      "list_ids_excluded": [
+        4
+      ]
+    }
+  ]
+}

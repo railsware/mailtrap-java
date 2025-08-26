@@ -66,8 +66,8 @@ class AccountAccessesImplTest extends BaseTest {
         AccountAccessResponse accountAccessResponse = accountAccessResponses.get(0);
         assertEquals(accountAccessResponse.getId(), accountAccessId);
         assertEquals(SpecifierType.API_TOKEN, accountAccessResponse.getSpecifierType());
-        assertEquals(((ApiTokenSpecifier) accountAccessResponse.getSpecifier()).getToken(), "token-value-11-22-33");
-        assertEquals(accountAccessResponse.getResources().size(), 2);
+        assertEquals("token-value-11-22-33", ((ApiTokenSpecifier) accountAccessResponse.getSpecifier()).getToken());
+        assertEquals(2, accountAccessResponse.getResources().size());
         assertEquals(accountAccessResponse.getResources().get(0).getResourceId(), projectId);
     }
 

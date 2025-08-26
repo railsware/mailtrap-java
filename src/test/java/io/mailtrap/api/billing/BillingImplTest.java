@@ -38,7 +38,7 @@ class BillingImplTest extends BaseTest {
         BillingResponse billingResponse = api.getCurrentBillingCycleUsage(accountId);
 
         assertNotNull(billingResponse);
-        assertEquals(billingResponse.getTestingBillingInfo().getPlan().getName(), "Individual");
-        assertEquals(billingResponse.getSendingBillingInfo().getPlan().getName(), "Basic 10K");
+        assertEquals("Individual", billingResponse.getTestingBillingInfo().getPlan().getName());
+        assertEquals("Basic 10K", billingResponse.getSendingBillingInfo().getPlan().getName());
     }
 }
