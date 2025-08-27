@@ -7,7 +7,8 @@ import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.contactimports.Contact;
 import io.mailtrap.model.request.contactimports.ImportContactsRequest;
 import io.mailtrap.model.response.contactimports.ContactImportStatus;
-import io.mailtrap.model.response.contactimports.ImportContactsResponse;
+import io.mailtrap.model.response.contactimports.ContactImportResponse;
+import io.mailtrap.model.response.contactimports.ImportContactResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -30,7 +31,7 @@ public class ContactImportsImplTest extends BaseTest {
         DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/imports",
             "POST", "api/contactimports/createContactsImportRequest.json", "api/contactimports/createContactsImportResponse.json"),
 
-        DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/imports/" + contactId,
+        DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/contacts/imports/" + importId,
             "GET", null, "api/contactimports/getContactsImportResponse.json")
     ));
 
@@ -48,11 +49,10 @@ public class ContactImportsImplTest extends BaseTest {
     final var secondContact = new Contact("customer2@example.com", Map.of("full_name", "John Doe"), List.of(3L), List.of(4L));
     final var request = new ImportContactsRequest(List.of(firstContact, secondContact));
 
-    ImportContactsResponse importContactsResponse = api.importContacts(accountId, request);
+    ImportContactResponse contactImportResponse = api.importContacts(accountId, request);
 
-    assertEquals(contactId, importContactsResponse.getId());
-    assertSame(ContactImportStatus.STARTED, importContactsResponse.getStatus());
-    assertNull(importContactsResponse.getCreatedContactsCount());
+    assertEquals(importId, contactImportResponse.getId());
+    assertSame(ContactImportStatus.STARTED, contactImportResponse.getStatus());
   }
 
   @Test
@@ -74,9 +74,9 @@ public class ContactImportsImplTest extends BaseTest {
 
   @Test
   void test_getContactImport() {
-    ImportContactsResponse contactImport = api.getContactImport(accountId, contactId);
+    ContactImportResponse contactImport = api.getContactImport(accountId, importId);
 
-    assertEquals(contactId, contactImport.getId());
+    assertEquals(importId, contactImport.getId());
     assertSame(ContactImportStatus.FINISHED, contactImport.getStatus());
     assertEquals(1L, contactImport.getCreatedContactsCount());
     assertEquals(3L, contactImport.getUpdatedContactsCount());

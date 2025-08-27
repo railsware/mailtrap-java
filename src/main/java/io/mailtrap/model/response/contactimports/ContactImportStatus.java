@@ -7,7 +7,7 @@ public enum ContactImportStatus {
   CREATED("created"),
   STARTED("started"),
   FINISHED("finished"),
-  FAILED("failed"),;
+  FAILED("failed");
 
   private final String value;
 

@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class ImportContactsResponse {
+public class ContactImportResponse {
 
   private long id;
 
@@ -18,4 +18,5 @@ public class ImportContactsResponse {
 
   @JsonProperty("contacts_over_limit_count")
   private Long contactsOverLimitCount;
+
 }

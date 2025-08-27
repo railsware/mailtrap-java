@@ -1,4 +1,4 @@
-package io.mailtrap.contactimports;
+package io.mailtrap.examples.contactimports;
 
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
@@ -34,9 +34,9 @@ public class ContactImports {
 
     System.out.println(createResponse);
 
-    var updateResponse = client.contactsApi().contactImports()
+    var contactImportResponse = client.contactsApi().contactImports()
         .getContactImport(ACCOUNT_ID, createResponse.getId());
 
-    System.out.println(updateResponse);
+    System.out.println(contactImportResponse);
   }
 }
