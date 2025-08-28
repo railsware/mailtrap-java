@@ -2,7 +2,7 @@ package io.mailtrap.api.contactimports;
 
 import io.mailtrap.model.request.contactimports.ImportContactsRequest;
 import io.mailtrap.model.response.contactimports.ContactImportResponse;
-import io.mailtrap.model.response.contactimports.ImportContactResponse;
+import io.mailtrap.model.response.contactimports.ImportContactsResponse;
 
 public interface ContactImports {
 
@@ -15,7 +15,7 @@ public interface ContactImports {
    * @param request   request body
    * @return contact data
    */
-  ImportContactResponse importContacts(long accountId, ImportContactsRequest request);
+  ImportContactsResponse importContacts(long accountId, ImportContactsRequest request);
 
   /**
    * Get Contact Import
