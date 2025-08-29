@@ -7,8 +7,8 @@ import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.contactimports.Contact;
 import io.mailtrap.model.request.contactimports.ImportContactsRequest;
 import io.mailtrap.model.response.contactimports.ContactImportStatus;
-import io.mailtrap.model.response.contactimports.ContactImportResponse;
-import io.mailtrap.model.response.contactimports.ImportContactsResponse;
+import io.mailtrap.model.response.contactimports.ContactsImportResponse;
+import io.mailtrap.model.response.contactimports.CreateContactsImportResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
 import io.mailtrap.testutils.TestHttpClient;
@@ -49,7 +49,7 @@ public class ContactImportsImplTest extends BaseTest {
     final var secondContact = new Contact("customer2@example.com", Map.of("full_name", "John Doe"), List.of(3L), List.of(4L));
     final var request = new ImportContactsRequest(List.of(firstContact, secondContact));
 
-    ImportContactsResponse contactImportResponse = api.importContacts(accountId, request);
+    CreateContactsImportResponse contactImportResponse = api.importContacts(accountId, request);
 
     assertEquals(importId, contactImportResponse.getId());
     assertSame(ContactImportStatus.STARTED, contactImportResponse.getStatus());
@@ -74,7 +74,7 @@ public class ContactImportsImplTest extends BaseTest {
 
   @Test
   void test_getContactImport() {
-    ContactImportResponse contactImport = api.getContactImport(accountId, importId);
+    ContactsImportResponse contactImport = api.getContactImport(accountId, importId);
 
     assertEquals(importId, contactImport.getId());
     assertSame(ContactImportStatus.FINISHED, contactImport.getStatus());

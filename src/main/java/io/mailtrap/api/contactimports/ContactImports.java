@@ -1,8 +1,8 @@
 package io.mailtrap.api.contactimports;
 
 import io.mailtrap.model.request.contactimports.ImportContactsRequest;
-import io.mailtrap.model.response.contactimports.ContactImportResponse;
-import io.mailtrap.model.response.contactimports.ImportContactsResponse;
+import io.mailtrap.model.response.contactimports.ContactsImportResponse;
+import io.mailtrap.model.response.contactimports.CreateContactsImportResponse;
 
 public interface ContactImports {
 
@@ -15,7 +15,7 @@ public interface ContactImports {
    * @param request   request body
    * @return contact data
    */
-  ImportContactsResponse importContacts(long accountId, ImportContactsRequest request);
+  CreateContactsImportResponse importContacts(long accountId, ImportContactsRequest request);
 
   /**
    * Get Contact Import
@@ -24,5 +24,5 @@ public interface ContactImports {
    * @param importId unique Contact Import ID
    * @return contact data
    */
-  ContactImportResponse getContactImport(long accountId, long importId);
+  ContactsImportResponse getContactImport(long accountId, long importId);
 }

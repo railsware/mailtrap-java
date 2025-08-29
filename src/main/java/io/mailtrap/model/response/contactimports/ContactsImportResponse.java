@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
-public class ContactImportResponse {
+public class ContactsImportResponse {
 
   private long id;
 
