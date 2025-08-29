@@ -18,4 +18,8 @@ public class BaseTest {
     protected final String contactUUID = "018dd5e3-f6d2-7c00-8f9b-e5c3f2d8a132";
     protected final String contactUUIDEncoded = URLEncoder.encode(contactUUID, Charset.defaultCharset());
     protected final long importId = 1L;
+    protected final long fieldId = 1L;
+    protected final long getFieldId = 777L;
+    protected final long updateFieldId = 999L;
+    protected final long deleteFieldId = 1111L;
 }

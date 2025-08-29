@@ -1,0 +1,6 @@
+{
+  "id": 999,
+  "name": "My Updated Contact Field",
+  "data_type": "text",
+  "merge_tag": "my_updated_contact_field"
+}
