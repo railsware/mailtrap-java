@@ -1,0 +1,6 @@
+{
+  "id": 1337,
+  "name": "My Contact Field",
+  "data_type": "boolean",
+  "merge_tag": "my_contact_field"
+}
