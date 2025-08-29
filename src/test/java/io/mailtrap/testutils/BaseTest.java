@@ -2,7 +2,6 @@ package io.mailtrap.testutils;
 
 import java.net.URLEncoder;
 import java.nio.charset.Charset;
-import java.util.UUID;
 
 public class BaseTest {
     protected final Long accountId = 1L;
@@ -18,4 +17,5 @@ public class BaseTest {
     protected final String emailEncoded = URLEncoder.encode(email, Charset.defaultCharset());
     protected final String contactUUID = "018dd5e3-f6d2-7c00-8f9b-e5c3f2d8a132";
     protected final String contactUUIDEncoded = URLEncoder.encode(contactUUID, Charset.defaultCharset());
+    protected final long importId = 1L;
 }

@@ -70,7 +70,7 @@ class InboxesImplTest extends BaseTest {
 
         assertNotNull(createdInbox);
         assertEquals(createdInbox.getProjectId(), projectId);
-        assertEquals(createdInbox.getName(), "Test inbox");
+        assertEquals("Test inbox", createdInbox.getName());
     }
 
     @Test
@@ -80,7 +80,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(inboxAttributes);
         assertTrue(inboxAttributes.getPermission().isCanRead());
         assertEquals(inboxAttributes.getProjectId(), projectId);
-        assertEquals(inboxAttributes.getName(), "Test inbox");
+        assertEquals("Test inbox", inboxAttributes.getName());
     }
 
     @Test
@@ -90,7 +90,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(deletedInbox);
         assertTrue(deletedInbox.getPermission().isCanRead());
         assertEquals(deletedInbox.getId(), inboxId);
-        assertEquals(deletedInbox.getName(), "Test inbox");
+        assertEquals("Test inbox", deletedInbox.getName());
     }
 
     @Test
@@ -100,8 +100,8 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(updatedInbox);
         assertTrue(updatedInbox.getPermission().isCanRead());
         assertEquals(updatedInbox.getId(), inboxId);
-        assertEquals(updatedInbox.getName(), "Updated Inbox Name");
-        assertEquals(updatedInbox.getEmailUsername(), "updated-email-username");
+        assertEquals("Updated Inbox Name", updatedInbox.getName());
+        assertEquals("updated-email-username", updatedInbox.getEmailUsername());
     }
 
     @Test
@@ -111,7 +111,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(cleanedInbox);
         assertTrue(cleanedInbox.getPermission().isCanRead());
         assertEquals(cleanedInbox.getId(), inboxId);
-        assertEquals(cleanedInbox.getName(), "Test inbox");
+        assertEquals("Test inbox", cleanedInbox.getName());
     }
 
     @Test
@@ -121,7 +121,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(markedAsRead);
         assertTrue(markedAsRead.getPermission().isCanRead());
         assertEquals(markedAsRead.getId(), inboxId);
-        assertEquals(markedAsRead.getName(), "Test inbox");
+        assertEquals("Test inbox", markedAsRead.getName());
     }
 
     @Test
@@ -131,7 +131,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(resetCredentials);
         assertTrue(resetCredentials.getPermission().isCanRead());
         assertEquals(resetCredentials.getId(), inboxId);
-        assertEquals(resetCredentials.getName(), "Test inbox");
+        assertEquals("Test inbox", resetCredentials.getName());
     }
 
     @Test
@@ -141,7 +141,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(enableEmailAddress);
         assertTrue(enableEmailAddress.getPermission().isCanRead());
         assertEquals(enableEmailAddress.getId(), inboxId);
-        assertEquals(enableEmailAddress.getName(), "Test inbox");
+        assertEquals("Test inbox", enableEmailAddress.getName());
     }
 
     @Test
@@ -151,7 +151,7 @@ class InboxesImplTest extends BaseTest {
         assertNotNull(resetEmailAddresses);
         assertTrue(resetEmailAddresses.getPermission().isCanRead());
         assertEquals(resetEmailAddresses.getId(), inboxId);
-        assertEquals(resetEmailAddresses.getName(), "Test inbox");
+        assertEquals("Test inbox", resetEmailAddresses.getName());
     }
 
     @Test
@@ -162,7 +162,7 @@ class InboxesImplTest extends BaseTest {
         assertEquals(1, inboxes.size());
         assertTrue(inboxes.get(0).getPermission().isCanRead());
         assertEquals(inboxes.get(0).getId(), inboxId);
-        assertEquals(inboxes.get(0).getName(), "Test inbox");
+        assertEquals("Test inbox", inboxes.get(0).getName());
     }
 
 }
