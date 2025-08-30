@@ -19,7 +19,7 @@ public interface ContactFields {
   /**
    * Create new Contact Fields (up to 40)
    *
-   * @param accountId unique account IDC
+   * @param accountId unique account ID
    * @param request   contact field data
    * @return attributes of the created contact field
    */
