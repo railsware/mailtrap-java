@@ -3,7 +3,7 @@ package io.mailtrap.model;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 
-  public enum ContactFieldDataType {
+public enum ContactFieldDataType {
   TEXT("text"),
   INTEGER("integer"),
   FLOAT("float"),
