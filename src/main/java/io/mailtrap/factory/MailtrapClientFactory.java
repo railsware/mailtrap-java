@@ -6,6 +6,7 @@ import io.mailtrap.api.accounts.AccountsImpl;
 import io.mailtrap.api.attachments.AttachmentsImpl;
 import io.mailtrap.api.billing.BillingImpl;
 import io.mailtrap.api.bulkemails.BulkEmailsImpl;
+import io.mailtrap.api.contactfields.ContactFieldsImpl;
 import io.mailtrap.api.contactimports.ContactImportsImpl;
 import io.mailtrap.api.contactlists.ContactListsImpl;
 import io.mailtrap.api.contacts.ContactsImpl;
@@ -55,8 +56,9 @@ public final class MailtrapClientFactory {
         final var contactLists = new ContactListsImpl(config);
         final var contacts = new ContactsImpl(config);
         final var contactImports = new ContactImportsImpl(config, customValidator);
+        final var contactFields = new ContactFieldsImpl(config, customValidator);
 
-        return new MailtrapContactsApi(contactLists, contacts, contactImports);
+        return new MailtrapContactsApi(contactLists, contacts, contactImports, contactFields);
     }
 
     private static MailtrapGeneralApi createGeneralApi(MailtrapConfig config) {
