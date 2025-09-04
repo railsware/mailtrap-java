@@ -1,0 +1,16 @@
+{
+  "id": "2fe148b8-b019-431f-ab3f-107663fdf868",
+  "type": "spam complaint",
+  "created_at": "2025-09-03T00:40:44.161Z",
+  "email": "email@mailtrap.io",
+  "sending_stream": "bulk",
+  "domain_name": "sender.com",
+  "message_bounce_category": null,
+  "message_category": "Welcome email",
+  "message_client_ip": "123.111.123.111",
+  "message_created_at": "2025-09-02T00:40:44.161Z",
+  "message_outgoing_ip": "1.1.1.1",
+  "message_recipient_mx_name": "Other Providers",
+  "message_sender_email": "hello-sender@sender.com",
+  "message_subject": "Welcome!"
+}
