@@ -1,0 +1,11 @@
+{
+  "id": 2222,
+  "name": "My Email Template",
+  "uuid": "2f422f64-6f04-4c7a-883b-746f770eebdb",
+  "subject": "Promotion Template subject",
+  "category": "Promotion",
+  "body_text": "Promotion Text body",
+  "body_html": "<div>Promotion body</div>",
+  "created_at": "2025-09-05T01:00:00Z",
+  "updated_at": "2025-09-05T01:00:00Z"
+}

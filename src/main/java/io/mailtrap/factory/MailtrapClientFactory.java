@@ -10,6 +10,7 @@ import io.mailtrap.api.contactfields.ContactFieldsImpl;
 import io.mailtrap.api.contactimports.ContactImportsImpl;
 import io.mailtrap.api.contactlists.ContactListsImpl;
 import io.mailtrap.api.contacts.ContactsImpl;
+import io.mailtrap.api.emailtemplates.EmailTemplatesImpl;
 import io.mailtrap.api.inboxes.InboxesImpl;
 import io.mailtrap.api.messages.MessagesImpl;
 import io.mailtrap.api.permissions.PermissionsImpl;
@@ -47,10 +48,11 @@ public final class MailtrapClientFactory {
         final var bulkSendingApi = createBulkSendingApi(config, customValidator);
         final var generalApi = createGeneralApi(config);
         final var contactsApi = createContactsApi(config, customValidator);
+        final var emailTemplatesApi = createEmailTemplatesApi(config, customValidator);
 
         final var sendingContextHolder = configureSendingContext(config);
 
-        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, contactsApi, sendingContextHolder);
+        return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, contactsApi, emailTemplatesApi, sendingContextHolder);
     }
 
     private static MailtrapContactsApi createContactsApi(MailtrapConfig config, CustomValidator customValidator) {
@@ -93,6 +95,12 @@ public final class MailtrapClientFactory {
         final var emails = new BulkEmailsImpl(config, customValidator);
 
         return new MailtrapBulkSendingApi(emails);
+    }
+
+    private static MailtrapEmailTemplatesApi createEmailTemplatesApi(MailtrapConfig config, CustomValidator customValidator) {
+        final var emailTemplates = new EmailTemplatesImpl(config, customValidator);
+
+        return new MailtrapEmailTemplatesApi(emailTemplates);
     }
 
     private static SendingContextHolder configureSendingContext(MailtrapConfig config) {

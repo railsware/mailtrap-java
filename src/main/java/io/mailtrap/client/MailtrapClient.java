@@ -49,6 +49,12 @@ public class MailtrapClient {
     private final MailtrapContactsApi contactsApi;
 
     /**
+     * API for Mailtrap.io Email Templates management functionality
+     */
+    @Getter
+    private final MailtrapEmailTemplatesApi emailTemplatesApi;
+
+    /**
      * Utility class which holds sending context (which API to use: Email Sending API, Bulk Sending API or
      * Email Testing API, inbox id for Email Testing API) to make it possible to perform send directly from MailtrapClient
      */
