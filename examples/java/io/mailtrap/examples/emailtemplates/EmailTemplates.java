@@ -1,3 +1,5 @@
+package io.mailtrap.examples.emailtemplates;
+
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.emailtemplates.CreateEmailTemplateRequest;
