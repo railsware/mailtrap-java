@@ -23,28 +23,32 @@ class SendingDomainsImplTest extends BaseTest {
     @BeforeEach
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains",
-                        "POST", "api/sending_domains/createSendingDomainRequest.json", "api/sending_domains/sendingDomainResponse.json"
-                ),
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains",
-                        "GET", null, "api/sending_domains/sendingDomainsResponse.json"
-                ),
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId,
-                        "GET", null, "api/sending_domains/sendingDomainResponse.json"
-                ),
-                DataMock.build(
-                        Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId + "/send_setup_instructions",
-                        "POST", "api/sending_domains/sendSetupInstructionsRequest.json", null
-                )
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains",
+                "POST", "api/sending_domains/createSendingDomainRequest.json", "api/sending_domains/sendingDomainResponse.json"
+            ),
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains",
+                "GET", null, "api/sending_domains/sendingDomainsResponse.json"
+            ),
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId,
+                "GET", null, "api/sending_domains/sendingDomainResponse.json"
+            ),
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId + "/send_setup_instructions",
+                "POST", "api/sending_domains/sendSetupInstructionsRequest.json", null
+            ),
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId,
+                "DELETE", null, null
+            )
         ));
 
         MailtrapConfig testConfig = new MailtrapConfig.Builder()
-                .httpClient(httpClient)
-                .token("dummy_token")
-                .build();
+            .httpClient(httpClient)
+            .token("dummy_token")
+            .build();
 
         domains = MailtrapClientFactory.createMailtrapClient(testConfig).sendingApi().domains();
     }
@@ -81,5 +85,10 @@ class SendingDomainsImplTest extends BaseTest {
     @Test
     void test_sendSendingDomainsSetupInstructions() {
         domains.sendSendingDomainsSetupInstructions(accountId, sendingDomainId, new SendingDomainsSetupInstructionsRequest("devops@test.io"));
+    }
+
+    @Test
+    void test_deleteSendingDomain() {
+        assertDoesNotThrow(() -> domains.deleteSendingDomain(accountId, sendingDomainId));
     }
 }
