@@ -54,4 +54,14 @@ public class SendingDomainsImpl extends ApiResource implements SendingDomains {
                 Void.class
         );
     }
+
+    @Override
+    public void deleteSendingDomain(long accountId, long sendingDomainId) {
+        httpClient
+            .delete(
+                String.format(apiHost + "/api/accounts/%d/sending_domains/%d", accountId, sendingDomainId),
+                new RequestData(),
+                Void.class
+            );
+    }
 }

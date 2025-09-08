@@ -42,4 +42,12 @@ public interface SendingDomains {
      * @param request         request data
      */
     void sendSendingDomainsSetupInstructions(long accountId, long sendingDomainId, SendingDomainsSetupInstructionsRequest request);
+
+    /**
+     * Delete a sending domain
+     *
+     * @param accountId       unique account ID
+     * @param sendingDomainId unique domain ID
+     */
+    void deleteSendingDomain(long accountId, long sendingDomainId);
 }
