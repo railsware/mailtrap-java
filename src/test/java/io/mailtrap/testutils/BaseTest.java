@@ -23,4 +23,5 @@ public class BaseTest {
     protected final long deleteFieldId = 1111L;
     protected final String suppressionId = "2fe148b8-b019-431f-ab3f-107663fdf868";
     protected final String suppressionIdEncoded = URLEncoder.encode(suppressionId, Charset.defaultCharset());
+    protected final long emailTemplateId = 2222L;
 }
