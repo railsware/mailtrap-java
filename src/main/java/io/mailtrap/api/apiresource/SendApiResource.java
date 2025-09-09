@@ -3,6 +3,7 @@ package io.mailtrap.api.apiresource;
 import io.mailtrap.CustomValidator;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.model.request.emails.MailtrapBatchMail;
 import io.mailtrap.model.request.emails.MailtrapMail;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,13 +17,19 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         super(config, customValidator);
     }
 
+    protected void assertBatchMailNotNull(MailtrapBatchMail batchMail){
+        if (batchMail == null) {
+            throw new InvalidRequestBodyException("BatchMail must not be null");
+        }
+    }
+
     /**
      * Validates the request body of an email message and throws an exception if it is invalid.
      *
      * @param mail The email message to be validated.
      * @throws InvalidRequestBodyException If the request body is invalid.
      */
-    protected void validateRequestBodyOrThrowException(MailtrapMail mail) throws InvalidRequestBodyException {
+    protected void validateMailPayload(MailtrapMail mail) throws InvalidRequestBodyException {
         // Check if the mail object itself is null
         if (mail == null) {
             throw new InvalidRequestBodyException("Mail must not be null");
@@ -30,8 +37,8 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
 
         // Check if all three subject, text, and html are empty
         boolean isSubjectTextHtmlEmpty = StringUtils.isEmpty(mail.getSubject())
-                && StringUtils.isEmpty(mail.getText())
-                && StringUtils.isEmpty(mail.getHtml());
+            && StringUtils.isEmpty(mail.getText())
+            && StringUtils.isEmpty(mail.getHtml());
 
         // Validate depending on whether the templateUuid is set
         if (StringUtils.isEmpty(mail.getTemplateUuid())) {

@@ -18,6 +18,7 @@ public class BaseSendTest {
     protected final String TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used, subject, text, and html must not be used";
     protected final String TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID = "Mail templateVariables must only be used with templateUuid";
     protected final String MAIL_MUST_NOT_BE_NULL = "Mail must not be null";
+    protected final String BATCH_MAIL_MUST_NOT_BE_NULL = "BatchMail must not be null";
 
     private Address getAddress(String email, String name) {
         return new Address(email, name);

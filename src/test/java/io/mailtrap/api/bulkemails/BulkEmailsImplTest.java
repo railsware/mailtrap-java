@@ -4,7 +4,9 @@ import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.factory.MailtrapClientFactory;
+import io.mailtrap.model.request.emails.MailtrapBatchMail;
 import io.mailtrap.model.request.emails.MailtrapMail;
+import io.mailtrap.model.response.emails.BatchSendResponse;
 import io.mailtrap.model.response.emails.SendResponse;
 import io.mailtrap.testutils.BaseSendTest;
 import io.mailtrap.testutils.DataMock;
@@ -22,21 +24,29 @@ class BulkEmailsImplTest extends BaseSendTest {
     @BeforeEach
     public void init() {
         TestHttpClient httpClient = new TestHttpClient(List.of(
-                DataMock.build(
-                        Constants.BULK_SENDING_HOST + "/api/send",
-                        "POST", "api/emails/sendRequest.json", "api/emails/sendResponse.json"
-                ),
-                DataMock.build(
-                        Constants.BULK_SENDING_HOST + "/api/send",
-                        "POST", "api/emails/sendRequestFromTemplate.json", "api/emails/sendResponse.json"
-                )
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/send",
+                "POST", "api/emails/sendRequest.json", "api/emails/sendResponse.json"
+            ),
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/send",
+                "POST", "api/emails/sendRequestFromTemplate.json", "api/emails/sendResponse.json"
+            ),
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/batch",
+                "POST", "api/emails/batchSendRequest.json", "api/emails/batchSendResponse.json"
+            ),
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/batch",
+                "POST", "api/emails/batchSendRequestFromTemplate.json", "api/emails/batchSendResponse.json"
+            )
         ));
 
         MailtrapConfig testConfig = new MailtrapConfig.Builder()
-                .httpClient(httpClient)
-                .token("dummy_token")
-                .bulk(true)
-                .build();
+            .httpClient(httpClient)
+            .token("dummy_token")
+            .bulk(true)
+            .build();
 
         bulkEmails = MailtrapClientFactory.createMailtrapClient(testConfig).bulkSendingApi().emails();
     }
@@ -122,5 +132,48 @@ class BulkEmailsImplTest extends BaseSendTest {
         // Assert
         assertTrue(response.isSuccess());
         assertEquals("11111", response.getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_ValidMail_SuccessResponse() {
+        // Set up test data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder().requests(List.of(createValidTestMail())).build();
+
+        // Perform call
+        BatchSendResponse response = bulkEmails.batchSend(batchMail);
+
+        // Assert
+        assertTrue(response.isSuccess());
+        assertEquals("22222", response.getResponses().get(0).getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_ValidMailFromTemplate_SuccessResponse() {
+        // Set up test data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder().requests(List.of(createTestMailFromTemplate())).build();
+
+        // Perform call
+        BatchSendResponse response = bulkEmails.batchSend(batchMail);
+
+        // Assert
+        assertTrue(response.isSuccess());
+        assertEquals("22222", response.getResponses().get(0).getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_NullableMail_ThrowsInvalidRequestBodyException() {
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkEmails.batchSend(null));
+        assertEquals(BATCH_MAIL_MUST_NOT_BE_NULL, exception.getMessage());
+    }
+
+    @Test
+    void batchSend_MailWithTemplateUuidAndText_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder().requests(List.of(createTestMailWithTemplateUuidAndText())).build();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkEmails.batchSend(batchMail));
+        assertEquals(TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY, exception.getMessage());
     }
 }
