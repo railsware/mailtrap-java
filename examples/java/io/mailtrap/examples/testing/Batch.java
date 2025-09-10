@@ -38,7 +38,7 @@ public class Batch {
         final var batchMail = MailtrapBatchMail.builder()
             // Optionally you can add this `base` object - if you have some common data across emails
             // Each property can be overridden in `requests` for individual emails
-            .base(BatchEmailBase.builder().subject("Base Subject for all emails").build())
+            .base(BatchEmailBase.builder().templateUuid("base-template-uuid").build())
             .requests(List.of(mail))
             .build();
 

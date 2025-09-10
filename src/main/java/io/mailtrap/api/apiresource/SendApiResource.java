@@ -8,6 +8,8 @@ import io.mailtrap.model.request.emails.MailtrapMail;
 import org.apache.commons.collections4.MapUtils;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Objects;
+
 /**
  * Abstract class representing a resource for sending emails via Mailtrap API.
  */
@@ -17,9 +19,15 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         super(config, customValidator);
     }
 
-    protected void assertBatchMailNotNull(MailtrapBatchMail batchMail){
+    protected void assertBatchMailNotNull(MailtrapBatchMail batchMail) {
         if (batchMail == null) {
             throw new InvalidRequestBodyException("BatchMail must not be null");
+        }
+        if (batchMail.getRequests() == null || batchMail.getRequests().isEmpty()) {
+            throw new InvalidRequestBodyException("BatchMail.requests must not be null or empty");
+        }
+        if (batchMail.getRequests().stream().anyMatch(Objects::isNull)) {
+            throw new InvalidRequestBodyException("BatchMail.requests must not contain null items");
         }
     }
 
@@ -36,9 +44,9 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         }
 
         // Check if all three subject, text, and html are empty
-        boolean isSubjectTextHtmlEmpty = StringUtils.isEmpty(mail.getSubject())
-            && StringUtils.isEmpty(mail.getText())
-            && StringUtils.isEmpty(mail.getHtml());
+        boolean isSubjectTextHtmlEmpty = StringUtils.isBlank(mail.getSubject())
+            && StringUtils.isBlank(mail.getText())
+            && StringUtils.isBlank(mail.getHtml());
 
         // Validate depending on whether the templateUuid is set
         if (StringUtils.isEmpty(mail.getTemplateUuid())) {
@@ -65,8 +73,13 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         }
 
         // Ensure the subject is not empty
-        if (StringUtils.isEmpty(mail.getSubject())) {
+        if (StringUtils.isBlank(mail.getSubject())) {
             throw new InvalidRequestBodyException("Subject must not be null or empty");
+        }
+
+        // Ensure at least one of text or html is present
+        if (StringUtils.isBlank(mail.getText()) && StringUtils.isBlank(mail.getHtml())) {
+            throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
         }
     }
 

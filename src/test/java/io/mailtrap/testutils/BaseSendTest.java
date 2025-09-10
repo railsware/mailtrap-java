@@ -17,6 +17,7 @@ public class BaseSendTest {
     protected final String TEMPLATE_UUID_OR_SUBJECT_AND_TEXT_OR_HTML_MUST_NOT_BE_EMPTY = "Mail must have subject and either text or html when templateUuid is not provided";
     protected final String TEMPLATE_UUID_IS_USED_SUBJECT_AND_TEXT_AND_HTML_SHOULD_BE_EMPTY = "When templateUuid is used, subject, text, and html must not be used";
     protected final String TEMPLATE_VARIABLES_SHOULD_BE_USED_WITH_TEMPLATE_UUID = "Mail templateVariables must only be used with templateUuid";
+    protected final String MAIL_MUST_HAVE_SUBJECT_AND_EITHER_TEXT_OR_HTML = "Mail must have subject and either text or html when templateUuid is not provided";
     protected final String MAIL_MUST_NOT_BE_NULL = "Mail must not be null";
     protected final String BATCH_MAIL_MUST_NOT_BE_NULL = "BatchMail must not be null";
 
@@ -69,6 +70,19 @@ public class BaseSendTest {
 
         return MailtrapMail.builder()
                 .from(from)
+                .to(List.of(to))
+                .attachments(List.of(attachment))
+                .build();
+    }
+
+    protected MailtrapMail createTestMailWithSubjectAndNoTextAndNoHtml() {
+        Address from = getAddress("sender@example.com", "John Doe");
+        Address to = getAddress("receiver@example.com", "Jane Doe");
+        EmailAttachment attachment = getAttachment();
+
+        return MailtrapMail.builder()
+                .from(from)
+                .subject("Sample invalidvalid mail subject")
                 .to(List.of(to))
                 .attachments(List.of(attachment))
                 .build();

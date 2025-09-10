@@ -102,6 +102,16 @@ class SendingEmailsImplTest extends BaseSendTest {
     }
 
     @Test
+    void send_MailWithSubjectAndNoTextNoHtml_ThrowsInvalidRequestBodyException() {
+        // Set up invalid data
+        MailtrapMail mail = createTestMailWithSubjectAndNoTextAndNoHtml();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
+        assertEquals(MAIL_MUST_HAVE_SUBJECT_AND_EITHER_TEXT_OR_HTML, exception.getMessage());
+    }
+
+    @Test
     void send_NullableMail_ThrowsInvalidRequestBodyException() {
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(null));

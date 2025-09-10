@@ -49,7 +49,7 @@ public class BatchEmailBase {
     /**
      * Values that are specific to the entire send that will be carried along with the email and its activity data
      */
-    @JsonProperty("custom_properties")
+    @JsonProperty("custom_variables")
     private Map<String, String> customVariables;
 
     /**
