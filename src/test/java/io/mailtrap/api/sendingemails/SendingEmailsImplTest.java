@@ -77,7 +77,7 @@ class SendingEmailsImplTest extends BaseSendTest {
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> sendApi.send(mail));
-        assertEquals(TEMPLATE_UUID_OR_SUBJECT_AND_TEXT_OR_HTML_MUST_NOT_BE_EMPTY, exception.getMessage());
+        assertEquals(MAIL_MUST_HAVE_SUBJECT_AND_EITHER_TEXT_OR_HTML, exception.getMessage());
     }
 
     @Test
