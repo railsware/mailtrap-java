@@ -201,7 +201,7 @@ class TestingEmailsImplTest extends BaseSendTest {
         // Set up test data
         MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
             .base(BatchEmailBase.builder().subject("Sample valid mail subject").text("Sample valid mail text").build())
-            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+            .requests(List.of(createTestMailForBatchWithNoSubjectAndText())).build();
 
         // Perform call
         BatchSendResponse response = testingApi.batchSend(batchMail, INBOX_ID);
@@ -212,11 +212,11 @@ class TestingEmailsImplTest extends BaseSendTest {
     }
 
     @Test
-    void batchSend_InvalidMailWithNoSubjectAndTextNoBase_SuccessResponse() {
+    void batchSend_InvalidMailWithNoSubjectAndTextNoBase_ThrowsInvalidRequestBodyException() {
         // Set up test data
         MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
             .base(BatchEmailBase.builder().text("Sample valid mail text").build())
-            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+            .requests(List.of(createTestMailForBatchWithNoSubjectAndText())).build();
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> testingApi.batchSend(batchMail, INBOX_ID));

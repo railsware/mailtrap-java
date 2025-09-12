@@ -63,7 +63,7 @@ public class BaseSendTest {
                 .build();
     }
 
-    protected MailtrapMail createValidTestMailForBatchWithNoSubjectAndText() {
+    protected MailtrapMail createTestMailForBatchWithNoSubjectAndText() {
         Address from = getAddress("sender@example.com", "John Doe");
         Address to = getAddress("receiver@example.com", "Jane Doe");
         EmailAttachment attachment = getAttachment();

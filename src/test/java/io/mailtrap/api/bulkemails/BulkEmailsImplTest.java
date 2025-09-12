@@ -199,7 +199,7 @@ class BulkEmailsImplTest extends BaseSendTest {
         // Set up test data
         MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
             .base(BatchEmailBase.builder().subject("Sample valid mail subject").text("Sample valid mail text").build())
-            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+            .requests(List.of(createTestMailForBatchWithNoSubjectAndText())).build();
 
         // Perform call
         BatchSendResponse response = bulkEmails.batchSend(batchMail);
@@ -210,11 +210,11 @@ class BulkEmailsImplTest extends BaseSendTest {
     }
 
     @Test
-    void batchSend_InvalidMailWithNoSubjectAndTextNoBase_SuccessResponse() {
+    void batchSend_InvalidMailWithNoSubjectAndTextNoBase_ThrowsInvalidRequestBodyException() {
         // Set up test data
         MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
             .base(BatchEmailBase.builder().text("Sample valid mail text").build())
-            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+            .requests(List.of(createTestMailForBatchWithNoSubjectAndText())).build();
 
         // Assert
         InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkEmails.batchSend(batchMail));
