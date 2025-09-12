@@ -20,6 +20,7 @@ public class BaseSendTest {
     protected final String MAIL_MUST_HAVE_SUBJECT_AND_EITHER_TEXT_OR_HTML = "Mail must have subject and either text or html when templateUuid is not provided";
     protected final String MAIL_MUST_NOT_BE_NULL = "Mail must not be null";
     protected final String BATCH_MAIL_MUST_NOT_BE_NULL = "BatchMail must not be null";
+    protected final String SUBJECT_MUST_NOT_BE_NULL = "Subject must not be null or empty";
 
     private Address getAddress(String email, String name) {
         return new Address(email, name);
@@ -44,6 +45,32 @@ public class BaseSendTest {
                 .subject("Sample valid mail subject")
                 .text("Sample valid mail text")
                 .html("<html><body>Test HTML</body></html>")
+                .attachments(List.of(attachment))
+                .build();
+    }
+
+    protected MailtrapMail createValidTestMailForBatchWithNoSubject() {
+        Address from = getAddress("sender@example.com", "John Doe");
+        Address to = getAddress("receiver@example.com", "Jane Doe");
+        EmailAttachment attachment = getAttachment();
+
+        return MailtrapMail.builder()
+                .from(from)
+                .to(List.of(to))
+                .text("Sample valid mail text")
+                .html("<html><body>Test HTML</body></html>")
+                .attachments(List.of(attachment))
+                .build();
+    }
+
+    protected MailtrapMail createValidTestMailForBatchWithNoSubjectAndText() {
+        Address from = getAddress("sender@example.com", "John Doe");
+        Address to = getAddress("receiver@example.com", "Jane Doe");
+        EmailAttachment attachment = getAttachment();
+
+        return MailtrapMail.builder()
+                .from(from)
+                .to(List.of(to))
                 .attachments(List.of(attachment))
                 .build();
     }

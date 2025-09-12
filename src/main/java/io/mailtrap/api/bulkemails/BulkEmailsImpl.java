@@ -34,11 +34,7 @@ public class BulkEmailsImpl extends SendApiResource implements BulkEmails {
 
     @Override
     public BatchSendResponse batchSend(MailtrapBatchMail mail) throws HttpException, InvalidRequestBodyException {
-        assertBatchMailNotNull(mail);
-
-        mail
-            .getRequests()
-            .forEach(this::validateMailPayload);
+        validateBatchPayload(mail);
 
         return
             httpClient.post(apiHost + "/api/batch", mail, new RequestData(), BatchSendResponse.class);

@@ -4,6 +4,7 @@ import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
 import io.mailtrap.factory.MailtrapClientFactory;
+import io.mailtrap.model.request.emails.BatchEmailBase;
 import io.mailtrap.model.request.emails.MailtrapBatchMail;
 import io.mailtrap.model.request.emails.MailtrapMail;
 import io.mailtrap.model.response.emails.BatchSendResponse;
@@ -35,6 +36,14 @@ class BulkEmailsImplTest extends BaseSendTest {
             DataMock.build(
                 Constants.BULK_SENDING_HOST + "/api/batch",
                 "POST", "api/emails/batchSendRequest.json", "api/emails/batchSendResponse.json"
+            ),
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/batch",
+                "POST", "api/emails/batchSendWithBaseSubjectRequest.json", "api/emails/batchSendResponse.json"
+            ),
+            DataMock.build(
+                Constants.BULK_SENDING_HOST + "/api/batch",
+                "POST", "api/emails/batchSendWithBaseSubjectAndTextRequest.json", "api/emails/batchSendResponse.json"
             ),
             DataMock.build(
                 Constants.BULK_SENDING_HOST + "/api/batch",
@@ -168,6 +177,48 @@ class BulkEmailsImplTest extends BaseSendTest {
         // Assert
         assertTrue(response.isSuccess());
         assertEquals("22222", response.getResponses().get(0).getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_ValidMailWithSubjectFromBase_SuccessResponse() {
+        // Set up test data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
+            .base(BatchEmailBase.builder().subject("Sample valid mail subject").build())
+            .requests(List.of(createValidTestMailForBatchWithNoSubject())).build();
+
+        // Perform call
+        BatchSendResponse response = bulkEmails.batchSend(batchMail);
+
+        // Assert
+        assertTrue(response.isSuccess());
+        assertEquals("22222", response.getResponses().get(0).getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_ValidMailWithSubjectAndTextFromBase_SuccessResponse() {
+        // Set up test data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
+            .base(BatchEmailBase.builder().subject("Sample valid mail subject").text("Sample valid mail text").build())
+            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+
+        // Perform call
+        BatchSendResponse response = bulkEmails.batchSend(batchMail);
+
+        // Assert
+        assertTrue(response.isSuccess());
+        assertEquals("22222", response.getResponses().get(0).getMessageIds().get(0));
+    }
+
+    @Test
+    void batchSend_InvalidMailWithNoSubjectAndTextNoBase_SuccessResponse() {
+        // Set up test data
+        MailtrapBatchMail batchMail = MailtrapBatchMail.builder()
+            .base(BatchEmailBase.builder().text("Sample valid mail text").build())
+            .requests(List.of(createValidTestMailForBatchWithNoSubjectAndText())).build();
+
+        // Assert
+        InvalidRequestBodyException exception = assertThrows(InvalidRequestBodyException.class, () -> bulkEmails.batchSend(batchMail));
+        assertEquals(SUBJECT_MUST_NOT_BE_NULL, exception.getMessage());
     }
 
     @Test

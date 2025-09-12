@@ -3,6 +3,11 @@ package io.mailtrap.api.apiresource;
 import io.mailtrap.CustomValidator;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.exception.InvalidRequestBodyException;
+import io.mailtrap.model.mailvalidation.ContentView;
+import io.mailtrap.model.mailvalidation.MailContentView;
+import io.mailtrap.model.mailvalidation.ResolvedMailContentView;
+import io.mailtrap.model.mailvalidation.ResolvedMailView;
+import io.mailtrap.model.request.emails.BatchEmailBase;
 import io.mailtrap.model.request.emails.MailtrapBatchMail;
 import io.mailtrap.model.request.emails.MailtrapMail;
 import org.apache.commons.collections4.MapUtils;
@@ -19,7 +24,55 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         super(config, customValidator);
     }
 
-    protected void assertBatchMailNotNull(MailtrapBatchMail batchMail) {
+    /**
+     * Validates the request body of an email message and throws an exception if it is invalid.
+     *
+     * @param mail The email message to be validated.
+     * @throws InvalidRequestBodyException If the request body is invalid.
+     */
+    protected void validateMailPayload(MailtrapMail mail) {
+        if (mail == null) {
+            throw new InvalidRequestBodyException("Mail must not be null");
+        }
+
+        // Perform bean validation (NotNull, etc.)
+        validateRequestBodyAndThrowException(mail);
+
+        // Validate subject/text/html/templateUuid
+        validateContentRules(MailContentView.of(mail));
+    }
+
+    /**
+     * Validates the request body of batch email and throws an exception if it is invalid.
+     *
+     * @param batch batch request to be validated.
+     * @throws InvalidRequestBodyException If the request body is invalid.
+     */
+    protected void validateBatchPayload(MailtrapBatchMail batch) {
+        assertBatchMailNotNull(batch);
+
+        BatchEmailBase base = batch.getBase();
+
+        for (int i = 0; i < batch.getRequests().size(); i++) {
+            MailtrapMail mail = batch.getRequests().get(i);
+            ResolvedMailView mailView = new ResolvedMailView(base, mail);
+
+            try {
+                // Perform bean validation (NotNull, etc.)
+                validateRequestBodyAndThrowException(mailView);
+            } catch (InvalidRequestBodyException e) {
+                throw new InvalidRequestBodyException("requests[" + i + "]: " + e.getMessage(), e);
+            }
+
+            validateContentRules(ResolvedMailContentView.of(mailView));
+
+            if (mailView.getFrom() == null) {
+                throw new InvalidRequestBodyException("requests[" + i + "]: from is required (either in mail or base)");
+            }
+        }
+    }
+
+    private void assertBatchMailNotNull(MailtrapBatchMail batchMail) {
         if (batchMail == null) {
             throw new InvalidRequestBodyException("BatchMail must not be null");
         }
@@ -29,64 +82,35 @@ public abstract class SendApiResource extends ApiResourceWithValidation {
         if (batchMail.getRequests().stream().anyMatch(Objects::isNull)) {
             throw new InvalidRequestBodyException("BatchMail.requests must not contain null items");
         }
+
     }
 
-    /**
-     * Validates the request body of an email message and throws an exception if it is invalid.
-     *
-     * @param mail The email message to be validated.
-     * @throws InvalidRequestBodyException If the request body is invalid.
-     */
-    protected void validateMailPayload(MailtrapMail mail) throws InvalidRequestBodyException {
-        // Check if the mail object itself is null
-        if (mail == null) {
-            throw new InvalidRequestBodyException("Mail must not be null");
-        }
+    private void validateContentRules(ContentView v) {
+        boolean templateUuidBlank = StringUtils.isBlank(v.getTemplateUuid());
 
-        // Check if all three subject, text, and html are empty
-        boolean isSubjectTextHtmlEmpty = StringUtils.isBlank(mail.getSubject())
-            && StringUtils.isBlank(mail.getText())
-            && StringUtils.isBlank(mail.getHtml());
+        boolean subjectTextHtmlEmpty = StringUtils.isBlank(v.getSubject())
+            && StringUtils.isBlank(v.getText())
+            && StringUtils.isBlank(v.getHtml());
 
-        // Validate depending on whether the templateUuid is set
-        if (StringUtils.isEmpty(mail.getTemplateUuid())) {
-            // Validation for the scenario where templateUuid is not provided
-            validateWithoutTemplate(mail, isSubjectTextHtmlEmpty);
+        if (templateUuidBlank) {
+            if (subjectTextHtmlEmpty) {
+                throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
+            }
+            if (MapUtils.isNotEmpty(v.getTemplateVariables())) {
+                throw new InvalidRequestBodyException("Mail templateVariables must only be used with templateUuid");
+            }
+            if (StringUtils.isBlank(v.getSubject())) {
+                throw new InvalidRequestBodyException("Subject must not be null or empty");
+            }
+            if (StringUtils.isBlank(v.getText()) && StringUtils.isBlank(v.getHtml())) {
+                throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
+            }
         } else {
-            // Validation for the scenario where templateUuid is provided
-            validateWithTemplate(mail);
-        }
-
-        // Additional validation logic (assumed to be provided by the user)
-        validateRequestBodyAndThrowException(mail);
-    }
-
-    private void validateWithoutTemplate(MailtrapMail mail, boolean isSubjectTextHtmlEmpty) throws InvalidRequestBodyException {
-        // Ensure that at least subject, text, or html is provided if templateUuid is not set
-        if (isSubjectTextHtmlEmpty) {
-            throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
-        }
-
-        // Ensure templateVariables are not used if templateUuid is not set
-        if (MapUtils.isNotEmpty(mail.getTemplateVariables())) {
-            throw new InvalidRequestBodyException("Mail templateVariables must only be used with templateUuid");
-        }
-
-        // Ensure the subject is not empty
-        if (StringUtils.isBlank(mail.getSubject())) {
-            throw new InvalidRequestBodyException("Subject must not be null or empty");
-        }
-
-        // Ensure at least one of text or html is present
-        if (StringUtils.isBlank(mail.getText()) && StringUtils.isBlank(mail.getHtml())) {
-            throw new InvalidRequestBodyException("Mail must have subject and either text or html when templateUuid is not provided");
+            if (StringUtils.isNotEmpty(v.getSubject())
+                || StringUtils.isNotEmpty(v.getText())
+                || StringUtils.isNotEmpty(v.getHtml()))
+                throw new InvalidRequestBodyException("When templateUuid is used, subject, text, and html must not be used");
         }
     }
 
-    private void validateWithTemplate(MailtrapMail mail) throws InvalidRequestBodyException {
-        // Ensure that subject, text, and html are not used when templateUuid is set
-        if (StringUtils.isNotEmpty(mail.getText()) || StringUtils.isNotEmpty(mail.getHtml()) || StringUtils.isNotEmpty(mail.getSubject())) {
-            throw new InvalidRequestBodyException("When templateUuid is used, subject, text, and html must not be used");
-        }
-    }
 }

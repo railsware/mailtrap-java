@@ -34,11 +34,7 @@ public class TestingEmailsImpl extends SendApiResource implements TestingEmails 
 
     @Override
     public BatchSendResponse batchSend(MailtrapBatchMail mail, long inboxId) throws HttpException, InvalidRequestBodyException {
-        assertBatchMailNotNull(mail);
-
-        mail
-            .getRequests()
-            .forEach(this::validateMailPayload);
+        validateBatchPayload(mail);
 
         return
             httpClient.post(String.format(apiHost + "/api/batch/%d", inboxId), mail, new RequestData(), BatchSendResponse.class);
