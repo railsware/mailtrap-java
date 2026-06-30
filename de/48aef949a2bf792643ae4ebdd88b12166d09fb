@@ -1,0 +1,21 @@
+pom.xml
+  s_bb26d762ebc01b::t_ecd9f76f258e17 64
+  s_bb26d762ebc01b::t_a5048c65dd14c4 49
+  s_bb26d762ebc01b::t_2e9dd3826b979f 54
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.4",
+  "base_commit_sha": "de48aef949a2bf792643ae4ebdd88b12166d09fb",
+  "prompts": {},
+  "sessions": {
+    "s_bb26d762ebc01b": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "1928c156-0f92-4fdb-984b-d6682d4ed7f0",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": "Marcin Klocek <marcin.klocek@railsware.com>"
+    }
+  }
+}
