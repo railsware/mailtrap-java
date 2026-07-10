@@ -1,3 +1,16 @@
+## [1.3.1] - 2026-07-10
+
+## What's Changed
+* Release v1.3.0 by @IgorDobryn in https://github.com/mailtrap/mailtrap-java/pull/52
+* MT-22022: Add webhook signature verification helper by @Rabsztok in https://github.com/mailtrap/mailtrap-java/pull/53
+* Bump com.fasterxml.jackson.core:jackson-databind from 2.17.2 to 2.22.0 by @dependabot[bot] in https://github.com/mailtrap/mailtrap-java/pull/55
+* Add draft-release workflow placeholder by @IgorDobryn in https://github.com/mailtrap/mailtrap-java/pull/54
+
+## New Contributors
+* @Rabsztok made their first contribution in https://github.com/mailtrap/mailtrap-java/pull/53
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.3.0...v1.3.1
+
 ## [1.3.0] - 2026-05-14
 
 See https://github.com/mailtrap/mailtrap-java/releases/tag/v1.3.0
