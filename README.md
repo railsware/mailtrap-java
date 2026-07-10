@@ -369,7 +369,7 @@ You can find the [Mailtrap Java API reference](https://mailtrap.github.io/mailtr
 ### Contacts API
 
 - [Contacts](examples/java/io/mailtrap/examples/contacts/ContactsExample.java)
-- [Contact Lists](examples/java/io/mailtrap/examples/contactlists/ContactListsExample.java) (incl. filtering lists by name via the `search` query param — case-insensitive prefix match)
+- [Contact Lists](examples/java/io/mailtrap/examples/contactlists/ContactListsExample.java)
 - [Contact Exports](examples/java/io/mailtrap/examples/contactexports/ContactExportsExample.java)
 - [Contact Fields](examples/java/io/mailtrap/examples/contactfields/ContactFieldsExample.java)
 - [Contact Imports](examples/java/io/mailtrap/examples/contactimports/ContactImportsExample.java)
