@@ -30,7 +30,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          ref: main
+          ref: debug
 
       - name: Set up JDK
         uses: actions/setup-java@v4
