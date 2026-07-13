@@ -1,3 +1,11 @@
+## [1.3.2] - 2026-07-13
+
+## What's Changed
+* Bump central publishing maven plugin by @IgorDobryn in https://github.com/mailtrap/mailtrap-java/pull/61
+
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.3.1...v1.3.2
+
 ## [1.3.1] - 2026-07-10
 
 ## What's Changed
