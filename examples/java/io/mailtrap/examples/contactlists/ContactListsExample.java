@@ -3,6 +3,7 @@ package io.mailtrap.examples.contactlists;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.contactlists.ContactListRequest;
+import io.mailtrap.model.request.contactlists.ListContactListsQueryParams;
 
 public class ContactListsExample {
 
@@ -10,6 +11,7 @@ public class ContactListsExample {
     private static final long ACCOUNT_ID = 1L;
     private static final String NAME_FOR_CREATE = "Clients";
     private static final String NAME_FOR_UPDATE = "Customers";
+    private static final String SEARCH_QUERY = "Cust";
 
     public static void main(String[] args) {
         final var config = new MailtrapConfig.Builder()
@@ -29,6 +31,11 @@ public class ContactListsExample {
 
         final var contactLists = client.contactsApi().contactLists().findAll(ACCOUNT_ID);
         System.out.println(contactLists);
+
+        // Filter contact lists by name (case-insensitive prefix match)
+        final var searchParams = new ListContactListsQueryParams(SEARCH_QUERY);
+        final var matchingContactLists = client.contactsApi().contactLists().findAll(ACCOUNT_ID, searchParams);
+        System.out.println(matchingContactLists);
 
         client.contactsApi().contactLists().deleteContactList(ACCOUNT_ID, byId.getId());
     }

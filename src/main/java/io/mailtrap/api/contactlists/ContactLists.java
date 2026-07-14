@@ -1,6 +1,7 @@
 package io.mailtrap.api.contactlists;
 
 import io.mailtrap.model.request.contactlists.ContactListRequest;
+import io.mailtrap.model.request.contactlists.ListContactListsQueryParams;
 import io.mailtrap.model.response.contactlists.ContactListResponse;
 
 import java.util.List;
@@ -14,6 +15,16 @@ public interface ContactLists {
      * @return contacts list
      */
     List<ContactListResponse> findAll(long accountId);
+
+    /**
+     * Get all contact lists existing in account, optionally filtered by name.
+     *
+     * @param accountId   unique account ID
+     * @param queryParams additional query parameters. The {@code search} value filters
+     *                    contact lists by name using a case-insensitive prefix match
+     * @return contacts list
+     */
+    List<ContactListResponse> findAll(long accountId, ListContactListsQueryParams queryParams);
 
     /**
      * Create new Contact List
