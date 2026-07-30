@@ -1,0 +1,19 @@
+pom.xml
+  s_1cffc50029f7ac::t_d4eb3318c34002 219
+---
+{
+  "schema_version": "authorship/3.0.0",
+  "git_ai_version": "1.6.12",
+  "base_commit_sha": "5838d653d84c40c84b9f800d25c3f56dc8d09ac4",
+  "prompts": {},
+  "sessions": {
+    "s_1cffc50029f7ac": {
+      "agent_id": {
+        "tool": "claude",
+        "id": "bf91e2f5-c829-4299-8621-09a6e2fd9989",
+        "model": "claude-opus-4-8"
+      },
+      "human_author": null
+    }
+  }
+}
