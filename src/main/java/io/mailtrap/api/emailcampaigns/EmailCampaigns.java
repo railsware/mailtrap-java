@@ -1,0 +1,130 @@
+package io.mailtrap.api.emailcampaigns;
+
+import io.mailtrap.model.request.emailcampaigns.CreateEmailCampaign;
+import io.mailtrap.model.request.emailcampaigns.ScheduleEmailCampaignRequest;
+import io.mailtrap.model.request.emailcampaigns.UpdateEmailCampaign;
+import io.mailtrap.model.response.emailcampaigns.EmailCampaignListResponse;
+import io.mailtrap.model.response.emailcampaigns.EmailCampaignResponse;
+import io.mailtrap.model.response.emailcampaigns.EmailCampaignStatsResponse;
+
+/**
+ * Email Campaigns API. Manage email marketing campaigns and retrieve their performance
+ * statistics.
+ *
+ * <p>The account is resolved from the API token, so these endpoints are token-scoped and the
+ * path is not account-scoped.
+ */
+public interface EmailCampaigns {
+
+    /**
+     * List the account's email campaigns, newest first.
+     *
+     * @param perPage number of campaigns per page (max 100, default 50); {@code null} to omit
+     * @param search  filter campaigns by name; {@code null} to omit
+     * @param token   page number to retrieve (page-token pagination, default 1);
+     *                {@code null} to omit
+     * @return a page of campaigns and the pagination metadata
+     */
+    EmailCampaignListResponse getEmailCampaigns(Integer perPage, String search, Integer token);
+
+    /**
+     * Create a new email campaign in the {@code draft} state.
+     *
+     * @param request the campaign attributes ({@code name}, {@code domainId},
+     *                {@code fromLocalPart} and a template {@code subject} are required)
+     * @return the created email campaign
+     */
+    EmailCampaignResponse createEmailCampaign(CreateEmailCampaign request);
+
+    /**
+     * Get a single email campaign by ID.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return the email campaign
+     */
+    EmailCampaignResponse getEmailCampaign(long emailCampaignId);
+
+    /**
+     * Update an existing {@code draft} email campaign. Only the provided attributes are
+     * changed.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @param request         the attributes to update
+     * @return the updated email campaign
+     */
+    EmailCampaignResponse updateEmailCampaign(long emailCampaignId, UpdateEmailCampaign request);
+
+    /**
+     * Delete an email campaign. The campaign must not be in a sending state.
+     *
+     * @param emailCampaignId unique email campaign ID
+     */
+    void deleteEmailCampaign(long emailCampaignId);
+
+    /**
+     * Start sending a {@code draft} campaign immediately.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return the started email campaign
+     */
+    EmailCampaignResponse startEmailCampaign(long emailCampaignId);
+
+    /**
+     * Schedule a {@code draft} campaign to start sending at a future time. The scheduled time
+     * is reported back in {@code currentStateMetadata.scheduledAt}.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @param request         when to start sending the campaign
+     * @return the scheduled email campaign
+     */
+    EmailCampaignResponse scheduleEmailCampaign(long emailCampaignId, ScheduleEmailCampaignRequest request);
+
+    /**
+     * Cancel a {@code scheduled} campaign, returning it to the {@code draft} state.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return the cancelled email campaign
+     */
+    EmailCampaignResponse cancelEmailCampaign(long emailCampaignId);
+
+    /**
+     * Terminate a campaign that is currently sending ({@code started}, {@code queued} or
+     * {@code paused}), aborting the in-flight send.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return the terminated email campaign
+     */
+    EmailCampaignResponse terminateEmailCampaign(long emailCampaignId);
+
+    /**
+     * Reset a {@code scheduled} campaign back to the {@code draft} state.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return the reset email campaign
+     */
+    EmailCampaignResponse resetEmailCampaign(long emailCampaignId);
+
+    /**
+     * Get aggregated performance statistics for an email campaign over the whole period since
+     * the campaign was last started. If the campaign has never been started, all counts and
+     * rates are returned as {@code 0}.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @return aggregated campaign statistics
+     */
+    EmailCampaignStatsResponse getEmailCampaignStats(long emailCampaignId);
+
+    /**
+     * Get aggregated performance statistics for an email campaign over a narrowed aggregation
+     * window.
+     *
+     * @param emailCampaignId unique email campaign ID
+     * @param startDate       start of the aggregation window (inclusive), in
+     *                        {@code YYYY-MM-DD} format; {@code null} to omit
+     * @param endDate         end of the aggregation window (inclusive), in {@code YYYY-MM-DD}
+     *                        format; {@code null} to omit
+     * @return aggregated campaign statistics
+     */
+    EmailCampaignStatsResponse getEmailCampaignStats(long emailCampaignId, String startDate, String endDate);
+
+}

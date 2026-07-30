@@ -1,0 +1,19 @@
+{
+  "name": "Spring Sale",
+  "domain_id": 4321,
+  "from_display_name": "Acme Marketing",
+  "from_local_part": "news",
+  "reply_to": {
+    "display_name": "Acme Support",
+    "local_part": "support",
+    "domain": "acme.com"
+  },
+  "template_attributes": {
+    "subject": "Spring is here — 30% off",
+    "body_html": "<html><body><h1>Hi {{first_name}}!</h1><p><a href=\"__unsubscribe_url__\">Unsubscribe</a></p></body></html>",
+    "merge_tags": ["first_name"]
+  },
+  "delivery_mode": "rapid",
+  "contact_list_ids": [55, 56],
+  "contact_segment_ids": [12]
+}

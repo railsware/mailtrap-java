@@ -385,6 +385,10 @@ You can find the [Mailtrap Java API reference](https://mailtrap.github.io/mailtr
 
 - [Email Templates](examples/java/io/mailtrap/examples/emailtemplates/EmailTemplatesExample.java)
 
+### Email Marketing API
+
+- [Email Campaigns](examples/java/io/mailtrap/examples/emailcampaigns/EmailCampaignsExample.java)
+
 ## Contributing
 
 Bug reports and pull requests are welcome on [GitHub](https://github.com/mailtrap/mailtrap-java). This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [code of conduct](CODE_OF_CONDUCT.md).

@@ -13,6 +13,7 @@ import io.mailtrap.api.contactfields.ContactFieldsImpl;
 import io.mailtrap.api.contactimports.ContactImportsImpl;
 import io.mailtrap.api.contactlists.ContactListsImpl;
 import io.mailtrap.api.contacts.ContactsImpl;
+import io.mailtrap.api.emailcampaigns.EmailCampaignsImpl;
 import io.mailtrap.api.emailtemplates.EmailTemplatesImpl;
 import io.mailtrap.api.inbound.InboundFoldersImpl;
 import io.mailtrap.api.inbound.InboundInboxesImpl;
@@ -78,11 +79,12 @@ public final class MailtrapClientFactory {
         final var emailTemplatesApi = createEmailTemplatesApi(config);
         final var organizationsApi = createOrganizationsApi(config);
         final var inboundApi = createInboundApi(config);
+        final var emailCampaignsApi = createEmailCampaignsApi(config);
 
         final var sendingContextHolder = configureSendingContext(config);
 
         return new MailtrapClient(sendingApi, testingApi, bulkSendingApi, generalApi, contactsApi, emailTemplatesApi,
-                organizationsApi, inboundApi, sendingContextHolder);
+                organizationsApi, inboundApi, emailCampaignsApi, sendingContextHolder);
     }
 
     private static MailtrapInboundApi createInboundApi(final MailtrapConfig config) {
@@ -92,6 +94,12 @@ public final class MailtrapClientFactory {
         final var threads = new InboundThreadsImpl(config);
 
         return new MailtrapInboundApi(folders, inboxes, messages, threads);
+    }
+
+    private static MailtrapEmailCampaignsApi createEmailCampaignsApi(final MailtrapConfig config) {
+        final var emailCampaigns = new EmailCampaignsImpl(config);
+
+        return new MailtrapEmailCampaignsApi(emailCampaigns);
     }
 
     private static MailtrapOrganizationsApi createOrganizationsApi(final MailtrapConfig config) {
