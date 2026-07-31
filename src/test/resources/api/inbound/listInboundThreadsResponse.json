@@ -1,0 +1,28 @@
+{
+  "data": [
+    {
+      "id": "thr_1",
+      "subject": "Support request",
+      "message_count": 3,
+      "size": 4096,
+      "first_message_at": "2026-07-30T10:15:00Z",
+      "last_activity_at": "2026-07-30T13:00:00Z",
+      "last_message_id": "msg_3",
+      "senders": ["customer@example.com"],
+      "recipients": ["support@inbound-mailtrap.io"]
+    },
+    {
+      "id": "thr_2",
+      "subject": "Question about billing",
+      "message_count": 1,
+      "size": 1536,
+      "first_message_at": "2026-07-30T11:20:00Z",
+      "last_activity_at": "2026-07-30T11:20:00Z",
+      "last_message_id": "msg_2",
+      "senders": ["another@example.com"],
+      "recipients": ["support@inbound-mailtrap.io"]
+    }
+  ],
+  "total_count": 2,
+  "last_id": "thr_2"
+}

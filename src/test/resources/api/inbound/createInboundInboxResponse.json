@@ -1,0 +1,6 @@
+{
+  "id": 203,
+  "name": "Custom domain inbox",
+  "address": "catch-all@example.com",
+  "domain_id": 6
+}
