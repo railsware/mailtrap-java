@@ -21,6 +21,18 @@ public class EmailLogMessage {
     @JsonProperty("subject")
     private String subject;
 
+    @JsonProperty("rfc_message_id")
+    private String rfcMessageId;
+
+    @JsonProperty("in_reply_to")
+    private String inReplyTo;
+
+    @JsonProperty("references")
+    private List<String> references;
+
+    @JsonProperty("thread_id")
+    private String threadId;
+
     @JsonProperty("from")
     private String from;
 

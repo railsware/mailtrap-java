@@ -39,6 +39,10 @@ class WebhooksImplTest extends BaseTest {
                         "POST", "api/webhooks/createWebhookRequest.json", "api/webhooks/createWebhookResponse.json"),
 
                 DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/webhooks",
+                        "POST", "api/webhooks/createInboundWebhookRequest.json",
+                        "api/webhooks/createInboundWebhookResponse.json"),
+
+                DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/webhooks",
                         "GET", null, "api/webhooks/listWebhooksResponse.json"),
 
                 DataMock.build(Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/webhooks/" + webhookId,
@@ -81,6 +85,24 @@ class WebhooksImplTest extends BaseTest {
         assertEquals(WebhookType.EMAIL_SENDING, response.getData().getWebhookType());
         assertEquals(SendingStream.TRANSACTIONAL, response.getData().getSendingStream());
         assertTrue(response.getData().isActive());
+    }
+
+    @Test
+    void test_createInboundWebhook() {
+        final CreateWebhookRequest request = new CreateWebhookRequest(
+                WebhookInput.builder()
+                        .url("https://example.com/mailtrap/inbound")
+                        .webhookType(WebhookType.INBOUND_RECEIVING)
+                        .inboundInboxId(42L)
+                        .build()
+        );
+
+        final CreateWebhookResponse response = api.createWebhook(accountId, request);
+
+        assertNotNull(response);
+        assertEquals(7L, response.getData().getId());
+        assertEquals(WebhookType.INBOUND_RECEIVING, response.getData().getWebhookType());
+        assertEquals(42L, response.getData().getInboundInboxId());
     }
 
     @Test

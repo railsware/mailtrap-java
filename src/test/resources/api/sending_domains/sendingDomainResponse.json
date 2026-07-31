@@ -61,6 +61,8 @@
   "health_alerts_enabled": true,
   "critical_alerts_enabled": true,
   "alert_recipient_email": "john.doe@test.io",
+  "inbound_enabled": true,
+  "inbound_verified": false,
   "permissions": {
     "can_read": true,
     "can_update": true,

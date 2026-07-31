@@ -1,0 +1,7 @@
+{
+  "webhook": {
+    "url": "https://example.com/mailtrap/inbound",
+    "webhook_type": "inbound_receiving",
+    "inbound_inbox_id": 42
+  }
+}

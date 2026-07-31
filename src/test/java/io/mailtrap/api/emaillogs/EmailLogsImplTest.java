@@ -81,6 +81,8 @@ class EmailLogsImplTest extends BaseTest {
         assertEquals(3938, msg.getSendingDomainId());
         assertEquals(2, msg.getOpensCount());
         assertEquals(1, msg.getClicksCount());
+        assertEquals("<abc123@example.com>", msg.getRfcMessageId());
+        assertEquals("thr_abc123", msg.getThreadId());
     }
 
     @Test
@@ -122,6 +124,10 @@ class EmailLogsImplTest extends BaseTest {
         assertEquals(MessageStatus.DELIVERED, message.getStatus());
         assertEquals("Welcome to our service", message.getSubject());
         assertNotNull(message.getRawMessageUrl());
+        assertEquals("<abc123@example.com>", message.getRfcMessageId());
+        assertEquals("<original@example.com>", message.getInReplyTo());
+        assertEquals(List.of("<original@example.com>"), message.getReferences());
+        assertEquals("thr_abc123", message.getThreadId());
         assertNotNull(message.getEvents());
         assertEquals(1, message.getEvents().size());
         assertEquals(EmailLogEventType.CLICK, message.getEvents().get(0).getEventType());
