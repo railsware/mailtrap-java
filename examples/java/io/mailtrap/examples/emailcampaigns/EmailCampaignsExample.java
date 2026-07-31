@@ -10,6 +10,7 @@ import io.mailtrap.model.request.emailcampaigns.UpdateEmailCampaign;
 import io.mailtrap.model.response.emailcampaigns.DeliveryOptions;
 import io.mailtrap.model.response.emailcampaigns.ReplyTo;
 
+import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.List;
@@ -76,10 +77,10 @@ public class EmailCampaignsExample {
                 .build());
         System.out.println(updated.getData());
 
-        // Schedule the draft to send later; the time comes back in
-        // currentStateMetadata.scheduledAt.
+        // Schedule the draft to send later — the time must be in the future, at most 1 month
+        // ahead; it comes back in currentStateMetadata.scheduledAt.
         final var scheduled = campaigns.scheduleEmailCampaign(campaignId,
-            new ScheduleEmailCampaignRequest(OffsetDateTime.of(2026, 6, 1, 9, 0, 0, 0, ZoneOffset.UTC)));
+            new ScheduleEmailCampaignRequest(OffsetDateTime.now(ZoneOffset.UTC).plusDays(1)));
         System.out.println(scheduled.getData().getCurrentStateMetadata().getScheduledAt());
 
         // Cancel the scheduled send — the campaign returns to `draft`.
@@ -91,7 +92,8 @@ public class EmailCampaignsExample {
         System.out.println(started.getData().getCurrentState());
 
         // Aggregated performance statistics; narrow the window with start/end dates (YYYY-MM-DD).
-        final var stats = campaigns.getEmailCampaignStats(campaignId, "2026-05-01", "2026-05-31");
+        final var today = LocalDate.now(ZoneOffset.UTC);
+        final var stats = campaigns.getEmailCampaignStats(campaignId, today.minusDays(30).toString(), today.toString());
         System.out.println(stats.getData());
 
         // Delete returns 204 No Content.
