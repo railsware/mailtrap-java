@@ -1,6 +1,7 @@
 package io.mailtrap.api.apitokens;
 
 import io.mailtrap.model.request.apitokens.CreateApiTokenRequest;
+import io.mailtrap.model.request.apitokens.ResetApiTokenRequest;
 import io.mailtrap.model.response.apitokens.ApiToken;
 import io.mailtrap.model.response.apitokens.ApiTokenWithToken;
 
@@ -52,5 +53,17 @@ public interface ApiTokens {
      * @return new token, including the full token value
      */
     ApiTokenWithToken resetApiToken(long accountId, long id);
+
+    /**
+     * Reset an API token. Expires the requested token and creates a new one with the same
+     * permissions; the new token value is returned only once. The request can set the new
+     * token expiration; omit it for the server default.
+     *
+     * @param accountId unique account ID
+     * @param id        API token ID
+     * @param request   optional new token expiration
+     * @return new token, including the full token value
+     */
+    ApiTokenWithToken resetApiToken(long accountId, long id, ResetApiTokenRequest request);
 
 }

@@ -6,6 +6,7 @@ import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.AbstractModel;
 import io.mailtrap.model.request.apitokens.CreateApiTokenRequest;
+import io.mailtrap.model.request.apitokens.ResetApiTokenRequest;
 import io.mailtrap.model.response.apitokens.ApiToken;
 import io.mailtrap.model.response.apitokens.ApiTokenWithToken;
 
@@ -60,6 +61,16 @@ public class ApiTokensImpl extends ApiResource implements ApiTokens {
         return httpClient.post(
             String.format(apiHost + "/api/accounts/%d/api_tokens/%d/reset", accountId, id),
             (AbstractModel) null,
+            new RequestData(),
+            ApiTokenWithToken.class
+        );
+    }
+
+    @Override
+    public ApiTokenWithToken resetApiToken(final long accountId, final long id, final ResetApiTokenRequest request) {
+        return httpClient.post(
+            String.format(apiHost + "/api/accounts/%d/api_tokens/%d/reset", accountId, id),
+            request,
             new RequestData(),
             ApiTokenWithToken.class
         );
