@@ -103,7 +103,6 @@ class InboundMessagesImplTest extends BaseTest {
     void reply_returnsSendResult() {
         final InboundReplyRequest request = InboundReplyRequest.builder()
                 .to(List.of(new Address("customer@example.com")))
-                .subject("Re: Support request")
                 .text("Thanks for reaching out, we are on it!")
                 .build();
 
@@ -118,7 +117,6 @@ class InboundMessagesImplTest extends BaseTest {
         final InboundReplyRequest request = InboundReplyRequest.builder()
                 .to(List.of(new Address("customer@example.com")))
                 .cc(List.of(new Address("cc@example.com")))
-                .subject("Re: Support request")
                 .text("Thanks everyone!")
                 .build();
 

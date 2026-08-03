@@ -42,8 +42,6 @@ public class InboundForwardRequest extends AbstractModel {
     @Valid
     private Address replyTo;
 
-    private String subject;
-
     private String text;
 
     private String html;

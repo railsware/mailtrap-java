@@ -38,7 +38,6 @@ public class InboundMessagesExample {
 
         // Reply to a message (sends a real email to the original sender).
         final var reply = messages.reply(INBOX_ID, messageId, InboundReplyRequest.builder()
-                .subject("Re: Support request")
                 .text("Thanks for reaching out!")
                 .html("<p>Thanks for reaching out!</p>")
                 .build());
