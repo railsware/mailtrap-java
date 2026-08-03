@@ -1,0 +1,15 @@
+{
+  "id": 34567,
+  "name": "Expiring token",
+  "last_4_digits": "z5w1",
+  "created_by": "user@example.com",
+  "expires_at": "2027-06-01T00:00:00Z",
+  "resources": [
+    {
+      "resource_type": "account",
+      "resource_id": 1,
+      "access_level": 100
+    }
+  ],
+  "token": "expiring123"
+}
