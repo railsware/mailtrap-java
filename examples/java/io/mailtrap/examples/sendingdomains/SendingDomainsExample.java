@@ -9,8 +9,8 @@ import static io.mailtrap.model.request.sendingdomains.CreateSendingDomainReques
 
 public class SendingDomainsExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
     private static final String DOMAIN_NAME = "test.io";
     private static final String DEVOPS_EMAIL = "devops@test.io";
 

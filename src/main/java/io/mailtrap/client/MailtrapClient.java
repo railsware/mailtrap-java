@@ -63,6 +63,12 @@ public class MailtrapClient {
     private final MailtrapOrganizationsApi organizationsApi;
 
     /**
+     * API for Mailtrap.io Inbound Email functionality
+     */
+    @Getter
+    private final MailtrapInboundApi inboundApi;
+
+    /**
      * Utility class which holds sending context (which API to use: Email Sending API, Bulk Sending API or
      * Email Testing API, inbox id for Email Testing API) to make it possible to perform send directly from MailtrapClient
      */

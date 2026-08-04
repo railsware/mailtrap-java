@@ -1,0 +1,13 @@
+{
+  "to": [
+    {
+      "email": "customer@example.com"
+    }
+  ],
+  "cc": [
+    {
+      "email": "cc@example.com"
+    }
+  ],
+  "text": "Thanks everyone!"
+}

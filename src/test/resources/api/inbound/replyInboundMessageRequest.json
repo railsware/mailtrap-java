@@ -1,0 +1,8 @@
+{
+  "to": [
+    {
+      "email": "customer@example.com"
+    }
+  ],
+  "text": "Thanks for reaching out, we are on it!"
+}

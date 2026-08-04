@@ -1,0 +1,8 @@
+{
+  "to": [
+    {
+      "email": "teammate@example.com"
+    }
+  ],
+  "text": "FYI, please take a look."
+}

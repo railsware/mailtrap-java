@@ -8,9 +8,9 @@ import java.util.List;
 
 public class AccountAccessExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
-    private static final String INBOX_ID = "2";
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
+    private static final String INBOX_ID = System.getenv("MAILTRAP_INBOX_ID");
 
     public static void main(String[] args) {
         final var config = new MailtrapConfig.Builder()

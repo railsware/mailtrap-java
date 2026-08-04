@@ -361,6 +361,13 @@ You can find the [Mailtrap Java API reference](https://mailtrap.github.io/mailtr
 - [Sandbox send using template](examples/java/io/mailtrap/examples/testing/EmailExample.java)
 - [Batch](examples/java/io/mailtrap/examples/testing/BatchExample.java)
 
+### Inbound Email API
+
+- [Folders](examples/java/io/mailtrap/examples/inbound/InboundFoldersExample.java)
+- [Inboxes](examples/java/io/mailtrap/examples/inbound/InboundInboxesExample.java)
+- [Messages](examples/java/io/mailtrap/examples/inbound/InboundMessagesExample.java)
+- [Threads](examples/java/io/mailtrap/examples/inbound/InboundThreadsExample.java)
+
 ### Bulk Sending API
 
 - [Bulk send](examples/java/io/mailtrap/examples/bulk/BulkSendExample.java)

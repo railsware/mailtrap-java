@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public enum WebhookType {
     EMAIL_SENDING("email_sending"),
     AUDIT_LOG("audit_log"),
-    CAMPAIGNS("campaigns");
+    CAMPAIGNS("campaigns"),
+    INBOUND_RECEIVING("inbound_receiving");
 
     private final String value;
 

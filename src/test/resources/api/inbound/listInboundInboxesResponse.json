@@ -1,0 +1,14 @@
+[
+  {
+    "id": 201,
+    "name": "Support inbox",
+    "address": "support@inbound-mailtrap.io",
+    "domain_id": null
+  },
+  {
+    "id": 202,
+    "name": "Catch-all",
+    "address": "catch-all@example.com",
+    "domain_id": 6
+  }
+]

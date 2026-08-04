@@ -9,8 +9,8 @@ import java.util.Map;
 
 public class ContactEventsExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
     private static final String CONTACT_IDENTIFIER = "b691272b-3e50-4813-997b-c7c9b317dcb2";
 
     public static void main(String[] args) {

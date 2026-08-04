@@ -14,8 +14,8 @@ import java.util.List;
 
 public class WebhooksExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
     private static final String WEBHOOK_URL = "https://example.com/webhooks/mailtrap";
     private static final String UPDATED_WEBHOOK_URL = "https://example.com/webhooks/mailtrap/v2";
 

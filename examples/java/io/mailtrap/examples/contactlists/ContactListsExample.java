@@ -7,8 +7,8 @@ import io.mailtrap.model.request.contactlists.ListContactListsQueryParams;
 
 public class ContactListsExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
     private static final String NAME_FOR_CREATE = "Clients";
     private static final String NAME_FOR_UPDATE = "Customers";
     private static final String SEARCH_QUERY = "Cust";

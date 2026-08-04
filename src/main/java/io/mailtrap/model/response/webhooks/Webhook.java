@@ -30,6 +30,9 @@ public class Webhook {
     @JsonProperty("domain_id")
     private Long domainId;
 
+    @JsonProperty("inbound_inbox_id")
+    private Long inboundInboxId;
+
     @JsonProperty("event_types")
     private List<WebhookEventType> eventTypes;
 

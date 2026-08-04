@@ -80,6 +80,8 @@ class SendingDomainsImplTest extends BaseTest {
         assertNotNull(response);
         assertEquals("test.io", response.getDomainName());
         assertEquals(6, response.getDnsRecords().size());
+        assertTrue(response.isInboundEnabled());
+        assertFalse(response.isInboundVerified());
     }
 
     @Test

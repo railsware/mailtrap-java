@@ -39,4 +39,7 @@ public class WebhookInput {
     @JsonProperty("domain_id")
     private Long domainId;
 
+    @JsonProperty("inbound_inbox_id")
+    private Long inboundInboxId;
+
 }

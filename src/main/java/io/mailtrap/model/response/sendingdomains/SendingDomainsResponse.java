@@ -45,6 +45,12 @@ public class SendingDomainsResponse {
     @JsonProperty("alert_recipient_email")
     private String alertRecipientEmail;
 
+    @JsonProperty("inbound_enabled")
+    private boolean inboundEnabled;
+
+    @JsonProperty("inbound_verified")
+    private boolean inboundVerified;
+
     @JsonProperty("permissions")
     private SendingDomainPermission permission;
 
