@@ -7,8 +7,8 @@ import io.mailtrap.model.request.subaccounts.SubAccountInput;
 
 public class SubAccountsExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ORGANIZATION_ID = 1L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ORGANIZATION_ID = Long.parseLong(System.getenv("MAILTRAP_ORGANIZATION_ID"));
     private static final String SUB_ACCOUNT_NAME = "Acme Marketing";
 
     public static void main(String[] args) {

@@ -7,7 +7,7 @@ import io.mailtrap.model.request.inbound.UpdateInboundFolderRequest;
 
 public class InboundFoldersExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
 
     public static void main(String[] args) {
         final var config = new MailtrapConfig.Builder()

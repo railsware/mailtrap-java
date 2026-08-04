@@ -11,12 +11,12 @@ import java.util.List;
 
 public class PermissionsExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
-    private static final long ACCOUNT_ID = 1L;
-    private static final long ACCOUNT_ACCESS_ID = 3L;
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
+    private static final long ACCOUNT_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ID"));
+    private static final long ACCOUNT_ACCESS_ID = Long.parseLong(System.getenv("MAILTRAP_ACCOUNT_ACCESS_ID"));
 
-    private static final String FIRST_RESOURCE_ID = "12";
-    private static final String SECOND_RESOURCE_ID = "21";
+    private static final String FIRST_RESOURCE_ID = System.getenv("MAILTRAP_FIRST_RESOURCE_ID");
+    private static final String SECOND_RESOURCE_ID = System.getenv("MAILTRAP_SECOND_RESOURCE_ID");
 
     public static void main(String[] args) {
         final var config = new MailtrapConfig.Builder()

@@ -10,10 +10,10 @@ import java.util.Map;
 
 public class EmailExample {
 
-    private static final String TOKEN = "<YOUR MAILTRAP TOKEN>";
+    private static final String TOKEN = System.getenv("MAILTRAP_API_KEY");
     private static final String SENDER_EMAIL = "sender@domain.com";
     private static final String RECIPIENT_EMAIL = "recipient@domain.com";
-    private static final long INBOX_ID = 1337L;
+    private static final long INBOX_ID = Long.parseLong(System.getenv("MAILTRAP_INBOX_ID"));
 
     public static void main(String[] args) {
         final var config = new MailtrapConfig.Builder()
