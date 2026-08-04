@@ -1,3 +1,14 @@
+## [1.4.0] - 2026-08-04
+
+## What's Changed
+* MT-22678: Add search query param to contact lists findAll by @Rabsztok in https://github.com/mailtrap/mailtrap-java/pull/56
+* Bump com.fasterxml.jackson.core:jackson-core from 2.22.0 to 2.22.1 by @dependabot[bot] in https://github.com/mailtrap/mailtrap-java/pull/63
+* Bump com.fasterxml.jackson.core:jackson-databind from 2.22.0 to 2.22.1 by @dependabot[bot] in https://github.com/mailtrap/mailtrap-java/pull/64
+* Add Inbound Email API support by @mklocek in https://github.com/mailtrap/mailtrap-java/pull/66
+
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.3.2...v1.4.0
+
 ## [1.3.2] - 2026-07-13
 
 ## What's Changed
