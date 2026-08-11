@@ -1,5 +1,7 @@
 package io.mailtrap.examples.emailcampaigns;
 
+import io.mailtrap.api.emailcampaigns.EmailCampaignListFilter;
+import io.mailtrap.api.emailcampaigns.EmailCampaignStatsFilter;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.DeliveryMode;
@@ -32,8 +34,13 @@ public class EmailCampaignsExample {
         // The campaign endpoints are token-scoped: the account is resolved from the API token.
         final var campaigns = client.emailCampaignsApi().emailCampaigns();
 
-        // List campaigns (newest first). `search` filters by name; `token` is the page number.
-        final var page = campaigns.getEmailCampaigns(50, "Spring", 1);
+        // List campaigns (newest first). Pass null for the first page with API defaults.
+        final var page = campaigns.getEmailCampaigns(
+            EmailCampaignListFilter.builder()
+                .perPage(50)
+                .search("Spring")
+                .token(1)
+                .build());
         System.out.println(page);
 
         // Create a campaign — it starts in the `draft` state. The request body is flat.
@@ -93,7 +100,11 @@ public class EmailCampaignsExample {
 
         // Aggregated performance statistics; narrow the window with start/end dates (YYYY-MM-DD).
         final var today = LocalDate.now(ZoneOffset.UTC);
-        final var stats = campaigns.getEmailCampaignStats(campaignId, today.minusDays(30).toString(), today.toString());
+        final var stats = campaigns.getEmailCampaignStats(campaignId,
+            EmailCampaignStatsFilter.builder()
+                .startDate(today.minusDays(30).toString())
+                .endDate(today.toString())
+                .build());
         System.out.println(stats.getData());
 
         // Delete returns 204 No Content.

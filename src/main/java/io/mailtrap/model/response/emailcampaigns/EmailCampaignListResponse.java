@@ -1,5 +1,6 @@
 package io.mailtrap.model.response.emailcampaigns;
 
+import io.mailtrap.model.response.Pagination;
 import lombok.Data;
 
 import java.util.List;

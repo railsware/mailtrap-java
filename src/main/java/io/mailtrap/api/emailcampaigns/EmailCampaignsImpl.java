@@ -26,11 +26,11 @@ public class EmailCampaignsImpl extends ApiResource implements EmailCampaigns {
     }
 
     @Override
-    public EmailCampaignListResponse getEmailCampaigns(final Integer perPage, final String search, final Integer token) {
+    public EmailCampaignListResponse getEmailCampaigns(final EmailCampaignListFilter filter) {
         final var queryParams = RequestData.buildQueryParams(
-            entry("per_page", Optional.ofNullable(perPage)),
-            entry("search", Optional.ofNullable(search)),
-            entry("token", Optional.ofNullable(token))
+            entry("per_page", Optional.ofNullable(filter).map(EmailCampaignListFilter::getPerPage)),
+            entry("search", Optional.ofNullable(filter).map(EmailCampaignListFilter::getSearch)),
+            entry("token", Optional.ofNullable(filter).map(EmailCampaignListFilter::getToken))
         );
 
         return httpClient.get(
@@ -109,15 +109,10 @@ public class EmailCampaignsImpl extends ApiResource implements EmailCampaigns {
     }
 
     @Override
-    public EmailCampaignStatsResponse getEmailCampaignStats(final long emailCampaignId) {
-        return getEmailCampaignStats(emailCampaignId, null, null);
-    }
-
-    @Override
-    public EmailCampaignStatsResponse getEmailCampaignStats(final long emailCampaignId, final String startDate, final String endDate) {
+    public EmailCampaignStatsResponse getEmailCampaignStats(final long emailCampaignId, final EmailCampaignStatsFilter filter) {
         final var queryParams = RequestData.buildQueryParams(
-            entry("start_date", Optional.ofNullable(startDate)),
-            entry("end_date", Optional.ofNullable(endDate))
+            entry("start_date", Optional.ofNullable(filter).map(EmailCampaignStatsFilter::getStartDate)),
+            entry("end_date", Optional.ofNullable(filter).map(EmailCampaignStatsFilter::getEndDate))
         );
 
         return httpClient.get(

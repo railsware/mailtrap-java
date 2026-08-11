@@ -1,10 +1,10 @@
-package io.mailtrap.model.response.emailcampaigns;
+package io.mailtrap.model.response;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 /**
- * Page-token pagination metadata returned with a list of email campaigns.
+ * Page-token pagination metadata returned with a paginated list response.
  */
 @Data
 public class Pagination {

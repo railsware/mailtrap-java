@@ -19,13 +19,11 @@ public interface EmailCampaigns {
     /**
      * List the account's email campaigns, newest first.
      *
-     * @param perPage number of campaigns per page (max 100, default 50); {@code null} to omit
-     * @param search  filter campaigns by name; {@code null} to omit
-     * @param token   page number to retrieve (page-token pagination, default 1);
-     *                {@code null} to omit
+     * @param filter filtering and pagination parameters; {@code null} for the first page with
+     *               API defaults
      * @return a page of campaigns and the pagination metadata
      */
-    EmailCampaignListResponse getEmailCampaigns(Integer perPage, String search, Integer token);
+    EmailCampaignListResponse getEmailCampaigns(EmailCampaignListFilter filter);
 
     /**
      * Create a new email campaign in the {@code draft} state.
@@ -105,26 +103,14 @@ public interface EmailCampaigns {
     EmailCampaignResponse resetEmailCampaign(long emailCampaignId);
 
     /**
-     * Get aggregated performance statistics for an email campaign over the whole period since
-     * the campaign was last started. If the campaign has never been started, all counts and
-     * rates are returned as {@code 0}.
+     * Get aggregated performance statistics for an email campaign. If the campaign has never
+     * been started, all counts and rates are returned as {@code 0}.
      *
      * @param emailCampaignId unique email campaign ID
+     * @param filter          aggregation window; {@code null} for the whole period since the
+     *                        campaign was last started
      * @return aggregated campaign statistics
      */
-    EmailCampaignStatsResponse getEmailCampaignStats(long emailCampaignId);
-
-    /**
-     * Get aggregated performance statistics for an email campaign over a narrowed aggregation
-     * window.
-     *
-     * @param emailCampaignId unique email campaign ID
-     * @param startDate       start of the aggregation window (inclusive), in
-     *                        {@code YYYY-MM-DD} format; {@code null} to omit
-     * @param endDate         end of the aggregation window (inclusive), in {@code YYYY-MM-DD}
-     *                        format; {@code null} to omit
-     * @return aggregated campaign statistics
-     */
-    EmailCampaignStatsResponse getEmailCampaignStats(long emailCampaignId, String startDate, String endDate);
+    EmailCampaignStatsResponse getEmailCampaignStats(long emailCampaignId, EmailCampaignStatsFilter filter);
 
 }

@@ -95,7 +95,7 @@ class EmailCampaignsImplTest extends BaseTest {
 
     @Test
     void test_getEmailCampaigns() {
-        final EmailCampaignListResponse response = api.getEmailCampaigns(null, null, null);
+        final EmailCampaignListResponse response = api.getEmailCampaigns(null);
 
         assertNotNull(response);
         assertEquals(2, response.getData().size());
@@ -124,7 +124,7 @@ class EmailCampaignsImplTest extends BaseTest {
 
     @Test
     void test_getEmailCampaigns_filtersBySearch() {
-        final EmailCampaignListResponse response = api.getEmailCampaigns(null, "Spring", null);
+        final EmailCampaignListResponse response = api.getEmailCampaigns(EmailCampaignListFilter.builder().search("Spring").build());
 
         assertNotNull(response);
         assertEquals(2, response.getData().size());
@@ -262,7 +262,7 @@ class EmailCampaignsImplTest extends BaseTest {
 
     @Test
     void test_getEmailCampaignStats() {
-        final EmailCampaignStatsResponse response = api.getEmailCampaignStats(emailCampaignId);
+        final EmailCampaignStatsResponse response = api.getEmailCampaignStats(emailCampaignId, null);
 
         assertNotNull(response);
         assertEquals(1450, response.getData().getDeliveryCount());
@@ -274,7 +274,8 @@ class EmailCampaignsImplTest extends BaseTest {
     @Test
     void test_getEmailCampaignStats_withDateWindow() {
         final EmailCampaignStatsResponse response =
-                api.getEmailCampaignStats(emailCampaignId, "2026-05-01", "2026-05-31");
+                api.getEmailCampaignStats(emailCampaignId,
+                        EmailCampaignStatsFilter.builder().startDate("2026-05-01").endDate("2026-05-31").build());
 
         assertNotNull(response);
         assertEquals(1450, response.getData().getDeliveryCount());
