@@ -11,8 +11,8 @@ import io.mailtrap.model.response.emailcampaigns.EmailCampaignStatsResponse;
  * Email Campaigns API. Manage email marketing campaigns and retrieve their performance
  * statistics.
  *
- * <p>The account is resolved from the API token, so these endpoints are token-scoped and the
- * path is not account-scoped.
+ * <p>These endpoints are token-scoped: the account is resolved from the API token, so the
+ * path takes no account id.
  */
 public interface EmailCampaigns {
 

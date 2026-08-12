@@ -8,9 +8,8 @@ import lombok.experimental.Accessors;
 /**
  * Represents an API for Mailtrap Email Campaigns functionality.
  *
- * <p>Email campaigns use a token-scoped, non-account-scoped URL family
- * ({@code /api/email_campaigns}), so they are grouped under their own API rather than the
- * account-scoped general API.
+ * <p>Email campaigns use a token-scoped URL family ({@code /api/email_campaigns}), so they
+ * are grouped under their own API rather than the account-scoped general API.
  */
 @Getter
 @Accessors(fluent = true)
