@@ -53,7 +53,7 @@ public interface EmailCampaigns {
     EmailCampaignResponse updateEmailCampaign(long emailCampaignId, UpdateEmailCampaign request);
 
     /**
-     * Delete an email campaign. The campaign must not be in a sending state.
+     * Delete an email campaign. Only a campaign in the {@code draft} state can be deleted.
      *
      * @param emailCampaignId unique email campaign ID
      */

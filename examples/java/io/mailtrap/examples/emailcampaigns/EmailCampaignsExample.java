@@ -107,7 +107,17 @@ public class EmailCampaignsExample {
                 .build());
         System.out.println(stats.getData());
 
-        // Delete returns 204 No Content.
-        campaigns.deleteEmailCampaign(campaignId);
+        // Only a campaign in the `draft` state can be deleted, and a started campaign never
+        // returns to `draft` - so delete a fresh draft. Delete returns 204 No Content.
+        final var throwaway = campaigns.createEmailCampaign(
+            CreateEmailCampaign.builder()
+                .name("Draft to delete")
+                .domainId(DOMAIN_ID)
+                .fromLocalPart("news")
+                .templateAttributes(TemplateAttributes.builder()
+                    .subject("Draft to delete")
+                    .build())
+                .build());
+        campaigns.deleteEmailCampaign(throwaway.getData().getId());
     }
 }
