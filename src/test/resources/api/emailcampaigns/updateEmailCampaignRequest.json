@@ -1,0 +1,14 @@
+{
+  "name": "Spring Sale (updated)",
+  "template_attributes": {
+    "subject": "New subject",
+    "body_html": "<html><body><h1>Hi {{first_name}}!</h1><p><a href=\"__unsubscribe_url__\">Unsubscribe</a></p></body></html>",
+    "merge_tags": ["first_name"]
+  },
+  "delivery_mode": "gradual",
+  "delivery_options": {
+    "emails_per_hour": 1000
+  },
+  "contact_list_ids": [55, 56],
+  "contact_segment_ids": [12]
+}
