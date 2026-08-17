@@ -1,3 +1,11 @@
+## [1.5.0] - 2026-08-14
+
+## What's Changed
+* MT-22401: Add Email Campaigns API by @Rabsztok in https://github.com/mailtrap/mailtrap-java/pull/65
+
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.4.0...v1.5.0
+
 ## [1.4.0] - 2026-08-04
 
 ## What's Changed
