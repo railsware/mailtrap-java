@@ -2,6 +2,7 @@ package io.mailtrap.api.sendingdomains;
 
 import io.mailtrap.model.request.sendingdomains.CreateSendingDomainRequest;
 import io.mailtrap.model.request.sendingdomains.SendingDomainsSetupInstructionsRequest;
+import io.mailtrap.model.request.sendingdomains.UpdateSendingDomainRequest;
 import io.mailtrap.model.response.sendingdomains.SendingDomainsResponse;
 
 import java.util.List;
@@ -33,6 +34,16 @@ public interface SendingDomains {
      * @return domain attributes, DNS records, status
      */
     SendingDomainsResponse getSendingDomain(long accountId, long sendingDomainId);
+
+    /**
+     * Update configuration settings for a sending domain
+     *
+     * @param accountId       unique account ID
+     * @param sendingDomainId unique domain ID
+     * @param request         request data, only the fields set are sent
+     * @return updated domain attributes, DNS records, status
+     */
+    SendingDomainsResponse update(long accountId, long sendingDomainId, UpdateSendingDomainRequest request);
 
     /**
      * Send sending domain setup instructions

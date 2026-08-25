@@ -5,6 +5,7 @@ import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.sendingdomains.CreateSendingDomainRequest;
 import io.mailtrap.model.request.sendingdomains.SendingDomainsSetupInstructionsRequest;
+import io.mailtrap.model.request.sendingdomains.UpdateSendingDomainRequest;
 import io.mailtrap.model.response.sendingdomains.SendingDomainsResponse;
 import io.mailtrap.testutils.BaseTest;
 import io.mailtrap.testutils.DataMock;
@@ -34,6 +35,10 @@ class SendingDomainsImplTest extends BaseTest {
             DataMock.build(
                 Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId,
                 "GET", null, "api/sending_domains/sendingDomainResponse.json"
+            ),
+            DataMock.build(
+                Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId,
+                "PATCH", "api/sending_domains/updateSendingDomainRequest.json", "api/sending_domains/sendingDomainResponse.json"
             ),
             DataMock.build(
                 Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/sending_domains/" + sendingDomainId + "/send_setup_instructions",
@@ -82,6 +87,27 @@ class SendingDomainsImplTest extends BaseTest {
         assertEquals(6, response.getDnsRecords().size());
         assertTrue(response.isInboundEnabled());
         assertFalse(response.isInboundVerified());
+    }
+
+    @Test
+    void test_update() {
+        final SendingDomainsResponse response = domains.update(
+            accountId,
+            sendingDomainId,
+            new UpdateSendingDomainRequest(
+                UpdateSendingDomainRequest.SendingDomainData.builder()
+                    .openTrackingEnabled(true)
+                    .clickTrackingEnabled(true)
+                    .trackingOptOutEnabled(true)
+                    .autoUnsubscribeLinkEnabled(false)
+                    .inboundEnabled(false)
+                    .build()
+            )
+        );
+
+        assertNotNull(response);
+        assertEquals("test.io", response.getDomainName());
+        assertTrue(response.isTrackingOptOutEnabled());
     }
 
     @Test

@@ -56,6 +56,7 @@
   ],
   "open_tracking_enabled": true,
   "click_tracking_enabled": true,
+  "tracking_opt_out_enabled": true,
   "auto_unsubscribe_link_enabled": true,
   "custom_domain_tracking_enabled": true,
   "health_alerts_enabled": true,

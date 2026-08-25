@@ -30,6 +30,9 @@ public class SendingDomainsResponse {
     @JsonProperty("click_tracking_enabled")
     private boolean clickTrackingEnabled;
 
+    @JsonProperty("tracking_opt_out_enabled")
+    private boolean trackingOptOutEnabled;
+
     @JsonProperty("auto_unsubscribe_link_enabled")
     private boolean autoUnsubscribeLinkEnabled;
 

@@ -348,6 +348,7 @@ You can find the [Mailtrap Java API reference](https://mailtrap.github.io/mailtr
 - [Send using template](examples/java/io/mailtrap/examples/sending/TemplateExample.java)
 - [Batch](examples/java/io/mailtrap/examples/sending/BatchExample.java)
 - [Sending Domains](examples/java/io/mailtrap/examples/sendingdomains/SendingDomainsExample.java)
+- [Company Info](examples/java/io/mailtrap/examples/companyinfo/CompanyInfoExample.java)
 - [Suppressions](examples/java/io/mailtrap/examples/suppressions/SuppressionsExample.java)
 - [Stats](examples/java/io/mailtrap/examples/sending/StatsExample.java)
 - [Email Logs](examples/java/io/mailtrap/examples/emaillogs/EmailLogsExample.java)
