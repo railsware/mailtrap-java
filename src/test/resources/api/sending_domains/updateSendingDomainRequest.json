@@ -1,0 +1,9 @@
+{
+  "sending_domain": {
+    "open_tracking_enabled": true,
+    "click_tracking_enabled": true,
+    "tracking_opt_out_enabled": true,
+    "auto_unsubscribe_link_enabled": false,
+    "inbound_enabled": false
+  }
+}

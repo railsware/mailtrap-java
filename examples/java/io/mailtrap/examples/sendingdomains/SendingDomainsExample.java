@@ -4,6 +4,7 @@ import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.request.sendingdomains.CreateSendingDomainRequest;
 import io.mailtrap.model.request.sendingdomains.SendingDomainsSetupInstructionsRequest;
+import io.mailtrap.model.request.sendingdomains.UpdateSendingDomainRequest;
 
 import static io.mailtrap.model.request.sendingdomains.CreateSendingDomainRequest.SendingDomainData;
 
@@ -31,6 +32,18 @@ public class SendingDomainsExample {
 
         final var allDomains = client.sendingApi().domains().getSendingDomains(ACCOUNT_ID);
         System.out.println(allDomains);
+
+        final var updateRequest = new UpdateSendingDomainRequest(
+            UpdateSendingDomainRequest.SendingDomainData.builder()
+                .openTrackingEnabled(true)
+                .clickTrackingEnabled(true)
+                .trackingOptOutEnabled(true)
+                .autoUnsubscribeLinkEnabled(false)
+                .build()
+        );
+
+        final var updatedDomain = client.sendingApi().domains().update(ACCOUNT_ID, createdDomain.getId(), updateRequest);
+        System.out.println(updatedDomain);
 
         final var sendInstructionsRequest = new SendingDomainsSetupInstructionsRequest(DEVOPS_EMAIL);
         client.sendingApi().domains().sendSendingDomainsSetupInstructions(ACCOUNT_ID, createdDomain.getId(), sendInstructionsRequest);

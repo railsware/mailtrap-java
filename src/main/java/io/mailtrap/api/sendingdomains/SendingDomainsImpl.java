@@ -6,6 +6,7 @@ import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.sendingdomains.CreateSendingDomainRequest;
 import io.mailtrap.model.request.sendingdomains.SendingDomainsSetupInstructionsRequest;
+import io.mailtrap.model.request.sendingdomains.UpdateSendingDomainRequest;
 import io.mailtrap.model.response.sendingdomains.SendingDomainsResponse;
 
 import java.util.List;
@@ -40,6 +41,16 @@ public class SendingDomainsImpl extends ApiResource implements SendingDomains {
     public SendingDomainsResponse getSendingDomain(final long accountId, final long sendingDomainId) {
         return httpClient.get(
             String.format(apiHost + "/api/accounts/%d/sending_domains/%d", accountId, sendingDomainId),
+            new RequestData(),
+            SendingDomainsResponse.class
+        );
+    }
+
+    @Override
+    public SendingDomainsResponse update(final long accountId, final long sendingDomainId, final UpdateSendingDomainRequest request) {
+        return httpClient.patch(
+            String.format(apiHost + "/api/accounts/%d/sending_domains/%d", accountId, sendingDomainId),
+            request,
             new RequestData(),
             SendingDomainsResponse.class
         );
