@@ -4,6 +4,8 @@ import io.mailtrap.Constants;
 import io.mailtrap.api.apiresource.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
+import io.mailtrap.model.request.suppressions.CreateSuppressionRequest;
+import io.mailtrap.model.response.suppressions.SuppressionResponse;
 import io.mailtrap.model.response.suppressions.SuppressionsResponse;
 
 import java.net.URLEncoder;
@@ -30,6 +32,16 @@ public class SuppressionsImpl extends ApiResource implements Suppressions {
                 new RequestData(queryParams),
                 SuppressionsResponse.class
             );
+    }
+
+    @Override
+    public SuppressionsResponse createSuppression(final long accountId, final CreateSuppressionRequest request) {
+        return httpClient.post(
+            String.format(apiHost + "/api/accounts/%d/suppressions", accountId),
+            request,
+            new RequestData(),
+            SuppressionResponse.class
+        ).getData();
     }
 
     @Override

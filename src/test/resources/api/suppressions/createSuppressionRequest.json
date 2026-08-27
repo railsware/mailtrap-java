@@ -1,0 +1,5 @@
+{
+  "email": "recipient@example.com",
+  "domain_id": 12345,
+  "sending_stream": "transactional"
+}

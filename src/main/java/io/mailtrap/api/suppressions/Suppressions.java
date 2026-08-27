@@ -1,5 +1,6 @@
 package io.mailtrap.api.suppressions;
 
+import io.mailtrap.model.request.suppressions.CreateSuppressionRequest;
 import io.mailtrap.model.response.suppressions.SuppressionsResponse;
 
 import java.util.List;
@@ -14,6 +15,15 @@ public interface Suppressions {
      * @return a list of suppressions
      */
     List<SuppressionsResponse> search(long accountId, String email);
+
+    /**
+     * Add an email address to the account's suppression list.
+     *
+     * @param accountId - unique account ID
+     * @param request   - request data
+     * @return the created suppression
+     */
+    SuppressionsResponse createSuppression(long accountId, CreateSuppressionRequest request);
 
     /**
      * Delete a suppression by ID. Mailtrap will no longer prevent sending to this email unless it's recorded in suppressions again.

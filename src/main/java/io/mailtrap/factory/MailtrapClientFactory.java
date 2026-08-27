@@ -30,6 +30,7 @@ import io.mailtrap.api.sendingemails.SendingEmailsImpl;
 import io.mailtrap.api.stats.StatsImpl;
 import io.mailtrap.api.subaccounts.SubAccountsImpl;
 import io.mailtrap.api.suppressions.SuppressionsImpl;
+import io.mailtrap.api.trackingoptouts.TrackingOptOutsImpl;
 import io.mailtrap.api.testingemails.TestingEmailsImpl;
 import io.mailtrap.api.webhooks.WebhooksImpl;
 import io.mailtrap.client.MailtrapClient;
@@ -137,10 +138,12 @@ public final class MailtrapClientFactory {
         final var domains = new SendingDomainsImpl(config);
         final var companyInfo = new CompanyInfoImpl(config);
         final var suppressions = new SuppressionsImpl(config);
+        final var trackingOptOuts = new TrackingOptOutsImpl(config);
         final var stats = new StatsImpl(config);
         final var emailLogs = new EmailLogsImpl(config);
 
-        return new MailtrapEmailSendingApi(emails, domains, companyInfo, suppressions, stats, emailLogs);
+        return new MailtrapEmailSendingApi(emails, domains, companyInfo, suppressions, trackingOptOuts, stats,
+            emailLogs);
     }
 
     private static MailtrapEmailTestingApi createTestingApi(final MailtrapConfig config) {

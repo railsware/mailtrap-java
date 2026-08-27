@@ -3,6 +3,8 @@ package io.mailtrap.api.suppressions;
 import io.mailtrap.Constants;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
+import io.mailtrap.model.SendingStream;
+import io.mailtrap.model.request.suppressions.CreateSuppressionRequest;
 import io.mailtrap.model.response.suppressions.SuppressionSendingStream;
 import io.mailtrap.model.response.suppressions.SuppressionType;
 import io.mailtrap.model.response.suppressions.SuppressionsResponse;
@@ -31,6 +33,11 @@ class SuppressionsImplTest extends BaseTest {
             Map.of("email", email)
         ),
         DataMock.build(
+            Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/suppressions",
+            "POST", "api/suppressions/createSuppressionRequest.json",
+            "api/suppressions/createSuppressionResponse.json"
+        ),
+        DataMock.build(
             Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/suppressions/" + suppressionIdEncoded,
             "DELETE", null, "api/suppressions/deleteSuppression.json"
         )
@@ -53,6 +60,23 @@ class SuppressionsImplTest extends BaseTest {
     assertEquals(email, searchResponse.get(0).getEmail());
     assertEquals(SuppressionSendingStream.BULK, searchResponse.get(0).getSendingStream());
     assertEquals(SuppressionType.SPAM_COMPLAINT, searchResponse.get(0).getType());
+  }
+
+  @Test
+  void test_createSuppression() {
+    final SuppressionsResponse created = api.createSuppression(
+        accountId,
+        CreateSuppressionRequest.builder()
+            .email("recipient@example.com")
+            .domainId(12345L)
+            .sendingStream(SendingStream.TRANSACTIONAL)
+            .build()
+    );
+
+    assertNotNull(created);
+    assertEquals("recipient@example.com", created.getEmail());
+    assertEquals(SuppressionSendingStream.TRANSACTIONAL, created.getSendingStream());
+    assertEquals(SuppressionType.MANUAL_IMPORT, created.getType());
   }
 
   @Test
