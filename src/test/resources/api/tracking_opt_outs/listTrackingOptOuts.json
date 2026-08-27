@@ -1,0 +1,11 @@
+{
+  "data": [
+    {
+      "id": "64d71bf3-1276-417b-86e1-8e66f138acfe",
+      "email": "tracked@example.com",
+      "created_at": "2025-01-15T10:30:00Z",
+      "domain_name": "example.com"
+    }
+  ],
+  "last_id": null
+}

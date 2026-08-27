@@ -6,6 +6,7 @@ import io.mailtrap.api.sendingdomains.SendingDomains;
 import io.mailtrap.api.sendingemails.SendingEmails;
 import io.mailtrap.api.stats.Stats;
 import io.mailtrap.api.suppressions.Suppressions;
+import io.mailtrap.api.trackingoptouts.TrackingOptOuts;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.Accessors;
@@ -21,6 +22,7 @@ public class MailtrapEmailSendingApi {
     private final SendingDomains domains;
     private final CompanyInfo companyInfo;
     private final Suppressions suppressions;
+    private final TrackingOptOuts trackingOptOuts;
     private final Stats stats;
     private final EmailLogs emailLogs;
 }
