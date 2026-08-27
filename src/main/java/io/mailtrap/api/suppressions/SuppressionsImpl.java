@@ -5,6 +5,7 @@ import io.mailtrap.api.apiresource.ApiResource;
 import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.http.RequestData;
 import io.mailtrap.model.request.suppressions.CreateSuppressionRequest;
+import io.mailtrap.model.request.suppressions.SuppressionListFilter;
 import io.mailtrap.model.response.suppressions.SuppressionResponse;
 import io.mailtrap.model.response.suppressions.SuppressionsResponse;
 
@@ -24,7 +25,17 @@ public class SuppressionsImpl extends ApiResource implements Suppressions {
 
     @Override
     public List<SuppressionsResponse> search(final long accountId, final String email) {
-        final var queryParams = RequestData.buildQueryParams(entry("email", Optional.ofNullable(email)));
+        return search(accountId, SuppressionListFilter.builder().email(email).build());
+    }
+
+    @Override
+    public List<SuppressionsResponse> search(final long accountId, final SuppressionListFilter filter) {
+        final var queryParams = RequestData.buildQueryParams(
+            entry("email", Optional.ofNullable(filter).map(SuppressionListFilter::getEmail)),
+            entry("start_time", Optional.ofNullable(filter).map(SuppressionListFilter::getStartTime)),
+            entry("end_time", Optional.ofNullable(filter).map(SuppressionListFilter::getEndTime)),
+            entry("last_id", Optional.ofNullable(filter).map(SuppressionListFilter::getLastId))
+        );
 
         return
             httpClient.getList(

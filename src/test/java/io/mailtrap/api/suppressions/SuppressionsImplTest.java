@@ -5,6 +5,7 @@ import io.mailtrap.config.MailtrapConfig;
 import io.mailtrap.factory.MailtrapClientFactory;
 import io.mailtrap.model.SendingStream;
 import io.mailtrap.model.request.suppressions.CreateSuppressionRequest;
+import io.mailtrap.model.request.suppressions.SuppressionListFilter;
 import io.mailtrap.model.response.suppressions.SuppressionSendingStream;
 import io.mailtrap.model.response.suppressions.SuppressionType;
 import io.mailtrap.model.response.suppressions.SuppressionsResponse;
@@ -34,6 +35,11 @@ class SuppressionsImplTest extends BaseTest {
         ),
         DataMock.build(
             Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/suppressions",
+            "GET", null, "api/suppressions/searchSuppressions.json",
+            Map.of("email", email, "start_time", "2025-01-01T00:00:00Z", "last_id", suppressionId)
+        ),
+        DataMock.build(
+            Constants.GENERAL_HOST + "/api/accounts/" + accountId + "/suppressions",
             "POST", "api/suppressions/createSuppressionRequest.json",
             "api/suppressions/createSuppressionResponse.json"
         ),
@@ -60,6 +66,21 @@ class SuppressionsImplTest extends BaseTest {
     assertEquals(email, searchResponse.get(0).getEmail());
     assertEquals(SuppressionSendingStream.BULK, searchResponse.get(0).getSendingStream());
     assertEquals(SuppressionType.SPAM_COMPLAINT, searchResponse.get(0).getType());
+  }
+
+  @Test
+  void test_searchWithFilter() {
+    final List<SuppressionsResponse> searchResponse = api.search(
+        accountId,
+        SuppressionListFilter.builder()
+            .email(email)
+            .startTime("2025-01-01T00:00:00Z")
+            .lastId(suppressionId)
+            .build()
+    );
+
+    assertEquals(1, searchResponse.size());
+    assertEquals(email, searchResponse.get(0).getEmail());
   }
 
   @Test
