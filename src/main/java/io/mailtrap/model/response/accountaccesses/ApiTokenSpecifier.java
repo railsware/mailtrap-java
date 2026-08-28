@@ -17,6 +17,9 @@ public class ApiTokenSpecifier extends Specifier {
 
     private String token;
 
+    @JsonProperty("masked_token")
+    private String maskedToken;
+
     @JsonProperty("expires_at")
     private OffsetDateTime expiresAt;
 

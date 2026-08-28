@@ -1,0 +1,15 @@
+{
+  "id": 23456,
+  "name": "Never expiring token",
+  "last_4_digits": "q8r2",
+  "created_by": "user@example.com",
+  "expires_at": null,
+  "resources": [
+    {
+      "resource_type": "account",
+      "resource_id": 1,
+      "access_level": 100
+    }
+  ],
+  "token": "neverexpires123"
+}

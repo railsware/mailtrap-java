@@ -1,0 +1,11 @@
+{
+  "name": "Never expiring token",
+  "expires_at": null,
+  "resources": [
+    {
+      "resource_type": "account",
+      "resource_id": 1,
+      "access_level": "admin"
+    }
+  ]
+}

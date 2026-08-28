@@ -26,6 +26,7 @@ class AccountAccessResponseDeserializerTest {
                       "id": 1,
                       "name": "Token",
                       "token": "xyz",
+                      "masked_token": "*******xyz",
                       "expires_at": "2025-01-01T00:00:00Z"
                     },
                     "resources": [],
@@ -46,6 +47,7 @@ class AccountAccessResponseDeserializerTest {
         assertEquals(1, apiTokenSpecifier.getId());
         assertEquals("Token", apiTokenSpecifier.getName());
         assertEquals("xyz", apiTokenSpecifier.getToken());
+        assertEquals("*******xyz", apiTokenSpecifier.getMaskedToken());
         assertEquals(OffsetDateTime.parse("2025-01-01T00:00:00Z"), apiTokenSpecifier.getExpiresAt());
     }
 

@@ -8,15 +8,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreateApiTokenRequest extends AbstractModel {
-
-    private String name;
+public class ResetApiTokenRequest extends AbstractModel {
 
     /**
      * Optional token expiration as an ISO 8601 date-time. Omit (or leave null) for the server
@@ -26,11 +22,5 @@ public class CreateApiTokenRequest extends AbstractModel {
     @JsonProperty("expires_at")
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private TokenExpiration expiresAt;
-
-    private List<ApiTokenResource> resources;
-
-    public CreateApiTokenRequest(final String name, final List<ApiTokenResource> resources) {
-        this(name, null, resources);
-    }
 
 }

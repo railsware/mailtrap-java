@@ -1,0 +1,15 @@
+{
+  "id": 54321,
+  "name": "My API Token",
+  "last_4_digits": "exp1",
+  "created_by": "user@example.com",
+  "expires_at": "2027-06-01T00:00:00Z",
+  "resources": [
+    {
+      "resource_type": "account",
+      "resource_id": 1,
+      "access_level": 100
+    }
+  ],
+  "token": "resetexpiring123"
+}
