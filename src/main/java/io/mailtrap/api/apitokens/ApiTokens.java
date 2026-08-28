@@ -19,7 +19,10 @@ public interface ApiTokens {
 
     /**
      * Create a new API token for the account with the given name and resource permissions.
-     * The full token value is returned only on creation.
+     * The full token value is returned only on creation. Without an explicit expiration in the
+     * request the server assigns its default lifetime (currently 1 year); use
+     * {@link io.mailtrap.model.request.apitokens.TokenExpiration#never()} for a token that
+     * never expires.
      *
      * @param accountId unique account ID
      * @param request   token name and resource permissions
@@ -46,7 +49,10 @@ public interface ApiTokens {
 
     /**
      * Reset an API token. Expires the requested token and creates a new one with the same
-     * permissions; the new token value is returned only once.
+     * permissions; the new token value is returned only once. The new token gets the server
+     * default lifetime (currently 1 year); use
+     * {@link #resetApiToken(long, long, ResetApiTokenRequest)} to set the expiration
+     * explicitly, including a token that never expires.
      *
      * @param accountId unique account ID
      * @param id        API token ID
