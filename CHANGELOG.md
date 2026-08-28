@@ -1,3 +1,13 @@
+## [1.7.0] - 2026-08-28
+
+## What's Changed
+* MT-23076: support api token expiration by @oshchyhol in https://github.com/mailtrap/mailtrap-java/pull/68
+
+## New Contributors
+* @oshchyhol made their first contribution in https://github.com/mailtrap/mailtrap-java/pull/68
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.6.0...v1.7.0
+
 ## [1.6.0] - 2026-08-28
 
 ## What's Changed
