@@ -1,3 +1,12 @@
+## [1.6.0] - 2026-08-28
+
+## What's Changed
+* Add sending domain update and company info endpoints by @mklocek in https://github.com/mailtrap/mailtrap-java/pull/70
+* Add tracking opt-outs and create-suppression endpoints by @mklocek in https://github.com/mailtrap/mailtrap-java/pull/71
+
+
+**Full Changelog**: https://github.com/mailtrap/mailtrap-java/compare/v1.5.0...v1.6.0
+
 ## [1.5.0] - 2026-08-14
 
 ## What's Changed
